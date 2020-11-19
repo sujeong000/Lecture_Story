@@ -1,0 +1,84 @@
+html, body, .wrap {
+    height: 100%;
+    text-align: center;
+    margin: 0;
+}
+/* 상단 고정 */
+.header {
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    height: 60px;
+    justify-content: space-between;
+    background-color: #00462A;
+}
+
+.container {
+    /* 사이트의 최소 높이값을 100% */
+    min-height: 100%;
+    /* 페이지를 벗어나 더 위로 100px만큼 -> footer 올라옴 */
+    margin-top: -100px;
+    /* 가려진 header와 끌어올린 footer의 높이값 만큼 부여 */
+    padding-top: 200px;
+    /* padding이나 border를 컨텐츠에 부여된 높이값에 포함 */
+    box-sizing: border-box;
+}
+.content {
+    height: 2300px;
+    background-color: lightsalmon;
+}
+/* 하단 고정 */
+.footer {
+    position: fixed;
+    bottom: 0; left:0; right:0;
+    height: 100px;
+    background-color: lightblue;
+}
+img {
+    padding-left: 20px;
+    padding-top: 10px;
+    height: 40px;
+    float: left;
+}
+
+.search{
+    width: 300px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+}
+.search input#search{
+    width: 300px;
+    height: 35px;
+    background: #00462A;
+    border: 2px solid #AAAAAA;
+    font-size: 10pt;
+    float: left;
+    color: #fff;
+    padding-left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  /*placeholder color*/
+.search input#search::-webkit-input-placeholder {
+    color: #fff;
+ }
+ .search input#search:-moz-placeholder { /* Firefox 18- */
+    color: #fff;  
+ }
+ .search input#search::-moz-placeholder {  /* Firefox 19+ */
+    color: #fff;  
+ }
+ .search input#search:-ms-input-placeholder {  
+    color: #fff;  
+ }
+
+ .search .icon{
+    position: absolute;
+    top: 50%;
+    margin-left: 17px;
+    margin-top: 17px;
+    z-index: 1;
+    color: #4f5b66;
+  }
