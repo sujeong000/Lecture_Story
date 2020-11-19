@@ -1,0 +1,78 @@
+@charset "utf-8";
+
+/* main page */
+html, body, .container {
+    height: 100%;
+    width: 100%;
+}
+.container {
+    display: table;
+    table-layout: fixed;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+.left {
+    position: relative;
+    display: table-cell;
+}
+.left .desc{
+    margin: 0 auto;
+    padding-top: 180px;
+}
+.left .desc .text1 {
+    font-size: 30px;
+    text-align: center;
+    line-height: 45px;
+    font-weight: bold;
+}
+.left .button {
+    margin: 150px 0;
+}
+.left .button a{
+    display: block;
+    width: 60%;
+    padding: 15px 10px;
+    margin: 15px auto;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px #00462A solid;
+    font-size: 20px;
+}
+.left .button .join{
+    background-color: #00462A;
+    color: white;
+    text-decoration: none;
+}
+.left .button .join:hover{
+    text-decoration: underline;
+}
+.left .button .login{
+    color: #00462A;
+    text-decoration: none;
+}
+.left .button .login:hover{
+    text-decoration: underline;
+}
+.right{
+    position: relative;
+    display: table-cell;
+    background: #00462A;
+    text-decoration: none;
+}
+.right p{
+    font-size: 25px;
+    color: white;
+    line-height: 35px;
+}
+.right .text2 {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+.right .text3 {
+    text-align: right;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
