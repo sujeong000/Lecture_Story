@@ -8,7 +8,6 @@ html, body, .wrap {
     position: fixed;
     top: 0; right: 0; left: 0;
     height: 60px;
-    vertical-align: center;
     justify-content: space-between;
     background-color: #00462A;
     text-align: left;
@@ -35,26 +34,41 @@ html, body, .wrap {
     height: 100px;
     background-color: lightblue;
 }
-img {
+#logo {
     padding: 12 15 5 15;
     height: 40px;
     float: left;
 }
+select,.search_bar {
+    position: relative;
+    top: 11px;
+}
+/*학기 드롭다운*/
+select {
+    width: 150px;
+    height: 35px;
+    background: no-repeat 95% 50%;
+    padding-left: 10px;
+    padding-right: 20px;
+    font-size: 10pt;
+    color : #AAAAAA;
+    border: 2px solid #AAAAAA;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
 
-/*검색창*/
+/*검색 바*/
 .search_bar{
     position: relative;
     display: inline-block;
-    top: 12px;
+    left: 10px;
 }
 .search_bar input#search{
-    position: relative;
-    display: inline-block;
     width: 350px;
     height: 35px;
     background: #00462A;
     border: 2px solid #AAAAAA;
-    font-size: 10pt;
     color: #fff;
     padding-left: 10px;
     padding-right: 30px;
@@ -80,6 +94,19 @@ img {
     left: -36px;
     border: 0 none;
     cursor: pointer;
-    background-color: transparent;
+    background: transparent;
     color: #AAAAAA;
+    outline: none;
   }
+.icons {
+    position: relative;
+    top: 15px;
+    display: inline-block;
+}
+.icons button { 
+    border: 0 none;
+    cursor: pointer;
+    background: transparent;
+    color: #fff;
+    outline: none;
+}
