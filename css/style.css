@@ -8,9 +8,9 @@ html, body, .wrap {
     position: fixed;
     top: 0; right: 0; left: 0;
     height: 60px;
-    justify-content: space-between;
     background-color: #00462A;
     text-align: left;
+    white-space: nowrap;
 }
 
 .container {
@@ -100,8 +100,10 @@ select {
   }
 .icons {
     position: relative;
-    top: 15px;
+    top: 16px;
     display: inline-block;
+    padding-right: 15px;
+    float: right;
 }
 .icons button { 
     border: 0 none;
@@ -109,4 +111,5 @@ select {
     background: transparent;
     color: #fff;
     outline: none;
+    padding: 0 10 0 10;
 }
