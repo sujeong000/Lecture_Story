@@ -35,7 +35,7 @@ html, body, .wrap {
     background-color: lightblue;
 }
 #logo {
-    padding: 12 15 5 15;
+    padding: 12px 15px 5px 15px;
     height: 40px;
     float: left;
 }
@@ -111,5 +111,5 @@ select {
     background: transparent;
     color: #fff;
     outline: none;
-    padding: 0 10 0 10;
+    padding: 0px 10px 0px 10px;
 }
