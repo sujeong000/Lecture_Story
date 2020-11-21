@@ -11,6 +11,7 @@ html, body, .wrap {
     vertical-align: center;
     justify-content: space-between;
     background-color: #00462A;
+    text-align: left;
 }
 
 .container {
@@ -45,7 +46,6 @@ img {
     position: relative;
     display: inline-block;
     top: 12px;
-    float: left;
 }
 .search_bar input#search{
     position: relative;
