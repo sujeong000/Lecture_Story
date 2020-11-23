@@ -3,24 +3,28 @@
 <head>
     <meta charset="utf-8">
     <title>lecture story</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="../css/tob_bar.css">
+    <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/read_post.css">
+    <link rel="stylesheet" href="../css/tob_bar_sub_bar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
     <div class="wrap">
         <div class="header">
-            <img id="logo" src= "./imgs/logo-white.png">
+            <img id="logo" src="../imgs/logo-white.png">
             <!--학기 드롭다운-->
             <select>
                 <option selected>2020-2학기</option>
                 <option>2020-1학기</option>
                 <option>2019-2학기</option>
+                <option>2019-1학기</option>
             </select>
             <!--검색 바-->
-            <div class="search_bar"> 
-                <input type="search" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
-                <button type="button" id="btn_search"><i class="fa fa-search"></i></button>
+            <div class="search_bar">
+                <form action="./select_lecture.html" method="post">
+                    <input type="text" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
+                    <button type="submit" id="btn_search"><i class="fa fa-search"></i></button>
+                </form>
             </div>
             <!--아이콘 바-->
             <div class="icons">
@@ -28,6 +32,21 @@
                 <button type="button" id="setting"><i class="fa fa-cog fa-2x"></i></button>
                 <button type="button" id="user"><i class="fa fa-user-circle fa-2x"></i></button>
             </div>
+        </div>
+        <!--메뉴 바-->
+        <div class="menu">
+            <span class="subject">통계학 (01) - 김이화 교수님</span>
+            <nav>
+                <ul class="navi">
+                    <li><a class="active" id="timeline" href="#"><span>타 임 라 인</span></a></li>
+                    <li><a id="grade" href="#"><span>성 적 통 계</span></a></li>
+                    <li><a id="eval" href="#"><span>강 의 평 가</span></a></li>
+                </ul>
+            </nav>
+            <a class="write" href="#">
+                <img src="../imgs/pencil.png" width=24px height=24px alt="글쓰기">
+            </a>
+
         </div>
         <!-- 여기까지 툴바 -->
         <div class="container">
@@ -72,7 +91,7 @@
                 <!-- 여기는 댓글 적기 -->
                 <div class="write_comment">
                     <form method="post">
-                        <textarea rows="3" cols="150"> </textarea>
+                        <textarea></textarea>
                         <input type="submit" value="추가">
                     </form>
                 </div>
