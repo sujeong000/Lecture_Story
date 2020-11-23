@@ -7,6 +7,7 @@
     <link href="../css/reset.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/tob_bar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="../javascript/timeline.js"></script>
 </head>
 
 <body>
@@ -28,13 +29,16 @@
                 <div class="icons">
                     <button type="button" id="noti"><i class="fa fa-bell fa-2x"></i></button>
                     <button type="button" id="setting"><i class="fa fa-cog fa-2x"></i></button>
-                    <button type="button" id="user"><i class="fa fa-user-circle fa-2x"></i></button>
+                    <button type="button" id="user" onclick="doDisplay()"><i class="fa fa-user-circle fa-2x"></i></button>
                 </div>
             </div>
     </header>
     
     <section>
         <div class="container">
+            <div id="logout-menu" style="display:none">
+                <button class="logout-button">로그아웃</button>
+            </div>
             <div class="timeline">
                 <ul class="tags">
                     <li><div class="point"></div><button class="tag">#최근</button></li>
