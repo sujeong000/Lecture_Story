@@ -82,10 +82,12 @@ const firebaseConfig = {
         //     });
         //     console.log(form.p_year.value);
         // });
-        //회원가입 하면 바로 board.html로 간다.
-        
-        //window.location.href="board.html";
-        
+
     }
-   
 }
+//회원가입 화면에서 board.html로 간다
+firebase.auth().onAuthStateChanged(firebaseUser =>{
+    if(firebaseUser){
+        window.location.href="board.html";
+    }
+});
