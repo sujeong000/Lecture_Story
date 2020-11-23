@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <title>Join Us</title>
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/JoinUs.css">
+    <link rel="stylesheet" href="./css/JoinUs.css">  
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script type="text/javascript" src="JoinUs.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <form method="post">
+        <form method="post" name="test">
             <!-- 가장 위의 로고// 이미지-->
             <div>
                 <img class="logo_img" src="./imgs/logo.png">
@@ -19,7 +22,7 @@
                 <p>이메일</p>
             </div>
             <div>
-                <input class="input_block" type="text" size=40 placeholder="@ewhain.net">
+                <input class="input_block" id="email" name="Email" type="text" size=40 placeholder="@ewhain.net">
             </div>
 
             <div>
@@ -34,14 +37,14 @@
                 <p>비밀번호</p>
             </div>
             <div>
-                <input class="input_block" type="password" placeholder="8자 이상 12자 이하">
+                <input class="input_block" id="password" type="password" placeholder="8자 이상 12자 이하">
             </div>
 
             <div>
                 <p>비밀번호 확인</p>
             </div>
             <div>
-                <input class="input_block" type="password" size=40>
+                <input class="input_block" id="password_check" name="p_check" type="password" size=40>
             </div>
 
             <div>
@@ -60,7 +63,7 @@
                 <input class="input_day" type="text" placeholder="일">
             </div>
             <div>
-                <button type="button" class="submit_button">제출</button>
+                <button type="button" onClick="signUp()" class="submit_button">제출</button>
             </div>
         </form>
     </div>
