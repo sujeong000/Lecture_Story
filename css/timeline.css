@@ -3,20 +3,17 @@
 	padding: 0;
 }
 
-.header{
-    z-index: 1;
-}
-
 .tag{
     border: none;
 }
 
 .timeline {
     width: auto;
-    height: 1000px;
     overflow: hidden;
+    margin-top: 30px;
     margin-left: 10px;
     position: relative;
+    height: 2300px;
 } 
 
 .tags {
