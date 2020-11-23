@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>lecture story</title>
+    <link rel="stylesheet" href="css/statistics.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart']}); 
+    </script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+        </div>
+        <div class="container">
+            <div class="grade">지금 나의 등수는? 3등 / 31명</div>
+            <div id="chart_div"></div>
+            <script language = "JavaScript">
+               function drawChart() {
+                  // Define the chart to be drawn.
+                  var data = google.visualization.arrayToDataTable([
+                     ['student', 'grade'],
+                     ['1', 15],['2', 20],['3', 25],['4', 30],['5', 34],
+                     ['6', 38],['7', 40],['8', 42],['9', 44],['10', 46],
+                     ['11', 48],['12', 50],['13', 52],['14', 55],['15', 56],
+                     ['16', 57],['17', 58],['18', 59],['19', 59],['20', 61],
+                     ['21', 63],['22', 64],['23', 64],['24', 66],['25', 67],
+                     ['26', 70],['27', 73],['28', 76],['29', 78],['30', 80],
+                     ['30', 82],['30', 90]  
+                  ]);
+                    
+                  // Set chart options
+                  var options = {
+                    title: '사람(명), 점수',
+                    width: 1700,
+                    height: 700,
+                    colors: ['#AAAAAA'],
+                    legend: { position: 'none' },
+                    bar: { gap: '50%' },
+                    histogram: {
+                        bucketSize: 5,
+                        maxNumBuckets: 300,
+                        hideBucketItems: true,
+                        
+                    },
+                  };				
+      
+                  // Instantiate and draw the chart.
+                  var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+                  chart.draw(data, options);
+               }
+               google.charts.setOnLoadCallback(drawChart);
+            </script>
+        </div>
+        <div class="footer">footer</div>
+    </div>
+</body>
+</html>
