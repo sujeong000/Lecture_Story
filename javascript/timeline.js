@@ -1,3 +1,6 @@
+import firebase from 'firebase';
+import 'firebase/firestore';
+
 const firebaseConfig = {
     apiKey: "AIzaSyBriqW5bb956O8Mi87iZJKtdNsD4uWGBp4",
     authDomain: "lecture-story.firebaseapp.com",
@@ -31,8 +34,7 @@ function logOut(){
 }
 
 var db = firebase.firestore();
-
-const docRef = firestore.doc("tags");
+const docRef = firestore.doc("tags/lEVEdkD3YaRqnqM1OmkH");
 
 function loglog(){
     window.alert("loglog");
@@ -44,6 +46,15 @@ for(var i=0; i< tagsNum; i++){
     tags[i].addEventListener("click", loglog);
 }
 
+
+getRealtimeUpdates = function(){
+    docRef.onSnapshot(function(doc){
+        const myData = doc.data();
+        console.log(mydata.tagName);
+    })
+}
+
+getRealtimeUpdates();
 
 
 
