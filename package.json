@@ -1,0 +1,22 @@
+{
+  "name": "lecture_story",
+  "version": "1.0.0",
+  "description": "New Lecture Review Forum\r 박주은 1971019\r 최수정 1971051\r 이진경 1971039\r 강민지 1971002",
+  "main": "firebase.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sujeong000/Lecture_Story.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sujeong000/Lecture_Story/issues"
+  },
+  "homepage": "https://github.com/sujeong000/Lecture_Story#readme",
+  "dependencies": {
+    "firebase": "^8.1.1"
+  }
+}
