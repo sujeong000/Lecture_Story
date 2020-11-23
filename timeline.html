@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline</title>
+    <link href="./css/timeline.css" rel="stylesheet">
+    <link href="./css/reset.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tob_bar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+    <header>
+            <div class="header">
+                <img id="logo" src= "./imgs/logo-white.png">
+                <!--학기 드롭다운-->
+                <select>
+                    <option selected>2020-2학기</option>
+                    <option>2020-1학기</option>
+                    <option>2019-2학기</option>
+                </select>
+                <!--검색 바-->
+                <div class="search_bar"> 
+                    <input type="search" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
+                    <button type="button" id="btn_search"><i class="fa fa-search"></i></button>
+                </div>
+                <!--아이콘 바-->
+                <div class="icons">
+                    <button type="button" id="noti"><i class="fa fa-bell fa-2x"></i></button>
+                    <button type="button" id="setting"><i class="fa fa-cog fa-2x"></i></button>
+                    <button type="button" id="user"><i class="fa fa-user-circle fa-2x"></i></button>
+                </div>
+            </div>
+    </header>
+    
+    <section>
+        <div class="container">
+            <div class="timeline">
+                <ul class="tags">
+                    <li><div class="point"></div><button class="tag">#최근</button></li>
+                    <li><div class="point"></div><button class="tag">#중간고사</button></li>
+                    <li><div class="point"></div><button class="tag">#퀴즈1</button></li>
+                    <li><div class="point"></div><button class="tag">#개강</button></li>
+                </ul>
+                <ul class="postings">
+                    <li>
+                        <div class="post">
+                            <span class="contents">너무 어려웠어</span>
+                            <div>
+                                <p class="date"> 2020/11/12
+                                <span class="like-comment">
+                                    <img src="./imgs/like.png">0
+                                    <img src="./imgs/comment.png">1
+                                </span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="post">
+                            <span class="contents">타임라인 망했어 안생<br>겨 동그라미가 이미지 어떻게 넣어<br>ㅏㅏㅏㅏ</b></span>
+                            <div>
+                                <p class="date"> 2020/11/12
+                                <span class="like-comment">
+                                    <img src="./imgs/like.png">0
+                                    <img src="./imgs/comment.png">1
+                                </span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
