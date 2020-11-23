@@ -1,0 +1,37 @@
+.content {
+    margin-left:15%;
+    width:70%;
+    height:80%;
+    background-color: rgb(236, 234, 234);
+    margin-bottom:50px;
+    text-align: left;
+    border: 2px solid rgb(197, 196, 196);
+    border-radius: 25px;
+}
+.content p{
+    padding-left:40px;
+    font-weight:bold;
+    font-size:25px;
+}
+.lecture_list li{
+    padding-bottom:10px;
+    list-style: none;
+    font-size:20px;
+}
+.lecture_submit{
+    background-color: #00462A;
+    color: #ffffff;
+    text-align: center;
+    border-style: none;
+    font-weight: bold;
+    font-size: 100%;
+    width: 70px;
+    height:30px;
+    margin-left:285px;
+    margin-bottom:5px;
+    border-radius: 5px;
+}
+.lecture_list a{
+    color:black;
+    text-decoration: none;
+}
