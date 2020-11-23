@@ -12,8 +12,11 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 
-function signUp() {
+//   const db=firebase.firestore();
+//   db.settings({timestamsInSnapshots:true});
 
+  function signUp(){
+  
     var email = document.getElementById("email");
     var password = document.getElementById("password");
     var password_check = document.getElementById("password_check");
@@ -32,8 +35,24 @@ function signUp() {
     } else {
         const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
         promise.catch(e => alert(e.message));
-
-        alert("Signed Up");
+        
+        
+        // const form = document.querySelector('#JoinUsForm');
+        // form.addEventListener("button",(e) =>{
+        //     e.preventDefault();
+        //     db.collection("UserInfo").add({
+        //         name:form.p_name.value,
+        //         year:form.p_year.value,
+        //         month:form.p_month.value,
+        //         day:form.p_day.value
+        //     });
+        //     form.p_name.value="";
+        //     form.p_name.value="";
+        //     form.p_name.value="";
+        //     form.p_name.value="";
+        // })
+        //회원가입 하면 바로 board.html로 간다.
+        window.location.href="board.html";
     }
 }
 
