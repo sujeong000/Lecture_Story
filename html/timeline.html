@@ -7,6 +7,8 @@
     <link href="../css/reset.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/tob_bar_sub_bar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
     <script src="../javascript/timeline.js"></script>
 </head>
 
@@ -52,7 +54,7 @@
     <section>
         <div class="container">
             <div id="logout-menu" style="display:none">
-                <button class="logout-button">로그아웃</button>
+                <button class="logout-button" onclick="logOut()">로그아웃</button>
             </div>
             <div class="timeline">
                 <ul class="tags">
@@ -62,6 +64,9 @@
                     <li><div class="point"></div><button class="tag">#개강</button></li>
                 </ul>
                 <ul class="postings">
+                    <pre id="object">
+
+                    </pre>
                     <li>
                         <div class="post">
                             <span class="contents">너무 어려웠어</span>
