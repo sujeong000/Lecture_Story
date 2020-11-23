@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <link href="./css/login.css" rel="stylesheet">
     <link href="./css/reset.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="login.js"></script>
 </head>
 <body>
     <div class="main-container">
@@ -23,27 +26,5 @@
         </div>
     </div>
     </div>
-    
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-
-    <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyBriqW5bb956O8Mi87iZJKtdNsD4uWGBp4",
-        authDomain: "lecture-story.firebaseapp.com",
-        databaseURL: "https://lecture-story.firebaseio.com",
-        projectId: "lecture-story",
-        storageBucket: "lecture-story.appspot.com",
-        messagingSenderId: "109177070261",
-        appId: "1:109177070261:web:8b6aa71008757f550254fc"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    </script>
-    <script src="login.js"></script>
 </body>
 </html>
