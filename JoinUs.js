@@ -16,9 +16,26 @@ const firebaseConfig = {
   
     var email = document.getElementById("email");
     var password = document.getElementById("password");
-    
-    const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
-    promise.catch(e => alert(e.message));
-    
-    alert("Signed Up");
+    var password_check=document.getElementById("password_check");
+
+    var email_ch=email.value.split("@")[1];
+    if(email_ch != "ewhain.net"){
+        document.test.Email.focus();
+        alert("이화인 계정이어야 합니다.");
+    }else if(password.value===""){
+        alert("비밀번호를 입력하세요");
+    }else if(password.value.length<6){
+        alert("비밀번호는 6자 이상이어야 합니다");
+    }else if(password.value != password_check.value){
+        document.test.p_check.focus();
+        alert("비밀번호를 다시 확인해 주세요.");
+    }else{
+        const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
+        promise.catch(e => alert(e.message));
+        
+        alert("Signed Up");
+    }
+
    }
+
+   
