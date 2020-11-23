@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>lecture story</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="css/tob_bar.css">
+    <link rel="stylesheet" href="css/read_post.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <img id="logo" src= "./imgs/logo-white.png">
+            <!--학기 드롭다운-->
+            <select>
+                <option selected>2020-2학기</option>
+                <option>2020-1학기</option>
+                <option>2019-2학기</option>
+            </select>
+            <!--검색 바-->
+            <div class="search_bar"> 
+                <input type="search" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
+                <button type="button" id="btn_search"><i class="fa fa-search"></i></button>
+            </div>
+            <!--아이콘 바-->
+            <div class="icons">
+                <button type="button" id="noti"><i class="fa fa-bell fa-2x"></i></button>
+                <button type="button" id="setting"><i class="fa fa-cog fa-2x"></i></button>
+                <button type="button" id="user"><i class="fa fa-user-circle fa-2x"></i></button>
+            </div>
+        </div>
+        <!-- 여기까지 툴바 -->
+        <div class="container">
+            <div class="content">
+                <!-- 여기에 게시글 -->
+                <div class="origin_post">
+                    <span class="contents">하나도 모르겠어ㅠㅠ</span>
+                    <span class="edit_button">
+                        <button type="button" >수정</button>
+                        <button type="button" >삭제</button>
+                    </span>
+                    <div>
+                        <p class="date"> 2020/11/12
+                        <span class="like-comment">
+                            <img src="./imgs/like.png">0
+                            <img src="./imgs/comment.png">3
+                        </span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 여기는 댓글 -->
+                <ul class="comments">
+                    <li>
+                        <div class="post">
+                            <span class="contents">css누가 만들었어ㅠㅠㅠ</b></span>
+                            <div>
+                                <p class="date"> 2020/11/12</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="post">
+                            <span class="contents">오소플 젠장 ㅠㅠㅠ<br>이거 백엔드는 어떻게 해ㅠㅠㅠ<br>으아아아아ㅏㅇ</b></span>
+                            <div>
+                                <p class="date"> 2020/11/12</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>    
+ 
+                <!-- 여기는 댓글 적기 -->
+                <div class="write_comment">
+                    <form method="post">
+                        <textarea rows="3" cols="150"> </textarea>
+                        <input type="submit" value="추가">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
