@@ -15,11 +15,14 @@
                 <option selected>2020-2학기</option>
                 <option>2020-1학기</option>
                 <option>2019-2학기</option>
+                <option>2019-1학기</option>
             </select>
             <!--검색 바-->
             <div class="search_bar"> 
-                <input type="search" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
-                <button type="button" id="btn_search"><i class="fa fa-search"></i></button>
+                <form action="./select_lecture.html" method="post">
+                    <input type="text" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
+                    <button type="submit" id="btn_search"><i class="fa fa-search"></i></button>
+                </form>
             </div>
             <!--아이콘 바-->
             <div class="icons">
