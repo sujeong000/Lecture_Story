@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="../css/JoinUs.css">  
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script> -->
-    <script type="text/javascript" src="../javascript/JoinUs.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+    
 </head>
 
 <body>
@@ -64,10 +64,11 @@
                 <input class="input_day" type="text" name="p_day" placeholder="일">
             </div>
             <div>
-                <button type="button" onClick="signUp()" class="submit_button" >제출</button>
+                <button type="button" onClick="signUp()" id="btn"  class="submit_button" >제출</button>
             </div>
         </form>
     </div>
+    <script type="text/javascript" src="../javascript/JoinUs.js"></script>
 </body>
 
 </html>
