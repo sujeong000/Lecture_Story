@@ -109,3 +109,9 @@
     margin-right: 5px;
     box-sizing: border-box;
 }
+
+#logout-menu{
+    float:right;
+    margin-top: 10px;
+    background-color: #cccccc;
+}
