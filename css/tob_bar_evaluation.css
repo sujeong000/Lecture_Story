@@ -132,6 +132,7 @@ select {
     font-weight: bold;
 }
 .nav-area{
+    position: relative;
     padding: 0;
     list-style: none;
 }
@@ -145,4 +146,8 @@ select {
 .btn-area{
     cursor: pointer;
     color: black;
+}
+.nav-area #menu3{
+    border-bottom: 3px solid #00462A;
+    padding-bottom: 15px;
 }
