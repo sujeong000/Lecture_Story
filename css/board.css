@@ -1,130 +1,19 @@
-html, body, .wrap {
-    height: 100%;
-    text-align: center;
-    margin: 0;
-    /* min-width: 647px;
-    max-width: 1440px; */
-    overflow-x: auto;
-    white-space: nowrap;
-}
-/* 상단 고정 */
-.header {
-    z-index: 5;
-    position: fixed;
-    top: 0; right: 0; left: 0;
-    height: 60px;
-    background-color: #00462A;
-    text-align: left;
-    white-space: nowrap;
-}
-
-#logo {
-    padding: 12px 15px 5px 15px;
-    height: 40px;
-    float: left;
-}
-select,.search_bar {
-    position: relative;
-    top: 11px;
-}
-/*학기 드롭다운*/
-select {
-    width: 150px;
-    height: 35px;
-    background: no-repeat 95% 50%;
-    padding-left: 10px;
-    padding-right: 20px;
-    font-size: 10pt;
-    color : #AAAAAA;
-    border: 2px solid #AAAAAA;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
-
-/*검색 바*/
-.search_bar{
-    position: relative;
-    display: inline-block;
-    left: 10px;
-}
-.search_bar input#search{
-    width: 350px;
-    height: 35px;
-    background: #00462A;
-    border: 2px solid #AAAAAA;
-    color: #fff;
-    padding-left: 10px;
-    padding-right: 30px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-  }
-  /*placeholder color*/
-.search_bar input#search::-webkit-input-placeholder {
-    color: #AAAAAA;
- }
- .search_bar  input#search:-moz-placeholder { /* Firefox 18- */
-    color: #AAAAAA;  
- }
- .search_bar  input#search::-moz-placeholder {  /* Firefox 19+ */
-    color: #AAAAAA;  
- }
- .search_bar  input#search:-ms-input-placeholder {  
-    color: #AAAAAA;  
- }
- .search_bar button{
-    position: relative;
-    left: -36px;
-    border: 0 none;
-    cursor: pointer;
-    background: transparent;
-    color: #AAAAAA;
-    outline: none;
-  }
-.icons {
-    position: relative;
-    top: 16px;
-    display: inline-block;
-    padding-right: 15px;
-    float: right;
-}
-.icons button { 
-    border: 0 none;
-    cursor: pointer;
-    background: transparent;
-    color: #fff;
-    outline: none;
-    padding: 0px 10px 0px 10px;
-}
-
 /* content 영역 */
 a {
     color: black;
     text-decoration: none;
 }
-.container {
-    width: 100%;
-    /* 사이트의 최소 높이값을 100% */
-    min-height: 100%;
-    /* 페이지를 벗어나 더 위로 140px만큼 -> footer 올라옴 */
-    margin-top: -140px;
-    /* 가려진 header와 끌어올린 footer의 높이값 만큼 부여 */
-    padding-top: 200px;
-    /* padding이나 border를 컨텐츠에 부여된 높이값에 포함 */
-    box-sizing: border-box;
-}
 /* 각각의 게시판 */
 .content {
-    width: 90%;
+    width: 80%;
     margin: 10px auto;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 .content .title, .text{
     margin: 0 auto;
 }
 .content .title{
-    padding: 10px 0;
+    padding: 15px 0;
 }
 .content .title .name{
     position: relative;
@@ -133,6 +22,7 @@ a {
 }
 .content .title .name span{
     background: white;
+    font-weight: bold;
 }
 .content .title .line{
     position: relative;
@@ -141,8 +31,8 @@ a {
     top: -10px;
 }
 .content .text{
-    background-color: #ebebeb;
-    height: 100px;
+    background-color: #f1f1f1;
+    height: 120px;
     border-radius: 15px;
 }
 .content .text p{
@@ -153,22 +43,12 @@ a {
     text-align: left;
     width:97%;
     overflow:hidden;
-    line-height: 32px;
+    line-height: 39px;
 }
 .content .text .line{
     margin: 0 auto;
     width: 98%;
     position: relative;
-    background: #cccccc;
-    border: 0.1px solid #cccccc;
-}
-
-/* footer */
-.footer {
-    height: 100px;
-    border-top:1px solid #cccccc;
-    vertical-align: center;
-}
-.footer div{
-    margin: 40px 0;
+    background: #dcdcdc;
+    border: 0.1px solid #dcdcdc;
 }
