@@ -43,7 +43,7 @@ function drawChart(arr) {
   // Set chart options
   var options = {
     title: '사람(명), 점수',
-    width: 1700,
+    width: 1500,
     height: 700,
     colors: ['#AAAAAA'],
     legend: { position: 'none' },
