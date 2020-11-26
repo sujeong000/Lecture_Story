@@ -19,8 +19,7 @@ window.onload = function() {
         querySnapshot.forEach((doc) => {
         arr.push(doc.data().tag);
         });
-        console.log(arr);
-        $("#select_tag").empty();
+        //console.log(arr);
 
         //tag 옵션에 추가
         for(var i = 0; i<arr.length; i++) {
@@ -30,4 +29,45 @@ window.onload = function() {
     });
 }
 
-//태그 추가할 때
+function sub(){ 
+    var ref = db.collection("2020_1학기").doc("20479-이숙영");
+    var selected_tag = document.getElementById("select_tag").value;
+    var content = document.getElementById("content").value;
+    var ui = firebaseui.auth.AuthUI(firebase.auth());
+
+    if(content === null) {
+        alert("내용을 입력해주세요.");
+    }
+    else{
+        console.log(`${selected_tag}`);
+        if(selected_tag === "태그 추가") { //태그 추가 선택 + 태그 입력 받아 글을 쓸 때
+            var add_tag = document.getElementById("add_tag").value;
+            //글 추가
+            ref.collection("board").add({
+                commentNum: 0,
+                content: content,
+                like: 0,
+                tag: add_tag,
+                time: new Date().getTime() //해결 안됨..
+                //userId: ui.currentUser.uid 로그인 확인불가능..
+            });
+            //태그 추가
+            ref.collection("tags").add({
+                tag: add_tag,
+                time: new Date().getTime()
+            });
+        }
+        else { //태그를 선택해서 글을 쓸 때
+            //글 추가
+            ref.collection("board").add({
+                commentNum: 0,
+                content: content,
+                like: 0,
+                tag: selected_tag,
+                time: new Date().getTime()
+                //userId: ui.currentUser.uid
+            });
+        }
+    }
+}
+

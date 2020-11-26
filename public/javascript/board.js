@@ -25,11 +25,7 @@ function register(){
     localStorage.setItem("Semester",semester);
  }
 
-//과목명 검색
-function register() {
-    var search_key = document.getElementById("search").value;
-    localStorage.setItem("storageName", search_key);
-}
+
 var index;
 $(document).ready(function(){
     $("section").click(function(){
