@@ -1,27 +1,31 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyBriqW5bb956O8Mi87iZJKtdNsD4uWGBp4",
-  authDomain: "lecture-story.firebaseapp.com",
-  databaseURL: "https://lecture-story.firebaseio.com",
-  projectId: "lecture-story",
-  storageBucket: "lecture-story.appspot.com",
-  messagingSenderId: "109177070261",
-  appId: "1:109177070261:web:8b6aa71008757f550254fc"
+  apiKey: "AIzaSyCTexaR10Q0JKdVdUPrEhovRK5Mx_w-NO4",
+  authDomain: "lecture-story-2.firebaseapp.com",
+  databaseURL: "https://lecture-story-2.firebaseio.com",
+  projectId: "lecture-story-2",
+  storageBucket: "lecture-story-2.appspot.com",
+  messagingSenderId: "70634403692",
+  appId: "1:70634403692:web:5833a0adb975d77c186549"
 };
 firebase.initializeApp(firebaseConfig);
 
-var database = firebase.database();
-google.charts.load('current', {packages: ['corechart']});
+var db = firebase.firestore();
+//google.charts.load('current', {packages: ['corechart']});
+var ref = db.collection("2020_1학기").doc("10011-안기주,이혜림").collection("grades");
 
-firebase.database().ref('/lecture/ComputerArchitecture/statistics').once('value').then(function(snapshot) {
-  var grades = snapshot.val();
+ref.get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.data().tag}`);
+  });
 
-  google.charts.load('current', {
+  /*google.charts.load('current', {
       'packages': ['corechart']
   });
   google.charts.setOnLoadCallback(drawChart(grades));
-
+  */
 });
 
+/*
 function drawChart(grades) {
   var array = $.map(grades, function(value, index) {
       return [value];
@@ -61,3 +65,4 @@ function drawChart(grades) {
   chart.draw(data, options); 
 };
 google.charts.setOnLoadCallback(drawChart);
+*/
