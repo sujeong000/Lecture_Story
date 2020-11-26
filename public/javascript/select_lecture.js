@@ -34,7 +34,7 @@ var semester=localStorage.getItem("Semester");
 //데이터베이스
 var db = firebase.firestore();
 var ref = db.collection(semester);
-var dc;
+
 //통계만 검색해서 통계학이 나오도록 하는 방법은 없나...ㅠ
 ref.where("교과목명","==",storageKey).get().then(
   function(querySnapshot){
@@ -48,16 +48,13 @@ ref.where("교과목명","==",storageKey).get().then(
   console.log(error);
 });
 
-var num;
-var name;
-var pf;
-var cl;
+
 
 function createLine(doc){
-  num=doc.data().학수번호;
-  name=doc.data().교과목명;
-  pf=doc.data().교수명;
-  cl=doc.data().분반;
+  var num=doc.data().학수번호;
+  var name=doc.data().교과목명;
+  var pf=doc.data().교수명;
+  var cl=doc.data().분반;
   // var loc=ul.querySelector(".lecture_list");
   // var inp=document.createElement("input");
   // inp.type="radio";
@@ -88,19 +85,20 @@ function sendInfo(){
     var lec_class=strArr[3].split(")")[0];//분반
     var lec_pf=strArr[5];//교수님
     console.log(lec_num);
-  }
-  
 
-  // db.collection("UserInfo").collection("즐겨찾기").add({
-  //   교과목명:name,
-  //   교수명: pf,
-  //   학수번호:num,
-  //   분반:cl,
-  //   학기:semester
-  //});
-  // alert(num,name,pf,semester);
-  // localStorage.setItem("courseNO",num);
-  // localStorage.setItem("courseName",name);
-  // localStorage.setItem("prof",pf);
-  // localStorage.setItem("semester",semester);
+    // 여기부터 안된다 사용자 받아와서 할 수 있도록 하자
+  //   e.preventDefault();
+  //   console.log("#");
+  //   var docdoc = db.collection("UserInfo").collection("즐겨찾기");
+  //   console.log("#");
+  //   docdoc.add({
+  //     교과목명: lec_name,
+  //     교수명: lec_pf,
+  //     분반: lec_class,
+  //     학수번호: lec_num,
+  //     학기: semester
+  //   });
+  //   console.log("#");
+  // 
+  }
 }
