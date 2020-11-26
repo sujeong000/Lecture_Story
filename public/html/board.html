@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="../css/tob_bar.css">
     <link rel="stylesheet" href="../css/board.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+    
 </head>
 
 <body>
@@ -23,9 +27,9 @@
             </select>
             <!--검색 바-->
             <div class="search_bar">
-                <form action="./select_lecture.html" method="post">
-                    <input type="text" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
-                    <button type="submit" id="btn_search"><i class="fa fa-search"></i></button>
+                <form action="./select_lecture.html" method="post"  onSubmit = "search()">
+                    <input type="text" id="search"  placeholder="추가하고 싶은 과목명을 입력하세요.">
+                    <button type="submit"  id="btn_search"><i class="fa fa-search"></i></button>
                 </form>
             </div>
             <!--아이콘 바-->
@@ -187,6 +191,7 @@
             </section>
         </div>
     </div>
+    <script type="text/javascript" src="../javascript/board.js"></script>
 </body>
 
 </html>
