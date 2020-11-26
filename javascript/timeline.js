@@ -1,6 +1,3 @@
-import firebase from 'firebase';
-import 'firebase/firestore';
-
 const firebaseConfig = {
     apiKey: "AIzaSyBriqW5bb956O8Mi87iZJKtdNsD4uWGBp4",
     authDomain: "lecture-story.firebaseapp.com",
@@ -12,7 +9,8 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-const auth=firebase.auth();
+const db=firebase.firestore();
+db.settings({timestamsInSnapshots:true});
 
 function doDisplay(){
     var con = document.getElementById("logout-menu");
@@ -33,28 +31,25 @@ function logOut(){
     });
 }
 
-var db = firebase.firestore();
-const docRef = firestore.doc("tags/lEVEdkD3YaRqnqM1OmkH");
-
-function loglog(){
-    window.alert("loglog");
+function loglog(tt){
+    var tagName = tt.innerText.substring(1, tt.innerText.length);
+    db.collection("tags").add({
+        tagname: tagName
+    });
 }
 
 var tags = document.querySelectorAll(".tag");
 var tagsNum = tags.length;
 for(var i=0; i< tagsNum; i++){
-    tags[i].addEventListener("click", loglog);
+    tags[i].addEventListener("click", addToStore);
 }
 
-
-getRealtimeUpdates = function(){
-    docRef.onSnapshot(function(doc){
-        const myData = doc.data();
-        console.log(mydata.tagName);
-    })
+//태그 버튼 누르면 db에 해당 태그 문서 생성되게
+function addToStore(evt){
+    var tagName = evt.currentTarget.innerText;
+    db.collection("tags").add({
+        tagname: tagName.substring(1, tagName.length)
+    });
 }
-
-getRealtimeUpdates();
-
 
 
