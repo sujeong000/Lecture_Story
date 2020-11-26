@@ -13,24 +13,21 @@ var db = firebase.firestore();
 //google.charts.load('current', {packages: ['corechart']});
 var ref = db.collection("2020_1학기").doc("10011-안기주,이혜림").collection("grades");
 
-ref.get().then((querySnapshot) => {
+//tag 중간고사인 것만
+ref.where('tag', '==', '중간고사').get().then((querySnapshot) => {
+  var arr = new Array;
   querySnapshot.forEach((doc) => {
-    console.log(`${doc.data().tag}`);
+    arr.push(doc.data().grade);
   });
 
-  /*google.charts.load('current', {
-      'packages': ['corechart']
-  });
-  google.charts.setOnLoadCallback(drawChart(grades));
-  */
+  google.charts.load('current', {'packages': ['corechart']});
+  google.charts.setOnLoadCallback(function() {drawChart(arr)});
 });
 
-/*
-function drawChart(grades) {
-  var array = $.map(grades, function(value, index) {
+function drawChart(arr) {
+  var array = $.map(arr, function(value, index) {
       return [value];
   });
-  console.log(array);
 
   var data = new google.visualization.DataTable();
   data.addColumn('string', "Student")
@@ -41,9 +38,7 @@ function drawChart(grades) {
       var item = array[i];
       output.push([String(i),parseInt(item)]);
   }
-  console.log(output);
   data.addRows(output);
-
     
   // Set chart options
   var options = {
@@ -64,5 +59,3 @@ function drawChart(grades) {
   var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
   chart.draw(data, options); 
 };
-google.charts.setOnLoadCallback(drawChart);
-*/
