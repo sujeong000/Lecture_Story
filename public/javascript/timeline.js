@@ -78,7 +78,7 @@ function getTagPostings(evt){
 //         });
 // });
 
-var postingZone = document.getElementById("postSec");
+var postingZone = document.querySelector(".postings");
 
 // 변화 감지해서 계속 포스팅 로드하는 함수
 function loadPostings(){
@@ -93,16 +93,13 @@ function loadPostings(){
     postingZone.innerHTML = ""; //포스팅 뜨는 세션에 HTML 부분 적기
     //데베에서 읽으면서 html 코드 추가
     docSnapshot.forEach((doc) => {
-      console.log("로드 포스팅 전");
       var entry = document.createElement("li");
-      entry.innerText="우가";
-      console.log("우가추가");
 
       var post = document.createElement("div");
-      post.className("post");
+      post.setAttribute("class","post");
 
       var content = document.createElement("span");
-      content.className("contents");
+      content.setAttribute("class","contents");
       content.innerText = doc.data().content;
 
       var date_com_like = document.createElement("div");
@@ -111,19 +108,30 @@ function loadPostings(){
       date.innerText = doc.data().timestamp;
 
       var like_com = document.createElement("span");
-      like_com.className("like-comment");
+      like_com.setAttribute("class","like-comment");
 
       var like = document.createElement("img");
       like.setAttribute("src", "../imgs/like.png");
+      var likeNode = document.createTextNode(doc.data().like);
 
       var comment = document.createElement("img");
-      like.setAttribute("src", "../imgs/comment.png");
+      comment.setAttribute("src", "../imgs/comment.png");
+      var commentNode = document.createTextNode(doc.data().commentNum);
       
-      like_com.innerHTML += like.outerHTML + doc.data().like + comment.outerHTML + doc.data().comment;
-      date_com_like.innerHTML += like_com.outerHTML;
-      date_com_like.innerHTML += date.outerHTML;
-      post.innerHTML += content.outerHTML += date_com_like.outerHTML;
-      entry.innerHTML += post.outerHTML;
+      like_com.append(like);
+      like_com.append(likeNode);
+      like_com.append(comment);
+      like_com.append(commentNode);
+      date.append(like_com);
+      date_com_like.append(date);
+      post.append(content);
+      post.append(date_com_like);
+      entry.append(post);
+    //   like_com.innerHTML += like.outerHTML + doc.data().like + comment.outerHTML + doc.data().comment;
+    //   date_com_like.innerHTML += like_com.outerHTML;
+    //   date_com_like.innerHTML += date.outerHTML;
+    //   post.innerHTML += content.outerHTML += date_com_like.outerHTML;
+    //   entry.innerHTML += post.outerHTML;
       postingZone.appendChild(entry);
     });
     });
