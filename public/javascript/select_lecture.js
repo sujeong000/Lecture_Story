@@ -48,7 +48,11 @@ ref.where("교과목명","==",storageKey).get().then(
   console.log(error);
 });
 
-
+//왜 안될까.....
+var ui = firebaseui.auth.AuthUI(firebase.auth());
+var user = firebase.auth().currentUser.uid;
+console.log(ui+"1");
+console.log(user+"2");
 
 function createLine(doc){
   var num=doc.data().학수번호;
