@@ -10,4 +10,18 @@ const firebaseConfig = {
   };
   firebase.initializeApp(firebaseConfig);
 
-  window.onload = alert(localStorage.getItem("storageName"));
+//과목명 검색
+function register(){
+  var search_key=document.getElementById("search").value;
+  localStorage.setItem("storageName",search_key);
+}
+
+//검색어: [  ] 표시하는 부분
+const storageKey=localStorage.getItem("storageName");
+document.getElementById("search_key").innerHTML=storageKey;
+
+//필요한 기능
+//1. 버튼 눌러서 등록하면, 그 과목이 즐겨찾기(board)에 추가되어야 한다. //데이터 구조를 어쩔건지
+//2. 검색어에 맞게 해당되는 부분만 골라서 리스트를 출력해야한다.
+
+
