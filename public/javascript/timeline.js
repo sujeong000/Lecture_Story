@@ -51,13 +51,16 @@ semester = semester.split("-");
 var semesterName = semester[0] +"_"+semester[1];
 console.log(semesterName);
 
+var docRef = db.collection("2020_1학기").doc("10012-김영주");
+console.log(docRef.get().data().학수번호);
+
 //강의명(교수님) html에서 따옴, html 안에꺼 컬렉션 이름처럼 임의로 바꿨음
 var lectureName = document.querySelector(".subject").innerText;
 lectureName = lectureName.split("-");
 var entireLec = db.collection(semesterName);
 lecture = entireLec.where("교과목명", "==", lectureName[0]);
 lecture = lecture.where("교수명", "==", lectureName[1]);
-console.log(lecture);
+console.log('${lecture.data().학수번호}');
 
 //태그 버튼 누르면 db에 해당 태그 문서 생성되게
 function getTagPostings(evt){
