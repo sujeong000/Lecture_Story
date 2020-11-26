@@ -1,32 +1,33 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyBriqW5bb956O8Mi87iZJKtdNsD4uWGBp4",
-  authDomain: "lecture-story.firebaseapp.com",
-  databaseURL: "https://lecture-story.firebaseio.com",
-  projectId: "lecture-story",
-  storageBucket: "lecture-story.appspot.com",
-  messagingSenderId: "109177070261",
-  appId: "1:109177070261:web:8b6aa71008757f550254fc"
+  apiKey: "AIzaSyCTexaR10Q0JKdVdUPrEhovRK5Mx_w-NO4",
+  authDomain: "lecture-story-2.firebaseapp.com",
+  databaseURL: "https://lecture-story-2.firebaseio.com",
+  projectId: "lecture-story-2",
+  storageBucket: "lecture-story-2.appspot.com",
+  messagingSenderId: "70634403692",
+  appId: "1:70634403692:web:5833a0adb975d77c186549"
 };
 firebase.initializeApp(firebaseConfig);
 
-var database = firebase.database();
-google.charts.load('current', {packages: ['corechart']});
+var db = firebase.firestore();
+//google.charts.load('current', {packages: ['corechart']});
+var ref = db.collection("2020_1학기").doc("10011-안기주,이혜림").collection("grades");
 
-firebase.database().ref('/lecture/ComputerArchitecture/statistics').once('value').then(function(snapshot) {
-  var grades = snapshot.val();
-
-  google.charts.load('current', {
-      'packages': ['corechart']
+//tag 중간고사인 것만
+ref.where('tag', '==', '중간고사').get().then((querySnapshot) => {
+  var arr = new Array;
+  querySnapshot.forEach((doc) => {
+    arr.push(doc.data().grade);
   });
-  google.charts.setOnLoadCallback(drawChart(grades));
 
+  google.charts.load('current', {'packages': ['corechart']});
+  google.charts.setOnLoadCallback(function() {drawChart(arr)});
 });
 
-function drawChart(grades) {
-  var array = $.map(grades, function(value, index) {
+function drawChart(arr) {
+  var array = $.map(arr, function(value, index) {
       return [value];
   });
-  console.log(array);
 
   var data = new google.visualization.DataTable();
   data.addColumn('string', "Student")
@@ -37,14 +38,12 @@ function drawChart(grades) {
       var item = array[i];
       output.push([String(i),parseInt(item)]);
   }
-  console.log(output);
   data.addRows(output);
-
     
   // Set chart options
   var options = {
     title: '사람(명), 점수',
-    width: 1700,
+    width: 1500,
     height: 700,
     colors: ['#AAAAAA'],
     legend: { position: 'none' },
@@ -60,4 +59,3 @@ function drawChart(grades) {
   var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
   chart.draw(data, options); 
 };
-google.charts.setOnLoadCallback(drawChart);

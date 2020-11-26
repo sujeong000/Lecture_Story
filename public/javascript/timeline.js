@@ -52,7 +52,7 @@ var semesterName = semester[0] +"_"+semester[1];
 console.log(semesterName);
 
 var docRef = db.collection("2020_1학기").doc("10012-김영주");
-console.log(docRef.get().data().학수번호);
+console.log(docRef.data().학수번호);
 
 //강의명(교수님) html에서 따옴, html 안에꺼 컬렉션 이름처럼 임의로 바꿨음
 var lectureName = document.querySelector(".subject").innerText;
