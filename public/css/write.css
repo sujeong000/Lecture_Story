@@ -37,7 +37,7 @@ html, body, .wrap {
     border-radius: 5px;
     float: left;
 }
-.content .top button{
+.content .top .submit{
     float: right;
     width: 120px;
     height: 35px;
@@ -48,6 +48,7 @@ html, body, .wrap {
     color: white;
     font-weight: bold;
     font-size: 1.1em;
+    cursor: pointer;
 }
 .content .text{
     height: 500px;
