@@ -44,7 +44,8 @@
             <div class="content">
                 <p>검색어: <span id="search_key">여기에 검색어</span></p>
 
-                <form method="post" >
+                <!-- <form method="post" onSubmit="sendInfo()"> -->
+                <form method="post"></form>
                     <ul class="lecture_list">
                         <div id="bgli">
 
@@ -55,7 +56,7 @@
                         </li>
                         -->
                     </ul>
-                    <input type="submit" class="lecture_submit" value="등록">
+                    <input type="submit" onClick="sendInfo()" class="lecture_submit" value="등록">
                 </form>
             </div>
         </div>
