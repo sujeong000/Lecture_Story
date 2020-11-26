@@ -1,16 +1,16 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyCTexaR10Q0JKdVdUPrEhovRK5Mx_w-NO4",
-    authDomain: "lecture-story-2.firebaseapp.com",
-    databaseURL: "https://lecture-story-2.firebaseio.com",
-    projectId: "lecture-story-2",
-    storageBucket: "lecture-story-2.appspot.com",
-    messagingSenderId: "70634403692",
-    appId: "1:70634403692:web:5833a0adb975d77c186549"
-  };
+  apiKey: "AIzaSyBriqW5bb956O8Mi87iZJKtdNsD4uWGBp4",
+  authDomain: "lecture-story.firebaseapp.com",
+  databaseURL: "https://lecture-story.firebaseio.com",
+  projectId: "lecture-story",
+  storageBucket: "lecture-story.appspot.com",
+  messagingSenderId: "109177070261",
+  appId: "1:109177070261:web:8b6aa71008757f550254fc"
+};
 firebase.initializeApp(firebaseConfig);
 
 const db=firebase.firestore();
-db.settings({timestamsInSnapshots:true});
+//db.settings({timestamsInSnapshots:true});
 
 function doDisplay(){
     var con = document.getElementById("logout-menu");
@@ -31,6 +31,20 @@ function logOut(){
     });
 }
 
+// // 렉쳐정보 전달 받기
+// const courseNO=localStorage.getItem("courseNO");
+// const courseName=localStorage.getItem("courseName");
+// const prof=localStorage.getItem("prof");
+// var semester=localStorage.getItem("semester");
+
+const courseName="이산수학";
+const courseNO = "20479";
+const prof="이숙영";
+var semester="2020_1학기";
+
+// 렉처 이름 띄우기
+document.getElementById("subject").innerHTML=courseName+"-"+prof;
+
 function loglog(tt){
     var tagName = tt.innerText.substring(1, tt.innerText.length);
     db.collection("tags").add({
@@ -38,43 +52,79 @@ function loglog(tt){
     });
 }
 
+// 각 태그 누르면 해당 태그 포스팅 뜨는 기능
 var tags = document.querySelectorAll(".tag");
 var tagsNum = tags.length;
 for(var i=0; i< tagsNum; i++){
     tags[i].addEventListener("click", getTagPostings);
 }
 
-//학기 html에서 따옴
-var semester = document.querySelector(".semester");
-semester = semester.options[semester.selectedIndex].text;
-semester = semester.split("-");
-var semesterName = semester[0] +"_"+semester[1];
-console.log(semesterName);
-
-var docRef = db.collection("2020_1학기").doc("10012-김영주");
-console.log(docRef.data().학수번호);
-
-//강의명(교수님) html에서 따옴, html 안에꺼 컬렉션 이름처럼 임의로 바꿨음
-var lectureName = document.querySelector(".subject").innerText;
-lectureName = lectureName.split("-");
-var entireLec = db.collection(semesterName);
-lecture = entireLec.where("교과목명", "==", lectureName[0]);
-lecture = lecture.where("교수명", "==", lectureName[1]);
-console.log('${lecture.data().학수번호}');
-
-//태그 버튼 누르면 db에 해당 태그 문서 생성되게
+//태그 버튼 누르면 db에 해당 태그 문서 로딩되게
 function getTagPostings(evt){
     var tagName = evt.currentTarget.innerText;
+    tagName = tagName.substring(1, tagName.length);
     //var docRef = db.collection(lectureName).collection("board");
-    var docRef = db.collection("2020_2").doc("10011-01").collection("board");
-   
-    docRef.where("tag", "==", "잡담")
-    .get()
-    .then(function(querySnapshot){
-        querySnapshot.forEach(function(doc){
-            console.log(doc.id);
-        });
-    });
+    var docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board");
+
+    console.log(tagName);
+    loadPostings();
 }
 
+// docRef.where("tag", "==", tagName)
+//     .get()
+//     .then(function(querySnapshot){
+//         querySnapshot.forEach(function(doc){
+//             doc.data().content;
+//         });
+// });
 
+var postingZone = document.getElementById("postSec");
+
+// 변화 감지해서 계속 포스팅 로드하는 함수
+function loadPostings(){
+    console.log("로드 포스팅 시작");
+
+    var docRef = db.collection("2020_1학기").doc("20479-이숙영").collection("board");
+    
+    //리스너 생성
+    docRef
+    .orderBy("timestamp", "desc") //시간 내림차순
+    .onSnapshot((docSnapshot) => {  //스냅샷
+    postingZone.innerHTML = ""; //포스팅 뜨는 세션에 HTML 부분 적기
+    //데베에서 읽으면서 html 코드 추가
+    docSnapshot.forEach((doc) => {
+      console.log("로드 포스팅 전");
+      var entry = document.createElement("li");
+      entry.innerText="우가";
+      console.log("우가추가");
+
+      var post = document.createElement("div");
+      post.className("post");
+
+      var content = document.createElement("span");
+      content.className("contents");
+      content.innerText = doc.data().content;
+
+      var date_com_like = document.createElement("div");
+
+      var date = document.createElement("p");
+      date.innerText = doc.data().timestamp;
+
+      var like_com = document.createElement("span");
+      like_com.className("like-comment");
+
+      var like = document.createElement("img");
+      like.setAttribute("src", "../imgs/like.png");
+
+      var comment = document.createElement("img");
+      like.setAttribute("src", "../imgs/comment.png");
+      
+      like_com.innerHTML += like.outerHTML + doc.data().like + comment.outerHTML + doc.data().comment;
+      date_com_like.innerHTML += like_com.outerHTML;
+      date_com_like.innerHTML += date.outerHTML;
+      post.innerHTML += content.outerHTML += date_com_like.outerHTML;
+      entry.innerHTML += post.outerHTML;
+      postingZone.appendChild(entry);
+    });
+    });
+}
