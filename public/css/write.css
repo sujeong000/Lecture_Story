@@ -67,3 +67,14 @@ html, body, .wrap {
 .content .text textarea:focus{
     outline: none;
 }
+.input_tag {
+    width: 240px;
+    height: 32px;
+    padding: 0 10px;
+    margin-left: 15px;
+    font-size: 10pt;
+    color : #AAAAAA;
+    border: 2px solid #AAAAAA;
+    border-radius: 5px;
+    float: left;
+}
