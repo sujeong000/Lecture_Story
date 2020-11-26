@@ -1,4 +1,3 @@
-import firebase from "firebase/app";
 const firebaseConfig = {
     apiKey: "AIzaSyCTexaR10Q0JKdVdUPrEhovRK5Mx_w-NO4",
     authDomain: "lecture-story-2.firebaseapp.com",
@@ -8,5 +7,4 @@ const firebaseConfig = {
     messagingSenderId: "70634403692",
     appId: "1:70634403692:web:5833a0adb975d77c186549"
   };
-  // Initialize Firebase
- export default firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
