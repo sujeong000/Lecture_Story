@@ -11,7 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -44,44 +44,16 @@
             <div class="content">
                 <p>검색어: <span id="search_key">여기에 검색어</span></p>
 
-                <form>
+                <form method="post" >
                     <ul class="lecture_list">
-                        <li>
+                        <div id="bgli">
+
+                        </div>
+                        <!-- <li>
                             <input type="radio">
                             <a href="#">통계학 (01) - 김이화 교수님</a>
                         </li>
-                        <li>
-                            <input type="radio">
-                            <a href="#">통계학 (02) - 박이화 교수님</a>
-                        </li>
-                        <li>
-                            <input type="radio">
-                            <a href="#">통계학 (03) - 이이화 교수님</a>
-                        </li>
-                        <li>
-                            <input type="radio">
-                            <a href="#">통계학 (01) - 김이화 교수님</a>
-                        </li>
-                        <li>
-                            <input type="radio">
-                            <a href="#">통계학 (02) - 박이화 교수님</a>
-                        </li>
-                        <li>
-                            <input type="radio">
-                            <a href="#">통계학 (03) - 이이화 교수님</a>
-                        </li>
-                        <li>
-                            <input type="radio">
-                            <a href="#">통계학 (01) - 김이화 교수님</a>
-                        </li>
-                        <li>
-                            <input type="radio">
-                            <a href="#">통계학 (02) - 박이화 교수님</a>
-                        </li>
-                        <li>
-                            <input type="radio">
-                            <a href="#">통계학 (03) - 이이화 교수님</a>
-                        </li>
+                        -->
                     </ul>
                     <input type="submit" class="lecture_submit" value="등록">
                 </form>
