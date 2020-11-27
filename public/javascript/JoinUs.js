@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 const form = document.querySelector('#JoinUsForm');
-// let userid;/
+
 // https://www.youtube.com/watch?v=qWy9ylc3f9U/
 form.addEventListener('submit', (e) => {
 
@@ -35,18 +35,17 @@ form.addEventListener('submit', (e) => {
         document.test.p_check.focus();
         alert("비밀번호를 다시 확인해 주세요.");
     } else {
+        // 회원가입 성공 시 데이터 쓰기를 함.
         auth.createUserWithEmailAndPassword(email, password).then(cred => {
-            alert(cred.user.uid); /* 원하는 정보는 잘 찍히는데 밑에 코드(db에 저장하는 코드가 안먹음 먹었다안먹었다함...) */
-            return db.collection("UserInfo4").doc(cred.user.uid).set({
-                name: form.p_name.value
+            return db.collection('Users').doc(cred.user.uid).set({
+                name: form.p_name.value,
+                year: form.p_year.value,
+                month: form.p_month.value,
+                day: form.p_day.value
             });
+        }).then(() => {
+            // 데이터 쓰기가 성공할 시 페이지 이동함.
+            window.location.href = "board.html";
         });
-    }
-});
-
-//회원가입 화면에서 board.html로 간다
-firebase.auth().onAuthStateChanged(firebaseUser => {
-    if (firebaseUser) {
-        window.location.href = "board.html";
     }
 });
