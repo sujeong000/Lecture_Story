@@ -34,6 +34,7 @@ var semester=localStorage.getItem("Semester");
 //데이터베이스
 var db = firebase.firestore();
 var ref = db.collection(semester);
+
 //통계만 검색해서 통계학이 나오도록 하는 방법은 없나...ㅠ
 ref.where("교과목명","==",storageKey).get().then(
   function(querySnapshot){
@@ -41,26 +42,67 @@ ref.where("교과목명","==",storageKey).get().then(
     querySnapshot.forEach((doc) => {
       arr.push(doc.id);
       createLine(doc);
+      dc=doc;
   });
 }).catch(function(error){
   console.log(error);
 });
 
+//왜 안될까.....
+var ui = firebaseui.auth.AuthUI(firebase.auth());
+var user = firebase.auth().currentUser.uid;
+console.log(ui+"1");
+console.log(user+"2");
+
 function createLine(doc){
-  var str=doc.data().교과목명+" ("+doc.data().분반+") - "+doc.data().교수명+" 교수님<br>";
+  var num=doc.data().학수번호;
+  var name=doc.data().교과목명;
+  var pf=doc.data().교수명;
+  var cl=doc.data().분반;
+  // var loc=ul.querySelector(".lecture_list");
+  // var inp=document.createElement("input");
+  // inp.type="radio";
+  // loc.appendChild(inp);
+  var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님<br>";
   line="<input type='radio'/> "+ "<span>"+str+"</span>";
   $("ul").append(line); //jquery문법, html에 링크 추가함
 };
 
 //즐겨찾기 추가한거 정보 보내기
 function sendInfo(){
+  var rei=document.getElementsByTagName("input");
+  var s=document.getElementsByTagName("span");
+  console.log(s);
+  for(i=0;i<rei.length;i++){
+    if(rei[i].checked===true){
+      //s[i].
+      console.log(rei[i]);
+      console.log(s[i].innerHTML);
+      splitStr(s[i].innerHTML); //쪼개기
+    }
+  }
 
-  var num=doc.data().학수번호;
-  var name=doc.data().교과목명;
-  var pf=doc.data().교수명;
-  
-  localStorage.setItem("courseNO",num);
-  localStorage.setItem("courseName",name);
-  localStorage.setItem("prof",pf);
-  localStorage.setItem("semester",semester);
+  function splitStr(str){
+    var strArr=str.split(' ');
+    var lec_name=strArr[0]; //강의명
+    var lec_num=strArr[1].split("(")[1];//학수번호
+    var lec_class=strArr[3].split(")")[0];//분반
+    var lec_pf=strArr[5];//교수님
+    console.log(lec_num);
+
+    // 여기부터 안된다 사용자 받아와서 할 수 있도록 하자
+  //   e.preventDefault();
+  //   console.log("#");
+  //   var docdoc = db.collection("UserInfo").collection("즐겨찾기");
+  //   console.log("#");
+  //   docdoc.add({
+  //     교과목명: lec_name,
+  //     교수명: lec_pf,
+  //     분반: lec_class,
+  //     학수번호: lec_num,
+  //     학기: semester
+  //   });
+  //   console.log("#");
+  // 
+  }
 }

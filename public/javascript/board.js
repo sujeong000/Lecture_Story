@@ -19,6 +19,7 @@ var ui = firebaseui.auth.AuthUI(firebase.auth());
 
 // var semester=$("#sel option:selected").text();
 
+
 var semester = "2020_1학기";
 //과목명 검색
 function register() {
@@ -26,6 +27,15 @@ function register() {
     localStorage.setItem("storageName", search_key);
     localStorage.setItem("Semester", semester);
 }
+
+var index;
+$(document).ready(function(){
+    $("section").click(function(){
+        // console.log($(".content").index($(this)));
+        index = $(".content").index($(this));
+    })
+})
+
 
 
 function move(evt) {
