@@ -159,7 +159,7 @@ function drawChart(arr) {
     bar: { gap: '50%' },
     histogram: {
         bucketSize: 1,
-        maxNumBuckets: 300,
+        maxNumBuckets: 10,
         hideBucketItems: true,
         
     },
