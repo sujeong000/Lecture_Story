@@ -101,11 +101,23 @@ function loadPage() {
                         <div class="line"></div>
                         <p>A poet is a person who creates poetry. Poets may describe themselves as such or be described as such by others. A poet may simply be a writer of poetry, or may perform their art to an audience.</p>
                     </div>
-                </section>`;
+                </section>
+                <button onClick="del_lec(this.id)" id="${subject.data().교과목명}-${subject.data().교수명}">삭제</button>
+                `;
                 html += section;
             });
             container.innerHTML = html;
         });
+}
+
+
+function del_lec(doc_name){
+    console.log(doc_name);
+    db.collection("Users").doc(auth.currentUser.uid).collection("즐겨찾기").doc(doc_name).delete().then(
+            function(){
+                alert("삭제되었습니다.");
+                loadPage();
+            });
 }
 
 // 로그인이나 회원가입 후 User의 정보가 있을 때 모든 기능이 동작함.
