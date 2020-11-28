@@ -13,7 +13,7 @@
     margin-top: 30px;
     margin-left: 10px;
     position: relative;
-    /* height: 1000px; */
+    height: 2000px;
 } 
 
 .tags {
@@ -52,8 +52,7 @@
 .timeline::before {
     content: "";
     position: absolute;
-    height: 700px;
-    /* height: 100%; */
+    height: 100%;
     width: 3px;
     left: 2.5%;
     background-color: #cccccc;
