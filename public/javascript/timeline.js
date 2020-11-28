@@ -38,8 +38,6 @@ document.getElementById("subject").innerHTML=courseName+"-"+prof;
 // 학기 select box의 디폴트 값을 현재 학기로 설정
 var semester_value = semester.substring(0, 6);
 var select_tag = document.getElementById(semester_value);
-console.log(select_tag);
-console.log(semester_value);
 select_tag.setAttribute("selected", "selected");
 
 // 초기 태그는 최근 태그로 설정, 최근 포스팅 가져오기

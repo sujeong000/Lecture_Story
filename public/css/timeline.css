@@ -13,11 +13,11 @@
     margin-top: 30px;
     margin-left: 10px;
     position: relative;
-    height: 2300px;
+    height: 1000px;
 } 
 
 .tags {
-    width: 100px;
+    width: 130px;
     height: 100%;
     overflow: hidden;
     float: left;
@@ -52,7 +52,7 @@
     position: absolute;
     height: 100%;
     width: 3px;
-    left: 2.6%;
+    left: 2.5%;
     background-color: #cccccc;
 }
 
