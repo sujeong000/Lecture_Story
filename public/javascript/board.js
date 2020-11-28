@@ -73,6 +73,30 @@ function move(evt) {
         });
 }
 
+function loadPage_getData(courseNo, prof) {
+    
+    var contents = [];
+    var html2;
+    var cnt = 0;
+    db.collection(localStorage.getItem("semester"))
+    .doc(courseNo + "-" + prof)
+    .collection("board")
+    .limit(3)
+    .get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach(function (doc) {
+            contents[cnt] = doc.data().content;
+            cnt++;
+        });
+        // # 실행 순서3 - 콜백이든 뭐든 개념은 잘 모르겠는데 나중에 실행된다는 건 알겠음...
+        console.log(contents);
+        html2 = `<div class="text"><p>${contents[0]}</p><div class="line"></div><p>${contents[1]}</p><div class="line"></div><p>${contents[2]}</p></div></section>`; console.log("3" + html2);
+        return html2;
+    });
+    // # 실행순서1
+    console.log("1" + html2);
+    return html2;
+}
 // db에서 특정 학기의 수업을 가져와 원하는 형식으로 보여주기. -> 잘 됨
 function loadPage() {
     let html = '';
@@ -83,33 +107,15 @@ function loadPage() {
         .get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (subject) {
-                let content1 = '';
+                let content1;
                 const section = `
                 <section onClick="move(this)" class="content">
                     <div class="title">
                         <h3 class="name"><span class="t">${subject.data().교과목명}(${subject.data().분반}) - ${subject.data().교수명} 교수님&nbsp&nbsp</span></h3>
                         <button class="delete-button" onClick="del_lec(event, this.id)" id="${subject.data().교과목명}-${subject.data().교수명}">삭제</button>
                     </div>`;
-                db.collection(localStorage.getItem("semester"))
-                    .doc(subject.data().교과목명+"-"+subject.data().교수명)
-                    .collection("board")
-                    .where("학기", "==", localStorage.getItem("semester"))
-                    .orderBy("time", "desc")
-                    .limit(3)
-                    .get()
-                    .then(function (querySnapshot) {
-                        querySnapshot.forEach(function (t) {
-                            content1 = `<div class="text">
-                                <p>${t.data().content}</p>
-                                <div class="line"></div>
-                                <p>${t.data().content}</p>
-                                <div class="line"></div>
-                                <p>${t.data().content}</p>
-                                </div>
-                                </section>
-                            `;
-                        });
-                    });
+                content1 = loadPage_getData(subject.data().학수번호, subject.data().교수명);
+                console.log("2" + content1); // 평범하게 return 값 받아서 2번째로 실행됨.
                 html += (section + content1);
             });
             container.innerHTML = html;
