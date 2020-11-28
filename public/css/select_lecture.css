@@ -16,15 +16,14 @@
     border-radius: 15px;
     padding: 5px 0;
 }
+
+/* 이거 이제 사용 안함
 .lecture_list li{
     padding :15px;
     font-size:20px;
     line-height: 1.3em;
-}
-.lecture_list a{
-    color:black;
-    text-decoration: none;
-}
+} */
+
 .lecture_submit{
     margin: 30px 0;
     background-color: #00462A;
