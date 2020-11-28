@@ -4,17 +4,15 @@
 <head>
     <meta charset="utf-8">
     <title>lecture story</title>
-
     <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/statistics.css">
+    <link rel="stylesheet" href="../css/write.css">
     <link rel="stylesheet" href="../css/tob_bar_sub_bar.css">
-    <link rel="stylesheet" href="../css/timeline.css"></link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
@@ -49,28 +47,36 @@
             <nav>
                 <ul class="navi">
                     <li><a id="timeline" href="timeline.html"><span>타 임 라 인</span></a></li>
-                    <li><a class="active" id="grade" href="statistics.html"><span>성 적 통 계</span></a></li>
-                    <li><a id="eval" href="evaluation.html"><span>강 의 평 가</span></a></li>
+                    <li><a id="grade" href="statistics.html"><span>성 적 통 계</span></a></li>
+                    <li><a class="active" id="eval" href="evaluation.html"><span>강 의 평 가</span></a></li>
                 </ul>
             </nav>
-            <a class="write" href="enter_score.html">
-                <img src="../imgs/pencil.png" width=24px height=24px alt="글쓰기">
-            </a>
+        </div>
+
+        <div class="container">
+            <section class="content">
+
+                <form>
+                    <div class="top">
+                        <select name="select_tag" id="select_tag">
+                            <option>중간고사 전</option>
+                            <option>기말고사 전</option>
+                            <option>종강 후</option>
+                        </select>
+                        <input class="submit" type="button" value="등록" onclick="sub()">
+                    </div>
+                    <div class="text">
+                        <textarea name="content" id="content" placeholder="내용을 입력해주세요."></textarea>
+                    </div>
+                </form>
+
+            </section>
 
         </div>
-        <div class="container">
-            <div class="timeline">
-                <ul class="tags">
-                    <section id="timelineSec"></section>
-                </ul>
-                <section class="postings">
-                    <div class="grade">지금 나의 등수는? 3등 / 31명</div>
-                    <div id="chart_div"></div>
-                </section>
-            </div>
-        </div>
+
+
     </div>
-    <script src="../javascript/charts.js"></script>
+    <script src="../javascript/evalWrite.js"></script>
 </body>
 
 </html>
