@@ -25,7 +25,6 @@ function logOut(){
 localStorage.setItem("courseNO", "20479");
 localStorage.setItem("courseName", "이산수학");
 localStorage.setItem("prof", "이숙영");
-localStorage.setItem("semester", "2020_2학기");
 
 // 렉쳐정보 전달 받기
 const courseNO=localStorage.getItem("courseNO");
@@ -64,7 +63,6 @@ var postingZone = document.querySelector(".postings");
 
 // 변화 감지해서 계속 포스팅 로드하는 함수
 function loadPostings(docRef){
-    console.log("포스팅 로드 시작");
     //리스너 생성
     docRef
     .orderBy("time", "desc") //시간 내림차순
@@ -72,46 +70,9 @@ function loadPostings(docRef){
     postingZone.innerHTML = ""; //포스팅 뜨는 세션에 HTML 부분 적기
     //db에서 읽으면서 html 코드 추가
     docSnapshot.forEach((doc) => {
-      if(doc.data().tag === tagName || tagName === "최근"){
-        console.log(tagName+" "+semester);
-        var entry = document.createElement("li");
-
-        var post = document.createElement("div");
-        post.setAttribute("class","post");
-        post.setAttribute("value", doc.id);
-  
-        var content = document.createElement("span");
-        content.setAttribute("class","contents");
-        content.innerText = doc.data().content;
-  
-        var date_com_like = document.createElement("div");
-  
-        var date = document.createElement("p");
-        date.innerText= doc.data().time.toDate().toDateString();
-  
-        var like_com = document.createElement("span");
-        like_com.setAttribute("class","like-comment");
-  
-        var like = document.createElement("img");
-        like.setAttribute("src", "../imgs/like.png");
-        var likeNode = document.createTextNode(doc.data().like+" ");
-  
-        var comment = document.createElement("img");
-        comment.setAttribute("src", "../imgs/comment.png");
-        var commentNode = document.createTextNode(doc.data().commentNum+" ");
-        
-        like_com.append(like);
-        like_com.append(likeNode);
-        like_com.append(comment);
-        like_com.append(commentNode);
-        date.append(like_com);
-        date_com_like.append(date);
-        post.append(content);
-        post.append(date_com_like);
-        entry.append(post);
-
-        postingZone.appendChild(entry);
-      }
+        if(doc.data().tag === tagName || tagName === "최근"){
+            addPostHTML(doc);
+        }
 
       // 각 게시글 누르면 해당 게시글로 이동하는 이벤트리스너 등록
         var tags = document.querySelectorAll(".post");
@@ -123,6 +84,47 @@ function loadPostings(docRef){
     });
     
     });
+}
+
+// db의 게시글 문서를 html로 띄워주는 함수
+function addPostHTML(doc){
+    var entry = document.createElement("li");
+
+    var post = document.createElement("div");
+    post.setAttribute("class","post");
+    post.setAttribute("value", doc.id);
+
+    var content = document.createElement("span");
+    content.setAttribute("class","contents");
+    content.innerText = doc.data().content;
+
+    var date_com_like = document.createElement("div");
+
+    var date = document.createElement("p");
+    date.innerText= doc.data().time.toDate().toDateString();
+
+    var like_com = document.createElement("span");
+    like_com.setAttribute("class","like-comment");
+
+    var like = document.createElement("img");
+    like.setAttribute("src", "../imgs/like.png");
+    var likeNode = document.createTextNode(doc.data().like+" ");
+
+    var comment = document.createElement("img");
+    comment.setAttribute("src", "../imgs/comment.png");
+    var commentNode = document.createTextNode(doc.data().commentNum+" ");
+    
+    like_com.append(like);
+    like_com.append(likeNode);
+    like_com.append(comment);
+    like_com.append(commentNode);
+    date.append(like_com);
+    date_com_like.append(date);
+    post.append(content);
+    post.append(date_com_like);
+    entry.append(post);
+
+    postingZone.appendChild(entry);
 }
 
 /* 타임 라인 변경 및 실시간 업데이트*/
@@ -190,3 +192,30 @@ function change_tag(){
     loadPostings(docRef);
     loadTimelineTags();
 }
+
+// 키워드로 포스팅 검색하는 함수
+function find_keyword(evt) {
+    evt.preventDefault();
+    var search_key = document.getElementById("search").value;
+    document.getElementById("search").value = "";
+
+    docRef
+    .orderBy("time", "desc").get().then((querySnapshot) => {
+        postingZone.innerHTML = ""; //포스팅 뜨는 세션에 HTML 부분 비우기
+        querySnapshot.forEach((doc) => {
+        if(doc.data().content.includes(search_key)){
+            addPostHTML(doc);
+        }
+
+        });
+    });
+
+    return false;
+}
+
+//semester값으로 tag보이는거 설정해야함
+var semester_value = semester.substring(0, 6);
+var select_tag = document.getElementById(semester_value);
+select_tag.setAttribute(selected, selected);
+
+//검색할때 리로드안되게 해야함

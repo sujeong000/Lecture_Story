@@ -17,15 +17,15 @@
         <img id="logo" src="../imgs/logo-white.png">
         <!--학기 드롭다운-->
         <select class="semester" onchange="change_tag()">
-            <option selected>2020-2학기</option>
-            <option>2020-1학기</option>
-            <option>2019-2학기</option>
-            <option>2019-1학기</option>
+            <option id="2020-2">2020-2학기</option>
+            <option id="2020-1">2020-1학기</option>
+            <option id="2019-2">2019-2학기</option>
+            <option id="2019-1">2019-1학기</option>
         </select>
         <!--검색 바-->
         <div class="search_bar">
-            <form action="./select_lecture.html" method="post">
-                <input type="text" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
+            <form method="post">
+                <input type="text" id="search" placeholder="검색어를 입력하세요." />
                 <button type="submit" id="btn_search"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -43,7 +43,7 @@
         <nav>
             <ul class="navi">
                 <li><a class="active" id="timeline" href="#"><span>타 임 라 인</span></a></li>
-                <li><a id="grade" href="#"><span>성 적 통 계</span></a></li>
+                <li><a id="grade" href="statistics.html"><span>성 적 통 계</span></a></li>
                 <li><a id="eval" href="#"><span>강 의 평 가</span></a></li>
             </ul>
         </nav>
