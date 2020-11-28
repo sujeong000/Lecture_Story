@@ -21,11 +21,11 @@
         <div class="header">
             <a href="board.html"><img id="logo" src="../imgs/logo-white.png"></a>
             <!--학기 드롭다운-->
-            <select>
-                <option selected>2020-2학기</option>
-                <option>2020-1학기</option>
-                <option>2019-2학기</option>
-                <option>2019-1학기</option>
+            <select class="semester" onchange="change_tag()">
+                <option id="2020_2">2020-2학기</option>
+                <option id="2020_1">2020-1학기</option>
+                <option id="2019_2">2019-2학기</option>
+                <option id="2019_1">2019-1학기</option>
             </select>
             <!--검색 바-->
             <div class="search_bar">
@@ -41,7 +41,7 @@
         </div>
         <!--메뉴 바-->
         <div class="menu">
-            <span class="subject">통계학 (01) - 김이화 교수님</span>
+            <span class="subject" id="subject"></span>
             <nav>
                 <ul class="navi">
                     <li><a class="active" id="timeline" href="timeline.html"><span>타 임 라 인</span></a></li>

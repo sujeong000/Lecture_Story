@@ -38,7 +38,6 @@ select_tag.setAttribute("selected", "selected");
 
 // 등록 버튼 누르면 등록
 function sub(evt){ 
-    evt.preventDeaul
     var ref = db.collection(semester).doc(courseNO+"-"+prof).collection("evaluation");
     var selected_tag = document.getElementById("select_tag").value;
     var content = document.getElementById("content").value;

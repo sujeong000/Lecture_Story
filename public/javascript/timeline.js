@@ -38,8 +38,8 @@ select_tag.setAttribute("selected", "selected");
 
 // 초기 태그는 최근 태그로 설정, 최근 포스팅 가져오기
 var docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board");
-var tagName = "최근";
-document.querySelector(".tag").style.fontWeight = "bold";
+var tagName = "전체";
+document.querySelector(".tag").style.fontWeight = "bold";   //"전체" 태그를 굵게
 loadPostings(docRef);
 
 // 게시글 클릭하면 해당 게시글과 댓글 확인하는 페이지로 이동하는 함수
@@ -77,7 +77,7 @@ function loadPostings(docRef){
     postingZone.innerHTML = ""; //포스팅 뜨는 세션에 HTML 부분 적기
     //db에서 읽으면서 html 코드 추가
     docSnapshot.forEach((doc) => {
-        if(doc.data().tag === tagName || tagName === "최근"){
+        if(doc.data().tag === tagName || tagName === "전체"){
             addPostHTML(doc);
         }
 
@@ -206,7 +206,12 @@ document.getElementById("search_box")
     e.preventDefault();
     var search_key = document.getElementById("search").value;
     document.getElementById("search").value = "";
-
+    var everyTag = document.querySelectorAll(".tag");
+    for(var i=0; i<everyTag.length; i++){
+        everyTag[i].style.fontWeight="normal";
+    }
+    tagName="전체";
+    document.querySelector(".tag").style.fontWeight = "bold";   //"전체" 태그를 굵게
     docRef
     .orderBy("time", "desc").get().then((querySnapshot) => {
         postingZone.innerHTML = ""; //포스팅 뜨는 세션에 HTML 부분 비우기

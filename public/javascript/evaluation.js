@@ -40,7 +40,7 @@ var firebaseConfig = {
   var every_tag = document.querySelector(".tags");
   every_tag = every_tag.querySelectorAll("li");
   for(var i=0; i< every_tag.length; i++){
-      every_tag[i].style.paddingBottom = "150%";
+      every_tag[i].style.paddingBottom = "120%";
   }
   
   // 초기 태그는 최근 태그로 설정, 최근 포스팅 가져오기
@@ -84,7 +84,7 @@ var firebaseConfig = {
       postingZone.innerHTML = ""; //포스팅 뜨는 세션에 HTML 부분 적기
       //db에서 읽으면서 html 코드 추가
       docSnapshot.forEach((doc) => {
-          if(doc.data().tag === tagName){
+          if(doc.data().tag === tagName || tagName==="전체"){
               addPostHTML(doc);
           }
   
@@ -116,23 +116,7 @@ var firebaseConfig = {
   
       var date = document.createElement("p");
       date.innerText= doc.data().time.toDate().toDateString();
-  
-      var like_com = document.createElement("span");
-      like_com.setAttribute("class","like-comment");
-  
-      var like = document.createElement("img");
-      like.setAttribute("src", "../imgs/like.png");
-      var likeNode = document.createTextNode(doc.data().like+" ");
-  
-      var comment = document.createElement("img");
-      comment.setAttribute("src", "../imgs/comment.png");
-      var commentNode = document.createTextNode(doc.data().commentNum+" ");
       
-      like_com.append(like);
-      like_com.append(likeNode);
-      like_com.append(comment);
-      like_com.append(commentNode);
-      date.append(like_com);
       date_com_like.append(date);
       post.append(content);
       post.append(date_com_like);
@@ -161,11 +145,9 @@ var firebaseConfig = {
       semester = localStorage.getItem("semester");
   
       // 바뀐 학기의 타임라인과 포스팅 기본값(최근) 로드
-      docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board");
-      timelineRef = db.collection(semester).doc(courseNO+"-"+prof).collection("tags");
+      docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("evaluation");
       tagName="중간고사 전";
       loadPostings(docRef);
-      loadTimelineTags();
   }
   
   // 검색 기능
@@ -174,7 +156,12 @@ var firebaseConfig = {
       e.preventDefault();
       var search_key = document.getElementById("search").value;
       document.getElementById("search").value = "";
-  
+      var everyTag = document.querySelectorAll(".tag");
+      for(var i=0; i<everyTag.length; i++){
+          everyTag[i].style.fontWeight="normal";
+      }
+      tagName="전체";
+      document.querySelector(".tag").style.fontWeight = "bold";   //"전체" 태그를 굵게
       docRef
       .orderBy("time", "desc").get().then((querySnapshot) => {
           postingZone.innerHTML = ""; //포스팅 뜨는 세션에 HTML 부분 비우기
