@@ -11,6 +11,16 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+ // 로그아웃 함수
+ function logOut(){
+  firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      window.location.href="login.html";
+  }).catch(function(error) {
+      // An error happened.
+  });
+}
+
 //과목명 검색
 function register(){
   var search_key=document.getElementById("search").value;
@@ -47,6 +57,8 @@ function change_tag(){
   // 학기 이름 저장하고 학기 이름 변경
   localStorage.setItem("semester", tag_selected);
   semester = localStorage.getItem("semester");
+  //새로 가져오기 전에 radio파트 삭제
+  $('ul').empty();
   window.onload=show_lec();
 }
 
@@ -58,7 +70,6 @@ var auth=firebase.auth();
 window.onload=show_lec();
 
 function show_lec() {
-  $('ul').empty();
   //통계만 검색해서 통계학이 나오도록 하는 방법은 없나...ㅠ
   //검색어 읽어오기
   var ref = db.collection(semester);
