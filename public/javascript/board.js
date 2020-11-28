@@ -29,6 +29,32 @@ function register() {
     
 }
 
+// var semester = document.querySelector(".semester").options[tag_choice.selectedIndex].value;
+// //전달받은 학기로 option의 select를 바꿔둔다 //html에서 selected지울지 말지 고민해보기
+// if (semester === "2020_2학기") {
+//   document.getElementsByTagName('option')[0].selected = "selected";
+// } else if (semester === "2020_1학기") {
+//   document.getElementsByTagName('option')[1].selected = "selected";
+// } else if (semester === "2019_2학기") {
+//   document.getElementsByTagName('option')[2].selected = "selected";
+// } else if (semester === "2019_1학기") {
+//   document.getElementsByTagName('option')[3].selected = "selected";
+// } 
+
+// 학기 select 박스에서 학기를 변경할 경우 작동하는 함수
+function change_tag(){
+    // html에서 학기 이름 따오기
+    var tag_choice = document.querySelector(".semester");
+    var tag_selected = tag_choice.options[tag_choice.selectedIndex].value
+    
+    tag_selected = tag_selected.replace("-", "_");
+    console.log(tag_selected);
+    
+    // 학기 이름 저장하고 학기 이름 변경
+    localStorage.setItem("semester", tag_selected);
+    semester = localStorage.getItem("semester");
+  
+  }
 
 function move(evt) {
 
