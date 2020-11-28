@@ -21,10 +21,6 @@ var firebaseConfig = {
           // An error happened.
       });
   }
-  
-  localStorage.setItem("courseNO", "20479");
-  localStorage.setItem("courseName", "이산수학");
-  localStorage.setItem("prof", "이숙영");
 
   // 렉쳐정보 전달 받기
   const courseNO=localStorage.getItem("courseNO");
