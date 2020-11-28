@@ -23,14 +23,17 @@ var ref = db.collection(semester).doc(courseNO+"-"+prof).collection("grades");
 // 렉처 이름 띄우기
 document.getElementById("subject").innerHTML=courseName+"-"+prof;
 
-//차트 section 가리기
+//차트 section 가리기, 안내 문구 보이기
 const chartContainer = document.getElementById('chart-container');
 chartContainer.style.display = "none";
+const info = document.getElementById('info');
+info.style.display = "block";
 
 // 학기 select box의 디폴트 값을 현재 학기로 설정
 var semester_value = semester.substring(0, 6);
 var select_tag = document.getElementById(semester_value);
 select_tag.setAttribute("selected", "selected");
+
 
 // 학기 select 박스에서 학기를 변경할 경우 작동하는 함수
 function change_tag(){
@@ -122,6 +125,7 @@ function check_user(evt) {
               break;
             }
           }
+          info.style.display = "none";
           google.charts.load('current', {'packages': ['corechart']});
           google.charts.setOnLoadCallback(function() {drawChart(arr)});
           document.getElementById("rank").innerHTML=userRank;
