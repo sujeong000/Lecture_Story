@@ -81,7 +81,6 @@ html, body, .wrap {
     float: right;
 }
 .header .icons #logout-button { 
-    /* border: 2px  #AAAAAA solid; */
     cursor: pointer;
     background: transparent;
     color: #fff;
@@ -90,7 +89,6 @@ html, body, .wrap {
     border-radius: 3px;
     padding: 5px;
     vertical-align: middle;
-    font-weight: bold;
     margin-right: 10px;
 }
 .container {
