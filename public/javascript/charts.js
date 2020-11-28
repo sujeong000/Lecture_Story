@@ -48,7 +48,7 @@ function drawChart(arr) {
     legend: { position: 'none' },
     bar: { gap: '50%' },
     histogram: {
-        bucketSize: 5,
+        bucketSize: 1,
         maxNumBuckets: 300,
         hideBucketItems: true,
         
