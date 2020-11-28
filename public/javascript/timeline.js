@@ -45,7 +45,7 @@ loadPostings(docRef);
 // 게시글 클릭하면 해당 게시글과 댓글 확인하는 페이지로 이동하는 함수
 function readPost(evt){
     // 해당 문서로 이동하기 위해 문서 id 저장
-    localStorage.setItem("docID", evt.currentTarget.value);
+    localStorage.setItem("docID", evt.currentTarget.dataset.docid);
     // 해당 문서로 이동
     window.location.href="read_post.html";
 }
@@ -99,7 +99,7 @@ function addPostHTML(doc){
 
     var post = document.createElement("div");
     post.setAttribute("class","post");
-    post.setAttribute("value", doc.id);
+    post.setAttribute("data-docid", doc.id);
 
     var content = document.createElement("span");
     content.setAttribute("class","contents");
