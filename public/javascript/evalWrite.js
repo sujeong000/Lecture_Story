@@ -37,7 +37,8 @@ var select_tag = document.getElementById(semester_value);
 select_tag.setAttribute("selected", "selected");
 
 // 등록 버튼 누르면 등록
-function sub(){ 
+function sub(evt){ 
+    evt.preventDeaul
     var ref = db.collection(semester).doc(courseNO+"-"+prof).collection("evaluation");
     var selected_tag = document.getElementById("select_tag").value;
     var content = document.getElementById("content").value;
@@ -51,13 +52,10 @@ function sub(){
             tag: selected_tag,
             time: firebase.firestore.Timestamp.fromDate(new Date()),
             //userId: ui.currentUser.uid
+        }).then(function(){
+            window.location.href="evaluation.html";
         });
-
-        go_to_eval_page();
     }
-}
-function go_to_eval_page(){
-    window.location.href="evaluation.html";
 }
 
 
