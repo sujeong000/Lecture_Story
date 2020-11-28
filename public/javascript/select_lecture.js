@@ -21,21 +21,16 @@ function register(){
 var storageKey=localStorage.getItem("storageName");
 document.getElementById("search_key").innerHTML=storageKey;
 
-//필요한 기능
-//1. 버튼 눌러서 등록하면, 그 과목이 즐겨찾기(board)에 추가되어야 한다. //데이터 구조를 어쩔건지
-//2. 검색어에 맞게 해당되는 부분만 골라서 리스트를 출력해야한다.
-
-//#1 과목 검색 한거 select_lecture화면에 강의 띄워주는것 -이진경/하고있는데 잘 안되고 있어...
-//#2 과목 즐겨찾기 등록하면 게시판에 추가해주기 - 위의 일이 끝나면 할 수 있음.
-
 //board에서 학기 전달 받음
 var semester=localStorage.getItem("Semester");
 
 //데이터베이스
 var db = firebase.firestore();
 var ref = db.collection(semester);
+var auth=firebase.auth();
 
 //통계만 검색해서 통계학이 나오도록 하는 방법은 없나...ㅠ
+//검색어 읽어오기
 ref.where("교과목명","==",storageKey).get().then(
   function(querySnapshot){
     var arr = new Array;
@@ -48,21 +43,14 @@ ref.where("교과목명","==",storageKey).get().then(
   console.log(error);
 });
 
-//왜 안될까.....
-var ui = firebaseui.auth.AuthUI(firebase.auth());
-var user = firebase.auth().currentUser.uid;
-console.log(ui+"1");
-console.log(user+"2");
 
 function createLine(doc){
   var num=doc.data().학수번호;
   var name=doc.data().교과목명;
   var pf=doc.data().교수명;
   var cl=doc.data().분반;
-  // var loc=ul.querySelector(".lecture_list");
-  // var inp=document.createElement("input");
-  // inp.type="radio";
-  // loc.appendChild(inp);
+  
+  //읽어온 검색어를 사용자에게 보여줘야 함. 어떤 과목을 추가할 건지
   var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님<br>";
   line="<input type='radio'/> "+ "<span>"+str+"</span>";
   $("ul").append(line); //jquery문법, html에 링크 추가함
@@ -72,37 +60,36 @@ function createLine(doc){
 function sendInfo(){
   var rei=document.getElementsByTagName("input");
   var s=document.getElementsByTagName("span");
-  console.log(s);
+  //s -> span 태그 list => 0번은 검색어 나타내는 부분
+  //그 뒤로 radio 옆의 과목명,학수번호,분반,교수님 나오는 문자열
   for(i=0;i<rei.length;i++){
     if(rei[i].checked===true){
-      //s[i].
-      console.log(rei[i]);
-      console.log(s[i].innerHTML);
+      //rei -> 0번에는 검색창, 그뒤로는 radio버튼
       splitStr(s[i].innerHTML); //쪼개기
     }
   }
 
   function splitStr(str){
+    //radio 옆의 span 문자열을 쪼개기
+    //사용자가 선택한 과목의 정보를 넘겨주기 위함
     var strArr=str.split(' ');
     var lec_name=strArr[0]; //강의명
     var lec_num=strArr[1].split("(")[1];//학수번호
     var lec_class=strArr[3].split(")")[0];//분반
     var lec_pf=strArr[5];//교수님
-    console.log(lec_num);
 
-    // 여기부터 안된다 사용자 받아와서 할 수 있도록 하자
-  //   e.preventDefault();
-  //   console.log("#");
-  //   var docdoc = db.collection("UserInfo").collection("즐겨찾기");
-  //   console.log("#");
-  //   docdoc.add({
-  //     교과목명: lec_name,
-  //     교수명: lec_pf,
-  //     분반: lec_class,
-  //     학수번호: lec_num,
-  //     학기: semester
-  //   });
-  //   console.log("#");
-  // 
+    //즐겨찾기 추가
+    var docdoc = db.collection("Users").doc(firebase.auth().currentUser.uid).collection("즐겨찾기");
+    docdoc.doc(lec_name+"-"+lec_pf).set({
+      교과목명: lec_name,
+      교수명: lec_pf,
+      분반: lec_class,
+      학수번호: lec_num,
+      학기: semester
+    }).then(function(){
+      //즐겨찾기에 문서가 저장이 되면
+      //board.html로 화면 전환
+      window.location.href = "board.html";
+    });
   }
 }
