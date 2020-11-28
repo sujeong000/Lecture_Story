@@ -219,8 +219,13 @@ document.getElementById("search_box")
         if(doc.data().content.includes(search_key)){
             addPostHTML(doc);
         }
-
         });
+         // 각 게시글 누르면 해당 게시글로 이동하는 이벤트리스너 등록
+         var tags = document.querySelectorAll(".post");
+         var tagsNum = tags.length;
+         for(var i=0; i< tagsNum; i++){
+             tags[i].addEventListener("click", readPost);
+         }
     });
 });
 

@@ -45,17 +45,9 @@ var firebaseConfig = {
   
   // 초기 태그는 최근 태그로 설정, 최근 포스팅 가져오기
   var docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("evaluation");
-  var tagName = "중간고사 전";
+  var tagName = "전체";
   document.querySelector(".tag").style.fontWeight = "bold";
   loadPostings(docRef);
-  
-  // 게시글 클릭하면 해당 게시글과 댓글 확인하는 페이지로 이동하는 함수
-  function readPost(evt){
-      // 해당 문서로 이동하기 위해 문서 id 저장
-      localStorage.setItem("docID", evt.currentTarget.value);
-      // 해당 문서로 이동
-      window.location.href="read_post.html";
-  }
   
   // 태그 버튼 누르면 db의 해당 태그의 게시글들 로딩시키는 함수
   function getTagPostings(evt){
@@ -86,13 +78,6 @@ var firebaseConfig = {
       docSnapshot.forEach((doc) => {
           if(doc.data().tag === tagName || tagName==="전체"){
               addPostHTML(doc);
-          }
-  
-        // 각 게시글 누르면 해당 게시글로 이동하는 이벤트리스너 등록
-          var tags = document.querySelectorAll(".post");
-          var tagsNum = tags.length;
-          for(var i=0; i< tagsNum; i++){
-              tags[i].addEventListener("click", readPost);
           }
         
       });
