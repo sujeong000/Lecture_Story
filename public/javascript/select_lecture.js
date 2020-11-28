@@ -26,7 +26,6 @@ document.getElementById("search_key").innerHTML=storageKey;
 var semester = localStorage.getItem("semester");
 
 //전달받은 학기로 option의 select를 바꿔둔다 //html에서 selected지움
-document.getElementsByTagName('option')[3].selected = "selected";
 if (semester === "2020_2학기") {
   document.getElementsByTagName('option')[0].selected = "selected";
 } else if (semester === "2020_1학기") {
