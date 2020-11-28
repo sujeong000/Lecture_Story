@@ -198,6 +198,7 @@ function change_tag(){
     tagName="전체";
     loadPostings(docRef);
     loadTimelineTags();
+    document.querySelector(".tag").style.fontWeight = "bold";   //"전체" 태그를 굵게
 }
 
 // 검색 기능

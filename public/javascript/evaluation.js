@@ -131,8 +131,9 @@ var firebaseConfig = {
   
       // 바뀐 학기의 타임라인과 포스팅 기본값(최근) 로드
       docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("evaluation");
-      tagName="중간고사 전";
+      tagName="전체";
       loadPostings(docRef);
+      document.querySelector(".tag").style.fontWeight = "bold";   //"전체" 태그를 굵게
   }
   
   // 검색 기능
