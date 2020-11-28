@@ -100,3 +100,8 @@ html, body, .wrap {
     box-sizing: border-box;
     padding-bottom: 30px;
 }
+
+.semester{
+    /* 커서 손모양으로 바꿈 */
+    cursor:pointer;
+}

@@ -13,7 +13,7 @@
     margin-top: 30px;
     margin-left: 10px;
     position: relative;
-    height: 1000px;
+    /* height: 1000px; */
 } 
 
 .tags {
@@ -43,14 +43,17 @@
     z-index: 0;
     border: 3px #ffffff solid;
     position: relative;
-    left: -5%;
+    /* 전체화면으로 보면 -5보다 -4가 좀더 나은듯....? */
+    left: -4%;
     float: left;
 }
 
+/* 타임라인 길이는 여기서 조절 */
 .timeline::before {
     content: "";
     position: absolute;
-    height: 100%;
+    height: 700px;
+    /* height: 100%; */
     width: 3px;
     left: 2.5%;
     background-color: #cccccc;

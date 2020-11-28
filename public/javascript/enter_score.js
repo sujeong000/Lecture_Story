@@ -44,14 +44,6 @@ window.onload = function() {
     });
 }
 
-// 게시글 클릭하면 해당 게시글과 댓글 확인하는 페이지로 이동하는 함수
-function readGrade(evt){
-    // 해당 문서로 이동하기 위해 문서 id 저장
-    localStorage.setItem("docID", evt.currentTarget.value);
-    // 해당 문서로 이동
-    window.location.href="statistics.html";
-}
-
 function check_user(){ 
     var selected_tag = document.getElementById("select_tag").value;
 
@@ -83,7 +75,7 @@ function submit_grade() {
         if(selected_tag === "태그 추가") { //태그 추가 선택 + 태그 입력 받아 성적 입력
             var add_tag = document.getElementById("add_tag").value;
             ref.collection("grades").add({
-                grade: score,
+                grade: parseInt(score),
                 tag: add_tag,
                 userId: ui.currentUser.uid
             });
@@ -97,13 +89,12 @@ function submit_grade() {
         }
         else { //태그를 선택해서 성적 입력
             ref.collection("grades").add({
-                grade: score,
+                grade: parseInt(score),
                 tag: selected_tag,
                 userId: ui.currentUser.uid
             }).then(function(){
                 window.location.href="statistics.html";
             })
         }
-        //readGrade()
     }
 }
