@@ -10,6 +10,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 var db = firebase.firestore();
+var ui = firebase.auth();
 
 // 렉쳐정보 전달 받기
 const courseNO=localStorage.getItem("courseNO");
@@ -21,6 +22,10 @@ var ref = db.collection(semester).doc(courseNO+"-"+prof).collection("grades");
 
 // 렉처 이름 띄우기
 document.getElementById("subject").innerHTML=courseName+"-"+prof;
+
+//차트 section 가리기
+const chartContainer = document.getElementById('chart-container');
+chartContainer.style.display = "none";
 
 // 학기 select box의 디폴트 값을 현재 학기로 설정
 var semester_value = semester.substring(0, 6);
@@ -79,28 +84,51 @@ function loadTimelineTags(){
       var tags = document.querySelectorAll(".tag");
       var tagsNum = tags.length;
       for(var i=0; i< tagsNum; i++){
-        // var tagName = tags[i].innerText;
-        // tagName = tagName.substring(1, tagName.length);
-        tags[i].addEventListener("click", getTagGrade);
+        tags[i].addEventListener("click", check_user);
       }
     });
 }
 
 loadTimelineTags();
 
-//tag 성적 정보 가져오기
-function getTagGrade(evt) {
+function check_user(evt) {
   var tagName = evt.currentTarget.innerText;
   tagName = tagName.substring(1, tagName.length);
 
+  //선택한 tag와 useId 일치하는 성적이 있는지 확인
   ref.where('tag', '==', tagName).get().then((querySnapshot) => {
-    var arr = new Array;
-    querySnapshot.forEach((doc) => {
-      arr.push(doc.data().grade);
-    });
-
-    google.charts.load('current', {'packages': ['corechart']});
-    google.charts.setOnLoadCallback(function() {drawChart(arr)});
+      var flag = false;
+      var userScore;
+      querySnapshot.forEach((doc) => {
+        if(doc.data().userId === ui.currentUser.uid) {
+          flag = true;
+          userScore = doc.data().grade;
+        }
+      });
+      if(flag === false) { //성적을 입력하지 않았다면 알림
+        alert("성적을 입력해야 볼 수 있습니다.");
+      }
+      else { //tag 성적 정보 가져오기
+        ref.where('tag', '==', tagName).get().then((querySnapshot) => {
+          var arr = new Array;
+          var userRank;
+          querySnapshot.forEach((doc) => {
+            arr.push(doc.data().grade);
+          });
+          arr.sort(function (a,b){ return b-a; }); //내림차순 정렬
+          for(var i=0; i<arr.length; i++) {
+            if(userScore === arr[i]) {
+              userRank = i+1;
+              break;
+            }
+          }
+          google.charts.load('current', {'packages': ['corechart']});
+          google.charts.setOnLoadCallback(function() {drawChart(arr)});
+          document.getElementById("rank").innerHTML=userRank;
+          document.getElementById("total").innerHTML=arr.length;
+          chartContainer.style.display = "block"; //차트 section을 보이게
+        });
+      }
   });
 }
 
@@ -124,8 +152,8 @@ function drawChart(arr) {
   // Set chart options
   var options = {
     title: '사람(명), 점수',
-    width: 1500,
-    height: 700,
+    width: $(window).width()*0.7,
+    height: $(window).height()*0.6,
     colors: ['#AAAAAA'],
     legend: { position: 'none' },
     bar: { gap: '50%' },
