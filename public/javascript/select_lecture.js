@@ -69,23 +69,25 @@ var auth=firebase.auth();
 
 window.onload=show_lec();
 
-function show_lec() {
-  //통계만 검색해서 통계학이 나오도록 하는 방법은 없나...ㅠ
-  //검색어 읽어오기
-  var ref = db.collection(semester);
-  ref.where("교과목명", "==", storageKey).get().then(
-    function (querySnapshot) {
-      //let html = '';
-      var arr = new Array;
-      querySnapshot.forEach((doc) => {
-        arr.push(doc.id);
-        createLine(doc);
-      });
-    }).catch(function (error) {
-      console.log(error);
-    });
-}
 
+//"이산"만 검색해도 "이산수학"이 검색되도록 했음
+//검색어 읽어오기
+function show_lec() {
+  var ref = db.collection(semester);
+  ref.get().then(function (querySnapshot) {
+    //let html = '';
+    var arr = new Array;
+    querySnapshot.forEach((doc) => {
+      if(doc.data().교과목명.includes(storageKey)){
+        arr.push(doc.id);
+      createLine(doc);
+      }
+    });
+  }).catch(function (error) {
+    console.log(error);
+  });
+ 
+}
 
 //radio 파트 만들기
 function createLine(doc){
