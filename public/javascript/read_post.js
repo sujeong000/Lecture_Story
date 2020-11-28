@@ -141,6 +141,7 @@ function addCommentHTML(doc){
     var edit = document.createElement("button");
     edit.setAttribute("type","button");
     edit.innerText = "수정";
+    edit.setAttribute("onclick", "edit_comment(this.dataset.docid)");
 
     var del = document.createElement("button");
     del.setAttribute("type","button");
@@ -180,7 +181,7 @@ function addWriteSecHTML(){
     var input = document.createElement("input");
     input.setAttribute("class", "button");
     input.setAttribute("type", "submit");
-    input.setAttribute("value", "등 록");
+    input.setAttribute("value", "댓글 추가");
     input.setAttribute("onclick", "sub()");
 
     form.append(textarea);
@@ -201,6 +202,19 @@ function del_post(){
 
 // 댓글 지우는 함수
 function del_comment(doc_name){
+    docRef.update({
+        commentNum: firebase.firestore.FieldValue.increment(-1)
+    })
+    docRef.collection("comment").doc(doc_name).delete().then(
+            function(){
+                alert("삭제되었습니다.");
+                window.location.reload();
+            });
+}
+
+// 댓글 수정하는 함수
+function edit_comment(doc_name){
+    var commit_block = document.querySelector("data-")
     docRef.update({
         commentNum: firebase.firestore.FieldValue.increment(-1)
     })
