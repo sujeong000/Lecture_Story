@@ -34,6 +34,7 @@ var semester=localStorage.getItem("Semester");
 //데이터베이스
 var db = firebase.firestore();
 var ref = db.collection(semester);
+var auth=firebase.auth();
 
 //통계만 검색해서 통계학이 나오도록 하는 방법은 없나...ㅠ
 ref.where("교과목명","==",storageKey).get().then(
@@ -48,21 +49,13 @@ ref.where("교과목명","==",storageKey).get().then(
   console.log(error);
 });
 
-//왜 안될까.....
-var ui = firebaseui.auth.AuthUI(firebase.auth());
-var user = firebase.auth().currentUser.uid;
-console.log(ui+"1");
-console.log(user+"2");
 
 function createLine(doc){
   var num=doc.data().학수번호;
   var name=doc.data().교과목명;
   var pf=doc.data().교수명;
   var cl=doc.data().분반;
-  // var loc=ul.querySelector(".lecture_list");
-  // var inp=document.createElement("input");
-  // inp.type="radio";
-  // loc.appendChild(inp);
+  
   var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님<br>";
   line="<input type='radio'/> "+ "<span>"+str+"</span>";
   $("ul").append(line); //jquery문법, html에 링크 추가함
@@ -90,19 +83,16 @@ function sendInfo(){
     var lec_pf=strArr[5];//교수님
     console.log(lec_num);
 
-    // 여기부터 안된다 사용자 받아와서 할 수 있도록 하자
-  //   e.preventDefault();
-  //   console.log("#");
-  //   var docdoc = db.collection("UserInfo").collection("즐겨찾기");
-  //   console.log("#");
-  //   docdoc.add({
-  //     교과목명: lec_name,
-  //     교수명: lec_pf,
-  //     분반: lec_class,
-  //     학수번호: lec_num,
-  //     학기: semester
-  //   });
-  //   console.log("#");
-  // 
+   
+    var docdoc = db.collection("Users").doc(firebase.auth().currentUser.uid).collection("즐겨찾기");
+    docdoc.doc(lec_name+"-"+lec_pf).set({
+      교과목명: lec_name,
+      교수명: lec_pf,
+      분반: lec_class,
+      학수번호: lec_num,
+      학기: semester
+    });
+    console.log("#");
+  
   }
 }
