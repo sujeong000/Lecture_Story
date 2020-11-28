@@ -53,14 +53,15 @@ function change_tag(){
 
 //데이터베이스
 var db = firebase.firestore();
-var ref = db.collection(semester);
 var auth=firebase.auth();
 
 window.onload=show_lec();
 
 function show_lec() {
+  $('ul').empty();
   //통계만 검색해서 통계학이 나오도록 하는 방법은 없나...ㅠ
   //검색어 읽어오기
+  var ref = db.collection(semester);
   ref.where("교과목명", "==", storageKey).get().then(
     function (querySnapshot) {
       //let html = '';
