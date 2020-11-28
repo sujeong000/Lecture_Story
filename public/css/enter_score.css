@@ -9,13 +9,12 @@
     margin: 0 auto;
 }
 .content{
-    
     margin: 0 auto;
-    width: 80%;
+    width: 900px;
 }
 .content form{
     display:block;
-    padding-top: 10px;
+    padding-top: 30px;
 }
 .content .top::after{
     display: block;
@@ -36,7 +35,7 @@
     border-radius: 5px;
     float: left;
 }
-.content .top button{
+.content .top .submit{
     float: right;
     width: 120px;
     height: 35px;
@@ -47,10 +46,21 @@
     color: white;
     font-weight: bold;
     font-size: 1.1em;
+    cursor: pointer;
+}
+.input_tag {
+    width: 240px;
+    height: 32px;
+    padding: 0 10px;
+    margin-left: 15px;
+    font-size: 10pt;
+    color : #AAAAAA;
+    border: 2px solid #AAAAAA;
+    border-radius: 5px;
+    float: left;
 }
 .content .text{
     height: 50px;
-    margin-top:50px;
 }
 .content .text input{
     width:100%; 

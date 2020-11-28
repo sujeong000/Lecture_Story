@@ -17,12 +17,41 @@ function register(){
   localStorage.setItem("storageName",search_key);
 }
 
+
 //검색어: [  ] 표시하는 부분
 var storageKey=localStorage.getItem("storageName");
 document.getElementById("search_key").innerHTML=storageKey;
 
 //board에서 학기 전달 받음
-var semester=localStorage.getItem("Semester");
+var semester = localStorage.getItem("semester");
+
+//전달받은 학기로 option의 select를 바꿔둔다 //html에서 selected지움
+if (semester === "2020_2학기") {
+  document.getElementsByTagName('option')[0].selected = "selected";
+} else if (semester === "2020_1학기") {
+  document.getElementsByTagName('option')[1].selected = "selected";
+} else if (semester === "2019_2학기") {
+  document.getElementsByTagName('option')[2].selected = "selected";
+} else if (semester === "2019_1학기") {
+  document.getElementsByTagName('option')[3].selected = "selected";
+} 
+
+
+// 학기 select 박스에서 학기를 변경할 경우 작동하는 함수
+function change_tag(){
+  // html에서 학기 이름 따오기
+  var tag_choice = document.querySelector(".semester");
+  var tag_selected = tag_choice.options[tag_choice.selectedIndex].value
+  
+  tag_selected = tag_selected.replace("-", "_");
+  console.log(tag_selected);
+  
+  // 학기 이름 저장하고 학기 이름 변경
+  localStorage.setItem("semester", tag_selected);
+  semester = localStorage.getItem("semester");
+
+}
+
 
 //데이터베이스
 var db = firebase.firestore();
@@ -44,6 +73,7 @@ ref.where("교과목명","==",storageKey).get().then(
 });
 
 
+//radio 파트 만들기
 function createLine(doc){
   var num=doc.data().학수번호;
   var name=doc.data().교과목명;
@@ -55,6 +85,7 @@ function createLine(doc){
   line="<input type='radio'/> "+ "<span>"+str+"</span>";
   $("ul").append(line); //jquery문법, html에 링크 추가함
 };
+
 
 //즐겨찾기 추가한거 정보 보내기
 function sendInfo(){
@@ -69,24 +100,24 @@ function sendInfo(){
     }
   }
 
-  function splitStr(str){
+  function splitStr(str) {
     //radio 옆의 span 문자열을 쪼개기
     //사용자가 선택한 과목의 정보를 넘겨주기 위함
-    var strArr=str.split(' ');
-    var lec_name=strArr[0]; //강의명
-    var lec_num=strArr[1].split("(")[1];//학수번호
-    var lec_class=strArr[3].split(")")[0];//분반
-    var lec_pf=strArr[5];//교수님
+    var strArr = str.split(' ');
+    var lec_name = strArr[0]; //강의명
+    var lec_num = strArr[1].split("(")[1];//학수번호
+    var lec_class = strArr[3].split(")")[0];//분반
+    var lec_pf = strArr[5];//교수님
 
     //즐겨찾기 추가
     var docdoc = db.collection("Users").doc(firebase.auth().currentUser.uid).collection("즐겨찾기");
-    docdoc.doc(lec_name+"-"+lec_pf).set({
+    docdoc.doc(lec_name + "-" + lec_pf).set({
       교과목명: lec_name,
       교수명: lec_pf,
       분반: lec_class,
       학수번호: lec_num,
       학기: semester
-    }).then(function(){
+    }).then(function () {
       //즐겨찾기에 문서가 저장이 되면
       //board.html로 화면 전환
       window.location.href = "board.html";

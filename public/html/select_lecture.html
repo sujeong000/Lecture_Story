@@ -20,12 +20,12 @@
         <div class="header">
             <img id="logo" src="../imgs/logo-white.png">
             <!--학기 드롭다운-->
-            <select>
-                <option selected>2020-2학기</option>
+            <select class="semester" onchange="change_tag()">
+                <option>2020-2학기</option>
                 <option>2020-1학기</option>
                 <option>2019-2학기</option>
                 <option>2019-1학기</option>
-            </select>
+            </select>            
             <!--검색 바-->
             <div class="search_bar">
                 <form action="./select_lecture.html" method="post" onSubmit = "register()">
