@@ -48,13 +48,13 @@ function sub(){
                 content: content,
                 like: 0,
                 tag: add_tag,
-                time: new Date().getTime() //해결 안됨..
+                time: firebase.firestore.Timestamp.fromDate(new Date())
                 //userId: ui.currentUser.uid 로그인 확인불가능..
             });
             //태그 추가
             ref.collection("tags").add({
                 tag: add_tag,
-                time: new Date().getTime()
+                time: firebase.firestore.Timestamp.fromDate(new Date())
             });
         }
         else { //태그를 선택해서 글을 쓸 때
@@ -64,7 +64,7 @@ function sub(){
                 content: content,
                 like: 0,
                 tag: selected_tag,
-                time: new Date().getTime()
+                time: firebase.firestore.Timestamp.fromDate(new Date())
                 //userId: ui.currentUser.uid
             });
         }
