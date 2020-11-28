@@ -29,6 +29,14 @@ window.onload = function() {
     });
 }
 
+// 게시글 클릭하면 해당 게시글과 댓글 확인하는 페이지로 이동하는 함수
+function readPost(evt){
+    // 해당 문서로 이동하기 위해 문서 id 저장
+    localStorage.setItem("docID", evt.currentTarget.value);
+    // 해당 문서로 이동
+    window.location.href="timeline.html";
+}
+
 function sub(){ 
     var ref = db.collection("2020_1학기").doc("20479-이숙영");
     var selected_tag = document.getElementById("select_tag").value;
@@ -39,7 +47,7 @@ function sub(){
         alert("내용을 입력해주세요.");
     }
     else{
-        console.log(`${selected_tag}`);
+        //console.log(`${selected_tag}`);
         if(selected_tag === "태그 추가") { //태그 추가 선택 + 태그 입력 받아 글을 쓸 때
             var add_tag = document.getElementById("add_tag").value;
             //글 추가
@@ -67,7 +75,9 @@ function sub(){
                 time: firebase.firestore.Timestamp.fromDate(new Date())
                 //userId: ui.currentUser.uid
             });
+            readPost();
         }
+       
     }
 }
 
