@@ -12,3 +12,9 @@
     font-weight: bold;
     
 }
+#info{
+    left:0;
+    right: 0;
+    float: left;
+    color: #00462A;
+}
