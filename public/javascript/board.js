@@ -14,6 +14,7 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 var ui = firebaseui.auth.AuthUI(firebase.auth());
 const container = document.querySelector(".container");
+const tag = document.querySelector(".semester");
 //현재 선택된 학기가 뭐인지 받아오는거 실패
 // var sel=document.getElementById(sel);
 // var sem=sel.options[sel.selectedIndex].value;
@@ -42,18 +43,16 @@ function register() {
 // } 
 
 // 학기 select 박스에서 학기를 변경할 경우 작동하는 함수
-function change_tag(){
+function change_tag(select_obj){
+
     // html에서 학기 이름 따오기
     var tag_choice = document.querySelector(".semester");
-    var tag_selected = tag_choice.options[tag_choice.selectedIndex].value
-    
-    tag_selected = tag_selected.replace("-", "_");
-    console.log(tag_selected);
+    var tag_selected = tag_choice.options[tag_choice.selectedIndex].innerHTML.replace("-", "_");
     
     // 학기 이름 저장하고 학기 이름 변경
     localStorage.setItem("semester", tag_selected);
     semester = localStorage.getItem("semester");
-  
+    loadPage();
   }
 
 function move(evt) {
@@ -98,6 +97,30 @@ function move(evt) {
 //         }
 //     });
 
+function loadTag(){
+    let cnt = 0;
+    let html = '';
+    db.collection("Users")
+        .doc(auth.currentUser.uid)
+        .collection("semesters")
+        .orderBy("semester")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                var section = '';
+                var semester = doc.data().semester.replace("_", "-");
+                if (cnt === 0) {   
+                    localStorage.setItem("semester", semester.replace("-", "_"));
+                    section = `<option selected>${semester}</option>`;
+                } else {
+                    section = `<option>${semester}</option>`;
+                }
+                html += section;
+            });
+
+            tag.innerHTML = html;
+        });
+}
 
 function loadPage() {
     
@@ -105,6 +128,7 @@ function loadPage() {
     db.collection("Users")
         .doc(auth.currentUser.uid)
         .collection("즐겨찾기")
+        .where("학기", "==", localStorage.getItem("semester"))
         .get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (subject) {
@@ -131,6 +155,8 @@ function loadPage() {
 }
 
 firebase.auth().onAuthStateChanged(function(user) {
-    if (user)
+    if (user){
+        loadTag();
         loadPage();
+    }
 });
