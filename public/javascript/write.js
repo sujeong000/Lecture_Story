@@ -13,7 +13,7 @@ var db = firebase.firestore();
 var ui = firebase.auth();
 
 // 렉처 이름 띄우기
-//document.getElementById("subject").innerHTML=courseName+"-"+prof;
+document.getElementById("subject").innerHTML=courseName+"-"+prof;
 
 // 로그아웃 함수
 function logOut(){
@@ -44,12 +44,13 @@ window.onload = function() {
 }
 
 // 게시글 클릭하면 해당 게시글과 댓글 확인하는 페이지로 이동하는 함수
-function readPost(evt){
+/*function readPost(evt){
     // 해당 문서로 이동하기 위해 문서 id 저장
     localStorage.setItem("docID", evt.currentTarget.value);
     // 해당 문서로 이동
     window.location.href="timeline.html";
 }
+*/ 
 
 function sub(){ 
     var ref = db.collection("2020_1학기").doc("20479-이숙영");
@@ -88,7 +89,7 @@ function sub(){
                 time: firebase.firestore.Timestamp.fromDate(new Date()),
                 userId: ui.currentUser.uid
             });
-            readPost();
+            //readPost();
         }
        
     }
