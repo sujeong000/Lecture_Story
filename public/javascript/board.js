@@ -92,7 +92,7 @@ function loadPage() {
                 <section onClick="move(this)" class="content">
                     <div class="title">
                         <h3 class="name"><span class="t">${subject.data().교과목명}(${subject.data().분반}) - ${subject.data().교수명} 교수님&nbsp&nbsp</span></h3>
-                        <div class="line"></div>
+                        <button class="delete-button" onClick="del_lec(this.id)" id="${subject.data().교과목명}-${subject.data().교수명}">삭제</button>
                     </div>
                     <div class="text">
                         <p>A poet is a person who creates poetry. Poets may describe themselves as such or be described as such by others. A poet may simply be a writer of poetry, or may perform their art to an audience.</p>
@@ -102,7 +102,7 @@ function loadPage() {
                         <p>A poet is a person who creates poetry. Poets may describe themselves as such or be described as such by others. A poet may simply be a writer of poetry, or may perform their art to an audience.</p>
                     </div>
                 </section>
-                <button onClick="del_lec(this.id)" id="${subject.data().교과목명}-${subject.data().교수명}">삭제</button>
+                
                 `;
                 html += section;
             });

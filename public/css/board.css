@@ -13,12 +13,14 @@ a {
     margin: 0 auto;
 }
 .content .title{
+    text-align: left;
     padding: 15px 0;
 }
 .content .title .name{
     position: relative;
     text-align: left;
     z-index: 2;
+    display: inline-block;
 }
 .content .title .name span{
     background: white;
@@ -30,6 +32,12 @@ a {
     border: 1px solid #bbbbbb;
     top: -10px;
 }
+.content .title .delete-button{
+    float: right;
+    background: white;
+    border: none;
+}
+
 .content .text{
     background-color: #f1f1f1;
     height: 120px;

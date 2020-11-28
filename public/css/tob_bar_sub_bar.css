@@ -80,13 +80,16 @@ html, body, .wrap {
     padding-right: 15px;
     float: right;
 }
-.header .icons button { 
-    border: 0 none;
+.header .icons #logout-button { 
     cursor: pointer;
     background: transparent;
     color: #fff;
     outline: none;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 15px;
+    border-radius: 3px;
+    padding: 5px;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 .container {
     min-height: 100%; /* 사이트의 최소 높이값을 100% */
@@ -135,11 +138,4 @@ html, body, .wrap {
     right: 20px;
     bottom: 10px;
     float: right;
-}
-
-#logout-button{
-    border: 1px #eeeeee solid;
-    border-radius: 3px;
-    padding: 5px;
-    vertical-align: middle;
 }
