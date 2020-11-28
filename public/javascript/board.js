@@ -13,6 +13,7 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 var ui = firebaseui.auth.AuthUI(firebase.auth());
+const container = document.querySelector(".container");
 //현재 선택된 학기가 뭐인지 받아오는거 실패
 // var sel=document.getElementById(sel);
 // var sem=sel.options[sel.selectedIndex].value;
@@ -20,22 +21,12 @@ var ui = firebaseui.auth.AuthUI(firebase.auth());
 // var semester=$("#sel option:selected").text();
 
 
-var semester = "2020_1학기";
 //과목명 검색
 function register() {
     var search_key = document.getElementById("search").value;
     localStorage.setItem("storageName", search_key);
     localStorage.setItem("Semester", semester);
 }
-
-var index;
-$(document).ready(function () {
-    $("section").click(function () {
-        // console.log($(".content").index($(this)));
-        index = $(".content").index($(this));
-    })
-})
-
 
 
 function move(evt) {
@@ -48,13 +39,13 @@ function move(evt) {
     var prof = textlist[2]; console.log(prof);
     localStorage.setItem("prof", textlist[2]);
     var ref = db.collection("Users")
-    .doc(firebase.auth().currentUser.uid)
-    .collection("즐겨찾기")
-    .where("학기", "==", "2020-2학기")
-    .where("교과목명", "==", courseName)
-    .where("교수명", "==", prof);
-    ref.get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
+        .doc(firebase.auth().currentUser.uid)
+        .collection("즐겨찾기")
+        .where("학기", "==", "2020-2학기")
+        .where("교과목명", "==", courseName)
+        .where("교수명", "==", prof);
+    ref.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
             var courseNO = doc.data().학수번호; console.log(courseNO);
             localStorage.setItem("courseNO", courseNO);
             var semester = doc.data().학기; console.log(semester);
@@ -64,23 +55,50 @@ function move(evt) {
     window.location.href = "timeline.html";
 }
 
+// var ref = db.collection("Users").doc(auth.currentUser.uid).collection("tags");
+//     var arr = [];
+//     ref.get().then((querySnapshot) => {
+//         querySnapshot.forEach((doc) => {
+//             arr.push(doc.data().tag);
+//         });
+//         console.log(arr);
+//         $("#select_tag").empty();
 
+//         //tag 옵션에 추가
+//         for (var i = 0; i < arr.length; i++) {
+//             var option = $("<option>" + arr[i] + "</option>");
+//             $('#select_tag').append(option);
+//         }
+//     });
 
-window.onload = function () {
-    console.log(auth.currentUser.uid);
-    var ref = db.collection(UserrInfo).doc(auth.currentUser.uid).collection("tags");
-    var arr = [];
-    ref.get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            arr.push(doc.data().tag);
+function loadPage() {
+    let html = '';
+    db.collection("Users")
+        .doc(firebase.firestore().currentUser.uid)
+        .collection("즐겨찾기")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (subject) {
+
+                const section = `
+                <section onClick="move(this)" class="content">
+                    <div class="title">
+                        <h3 class="name"><span class="t">${subject.data().교과목명}(${subject.data().분반}) - ${subject.data().교수명} 교수님&nbsp&nbsp</span></h3>
+                        <div class="line"></div>
+                    </div>
+                    <div class="text">
+                        <p>A poet is a person who creates poetry. Poets may describe themselves as such or be described as such by others. A poet may simply be a writer of poetry, or may perform their art to an audience.</p>
+                        <div class="line"></div>
+                        <p>A poet is a person who creates poetry. Poets may describe themselves as such or be described as such by others. A poet may simply be a writer of poetry, or may perform their art to an audience.</p>
+                        <div class="line"></div>
+                        <p>A poet is a person who creates poetry. Poets may describe themselves as such or be described as such by others. A poet may simply be a writer of poetry, or may perform their art to an audience.</p>
+                    </div>
+                </section>`;
+                html += section;
+            });
+
+            container.innerHTML = html;
         });
-        console.log(arr);
-        $("#select_tag").empty();
-
-        //tag 옵션에 추가
-        for (var i = 0; i < arr.length; i++) {
-            var option = $("<option>" + arr[i] + "</option>");
-            $('#select_tag').append(option);
-        }
-    });
 }
+loadPage();
+
