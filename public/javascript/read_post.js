@@ -42,7 +42,7 @@ var firebaseConfig = {
   var commentZone;
 
   // 넘겨받은 문서 id 사용해서 문서 불러오고 화면에 띄우기
-  var docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board").doc(doc_id)
+  var docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board").doc(doc_id);
   docRef.get().then((doc)=>{
     addPostHTML(doc);
 
@@ -172,14 +172,16 @@ function addWriteSecHTML(){
     var entry = document.createElement("div");
     entry.setAttribute("class", "write_comment");
 
-    var form = document.createElement("form");
-    form.setAttribute("method","post");
+    var form = document.createElement("div");
+    //form.setAttribute("method","post");
 
     var textarea = document.createElement("textarea");
+    textarea.setAttribute("id", "txt");
     var input = document.createElement("input");
     input.setAttribute("class", "button");
     input.setAttribute("type", "submit");
     input.setAttribute("value", "등 록");
+    input.setAttribute("onclick", "sub()");
 
     form.append(textarea);
     form.append(input);
@@ -188,6 +190,7 @@ function addWriteSecHTML(){
     postingZone.appendChild(entry);
 }
 
+// 게시글 지우는 함수
 function del_post(){
     docRef.delete().then(
         function(){
@@ -196,11 +199,40 @@ function del_post(){
         });
 }
 
+// 댓글 지우는 함수
 function del_comment(doc_name){
-    console.log(doc_name);
+    docRef.update({
+        commentNum: firebase.firestore.FieldValue.increment(-1)
+    })
     docRef.collection("comment").doc(doc_name).delete().then(
             function(){
                 alert("삭제되었습니다.");
                 window.location.reload();
             });
 }
+
+function sub(){ 
+    var content = document.getElementById("txt").value;
+    
+    if(content === "") {
+        alert("내용을 입력해주세요.");
+    }
+    else{
+        docRef.collection("comment").add({
+            content: content,
+            time: firebase.firestore.Timestamp.fromDate(new Date()),
+            userId: firebase.auth().currentUser.uid 
+        });
+        docRef.update({
+            commentNum: firebase.firestore.FieldValue.increment(1)
+        }).then(function(){
+            window.location.reload();
+        });
+    };
+}
+
+// 새로고침 할때마다 양식 다시 제출 확인 뜨는 오류 해결
+if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+}
+
