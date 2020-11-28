@@ -15,37 +15,21 @@ const db = firebase.firestore();
 var ui = firebaseui.auth.AuthUI(firebase.auth());
 const container = document.querySelector(".container");
 const tag = document.querySelector(".semester");
-//현재 선택된 학기가 뭐인지 받아오는거 실패
-// var sel=document.getElementById(sel);
-// var sem=sel.options[sel.selectedIndex].value;
 
-// var semester=$("#sel option:selected").text();
-
-
+if (localStorage.getItem("semester") === ""){
+    var semester = localStorage.setItem("semester", "2020_2학기");
+}
 //과목명 검색
 function register() {
     var search_key = document.getElementById("search").value;
     localStorage.setItem("storageName", search_key);
     localStorage.setItem("semester", semester);
-    
 }
-
-// var semester = document.querySelector(".semester").options[tag_choice.selectedIndex].value;
-// //전달받은 학기로 option의 select를 바꿔둔다 //html에서 selected지울지 말지 고민해보기
-// if (semester === "2020_2학기") {
-//   document.getElementsByTagName('option')[0].selected = "selected";
-// } else if (semester === "2020_1학기") {
-//   document.getElementsByTagName('option')[1].selected = "selected";
-// } else if (semester === "2019_2학기") {
-//   document.getElementsByTagName('option')[2].selected = "selected";
-// } else if (semester === "2019_1학기") {
-//   document.getElementsByTagName('option')[3].selected = "selected";
-// } 
 
 // 학기 select 박스에서 학기를 변경할 경우 작동하는 함수
 function change_tag(select_obj){
 
-    // html에서 학기 이름 따오기
+    // 선택된 학기 정보를 받아 html에서 학기 이름 따오기
     var tag_choice = document.querySelector(".semester");
     var tag_selected = tag_choice.options[tag_choice.selectedIndex].innerHTML.replace("-", "_");
     
@@ -55,11 +39,12 @@ function change_tag(select_obj){
     loadPage();
   }
 
+// 특정 과목의 게시판을 선택했을 때 선택한 과목의 정보를 localStorage에 저장 후 페이지 이동
 function move(evt) {
 
     var text = evt.getElementsByTagName("span")[0].innerHTML;
     var textlist = text.split(' ');
-    // 
+   
     var courseName = textlist[0].split("(")[0]; console.log(courseName);
     localStorage.setItem("courseName", courseName);
     var prof = textlist[2]; console.log(prof);
@@ -81,49 +66,8 @@ function move(evt) {
     window.location.href = "timeline.html";
 }
 
-// var ref = db.collection("Users").doc(auth.currentUser.uid).collection("tags");
-//     var arr = [];
-//     ref.get().then((querySnapshot) => {
-//         querySnapshot.forEach((doc) => {
-//             arr.push(doc.data().tag);
-//         });
-//         console.log(arr);
-//         $("#select_tag").empty();
-
-//         //tag 옵션에 추가
-//         for (var i = 0; i < arr.length; i++) {
-//             var option = $("<option>" + arr[i] + "</option>");
-//             $('#select_tag').append(option);
-//         }
-//     });
-
-function loadTag(){
-    let cnt = 0;
-    let html = '';
-    db.collection("Users")
-        .doc(auth.currentUser.uid)
-        .collection("semesters")
-        .orderBy("semester")
-        .get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                var section = '';
-                var semester = doc.data().semester.replace("_", "-");
-                if (cnt === 0) {   
-                    localStorage.setItem("semester", semester.replace("-", "_"));
-                    section = `<option selected>${semester}</option>`;
-                } else {
-                    section = `<option>${semester}</option>`;
-                }
-                html += section;
-            });
-
-            tag.innerHTML = html;
-        });
-}
-
+// db에서 특정 학기의 수업을 가져와 원하는 형식으로 보여주기.
 function loadPage() {
-    
     let html = '';
     db.collection("Users")
         .doc(auth.currentUser.uid)
@@ -149,14 +93,13 @@ function loadPage() {
                 </section>`;
                 html += section;
             });
-
             container.innerHTML = html;
         });
 }
 
+// 로그인이나 회원가입 후 User의 정보가 있을 때 모든 기능이 동작함.
 firebase.auth().onAuthStateChanged(function(user) {
     if (user){
-        loadTag();
         loadPage();
     }
 });
