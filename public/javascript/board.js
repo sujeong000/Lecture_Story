@@ -10,6 +10,16 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// 로그아웃 함수
+function logOut() {
+    firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+        window.location.href = "login.html";
+    }).catch(function (error) {
+        // An error happened.
+    });
+}
+
 const auth = firebase.auth();
 const db = firebase.firestore();
 var ui = firebaseui.auth.AuthUI(firebase.auth());

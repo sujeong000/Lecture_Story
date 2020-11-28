@@ -11,13 +11,13 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
- // 로그아웃 함수
- function logOut(){
-  firebase.auth().signOut().then(function() {
-      // Sign-out successful.
-      window.location.href="login.html";
-  }).catch(function(error) {
-      // An error happened.
+// 로그아웃 함수
+function logOut() {
+  firebase.auth().signOut().then(function () {
+    // Sign-out successful.
+    window.location.href = "login.html";
+  }).catch(function (error) {
+    // An error happened.
   });
 }
 
