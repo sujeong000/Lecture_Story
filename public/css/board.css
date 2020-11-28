@@ -43,6 +43,8 @@ a {
     float: right;
     background: white;
     border: none;
+    position: relative;
+    outline: none;
 }
 
 .content .text{
