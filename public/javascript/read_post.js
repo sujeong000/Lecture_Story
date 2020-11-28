@@ -52,7 +52,8 @@ var firebaseConfig = {
     commentZone = document.querySelector(".comments");
 
     var commentRef = docRef.collection("comment");
-    commentRef.get().then((querySnapshot) => {
+    commentRef.orderBy("time")
+    .get().then((querySnapshot) => {
         querySnapshot.forEach((comment_doc) => {
           addCommentHTML(comment_doc);
         });
@@ -79,6 +80,7 @@ var firebaseConfig = {
 
     var del = document.createElement("button");
     del.setAttribute("type","button");
+    del.setAttribute("onclick", "del_post()");
     del.innerText = "삭제";
     
     var date_div = document.createElement("div");
@@ -113,7 +115,9 @@ var firebaseConfig = {
     edit_button.append(del);
     date_div.append(date);
     entry.append(content);
-    entry.append(edit_button);
+    if(firebase.auth().currentUser.uid == doc.data().userId){
+        entry.append(edit_button);
+    }
     entry.append(date_div);
 
     postingZone.appendChild(entry);
@@ -140,6 +144,8 @@ function addCommentHTML(doc){
 
     var del = document.createElement("button");
     del.setAttribute("type","button");
+    del.setAttribute("data-docid", doc.id);
+    del.setAttribute("onclick", "del_comment(this.dataset.docid)");
     del.innerText = "삭제";
 
     var date_div = document.createElement("div");
@@ -152,7 +158,9 @@ function addCommentHTML(doc){
     edit_button.append(edit);
     edit_button.append(del);
     comment.append(contents);
-    comment.append(edit_button);
+    if(firebase.auth().currentUser.uid == doc.data().userId){
+        comment.append(edit_button);
+    }
     comment.append(date_div);
     entry.append(comment);
 
@@ -178,4 +186,21 @@ function addWriteSecHTML(){
     entry.append(form);
 
     postingZone.appendChild(entry);
+}
+
+function del_post(){
+    docRef.delete().then(
+        function(){
+            alert("삭제되었습니다.");
+            window.location.href="timeline.html";
+        });
+}
+
+function del_comment(doc_name){
+    console.log(doc_name);
+    docRef.collection("comment").doc(doc_name).delete().then(
+            function(){
+                alert("삭제되었습니다.");
+                window.location.reload();
+            });
 }
