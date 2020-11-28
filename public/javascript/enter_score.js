@@ -10,12 +10,13 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
+var ui = firebase.auth();
+var ref = db.collection("2020_1학기").doc("20479-이숙영");
 
 //tag 불러오기
 window.onload = function() {
-    var ref = db.collection("2020_1학기").doc("20479-이숙영").collection("tags");
     var arr = [];
-    ref.get().then((querySnapshot) => {
+    ref.collection("tags").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
         arr.push(doc.data().tag);
         });
@@ -37,36 +38,46 @@ function readGrade(evt){
     window.location.href="statistics.html";
 }
 
-function sub(){ 
-    var ref = db.collection("2020_1학기").doc("20479-이숙영");
+function check_user(){ 
     var selected_tag = document.getElementById("select_tag").value;
-    var score = document.getElementById("score").value;
-    var ui = firebaseui.auth.AuthUI(firebase.auth());
-    //var currUser = ui.currentUser.uid;
 
     //현재 userId와 tag가 일치하는 문서가 있으면 접근x
-    /*ref.collection("tags").where('tag', '==', selected_tag).get().then((querySnapshot) => {
+    let flag = 0;
+    ref.collection("grades").where('tag', '==', selected_tag).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            if(doc.data().userId === currUser) {
-                alert("이미 성적을 입력하였습니다.");
+            if(doc.data().userId === ui.currentUser.uid) {
+                flag = 1;
+                console.log(doc.data());
+                console.log(flag);
             }
         });
-    });*/
+    });
+    console.log(flag); 
+    if(flag === 1) {
+        alert("이미 성적을 입력하였습니다.");
+    }
+    else {
+        submit_grade();
+    }
+}
+
+function submit_grade() {
+    var selected_tag = document.getElementById("select_tag").value;
+    var score = document.getElementById("score").value;
 
     if(score === null) {
         alert("성적을 입력해주세요.");
     }
     else{
-        //console.log(`${selected_tag}`);
         if(selected_tag === "태그 추가") { //태그 추가 선택 + 태그 입력 받아 성적 입력
             var add_tag = document.getElementById("add_tag").value;
             ref.collection("grades").add({
                 grade: score,
                 tag: add_tag,
-                //userId: currUser
+                userId: ui.currentUser.uid
             });
             //태그 추가
-            ref.collection("tags").add({
+            ref.collection("gradeTags").add({
                 tag: add_tag,
                 time: firebase.firestore.Timestamp.fromDate(new Date())
             });
@@ -75,7 +86,7 @@ function sub(){
             ref.collection("grades").add({
                 grade: score,
                 tag: selected_tag,
-                //userId: currUsER
+                userId: ui.currentUser.uid
             });
         }
         //readGrade()
