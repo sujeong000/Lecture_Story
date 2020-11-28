@@ -91,6 +91,8 @@ function submit_grade() {
             ref.collection("gradeTags").add({
                 tag: add_tag,
                 time: firebase.firestore.Timestamp.fromDate(new Date())
+            }).then(function(){
+                window.location.href="statistics.html";
             });
         }
         else { //태그를 선택해서 성적 입력
@@ -98,7 +100,9 @@ function submit_grade() {
                 grade: score,
                 tag: selected_tag,
                 userId: ui.currentUser.uid
-            });
+            }).then(function(){
+                window.location.href="statistics.html";
+            })
         }
         //readGrade()
     }
