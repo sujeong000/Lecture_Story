@@ -100,9 +100,10 @@ function move(evt) {
 
 
 function loadPage() {
+    
     let html = '';
     db.collection("Users")
-        .doc(firebase.firestore().currentUser.uid)
+        .doc(auth.currentUser.uid)
         .collection("즐겨찾기")
         .get()
         .then(function (querySnapshot) {
@@ -128,5 +129,8 @@ function loadPage() {
             container.innerHTML = html;
         });
 }
-loadPage();
 
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user)
+        loadPage();
+});
