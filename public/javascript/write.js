@@ -10,6 +10,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
+var ui = firebase.auth();
 
 //tag 불러오기
 window.onload = function() {
@@ -41,7 +42,6 @@ function sub(){
     var ref = db.collection("2020_1학기").doc("20479-이숙영");
     var selected_tag = document.getElementById("select_tag").value;
     var content = document.getElementById("content").value;
-    var ui = firebaseui.auth.AuthUI(firebase.auth());
 
     if(content === null) {
         alert("내용을 입력해주세요.");
@@ -56,8 +56,8 @@ function sub(){
                 content: content,
                 like: 0,
                 tag: add_tag,
-                time: firebase.firestore.Timestamp.fromDate(new Date())
-                //userId: ui.currentUser.uid 로그인 확인불가능..
+                time: firebase.firestore.Timestamp.fromDate(new Date()),
+                userId: ui.currentUser.uid 
             });
             //태그 추가
             ref.collection("tags").add({
@@ -72,8 +72,8 @@ function sub(){
                 content: content,
                 like: 0,
                 tag: selected_tag,
-                time: firebase.firestore.Timestamp.fromDate(new Date())
-                //userId: ui.currentUser.uid
+                time: firebase.firestore.Timestamp.fromDate(new Date()),
+                userId: ui.currentUser.uid
             });
             readPost();
         }
