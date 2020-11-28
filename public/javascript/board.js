@@ -26,10 +26,6 @@ var ui = firebaseui.auth.AuthUI(firebase.auth());
 const container = document.querySelector(".container");
 const tag = document.querySelector(".semester");
 
-// // semester 초기값 주기. 
-// if (localStorage.getItem("semester") === "") {
-//     var semester = localStorage.setItem("semester", "2020_2학기"); // (검색 후가 아닌 로그인 후가 이에 해당)
-// }
 //과목명 검색
 function register() {
     var search_key = document.getElementById("search").value;
@@ -37,7 +33,7 @@ function register() {
     localStorage.setItem("semester", semester);
 }
 
-// 학기 select 박스에서 학기를 변경할 경우 작동하는 함수 -> 잘 됨
+// 학기 select 박스에서 학기를 변경할 경우 작동하는 함수
 function change_tag() {
 
     // 선택된 학기 정보를 받아 html에서 학기 이름 따오기
@@ -56,25 +52,25 @@ function move(evt) {
     var text = evt.getElementsByTagName("span")[0].innerHTML;
     var textlist = text.split(' ');
 
-    var courseName = textlist[0].split("(")[0]; console.log(courseName);
+    var courseName = textlist[0].split("(")[0];
     localStorage.setItem("courseName", courseName);
-    var prof = textlist[2]; console.log(prof);
+    var prof = textlist[2];
     localStorage.setItem("prof", textlist[2]);
-    var ref = db.collection("Users")
-        .doc(firebase.auth().currentUser.uid)
+
+    db.collection("Users")
+        .doc(auth.currentUser.uid)
         .collection("즐겨찾기")
-        .where("학기", "==", "2020-2학기")
-        .where("교과목명", "==", courseName)
-        .where("교수명", "==", prof);
-    ref.get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            var courseNO = doc.data().학수번호; console.log(courseNO);
+        .doc(courseName + "-" + prof)
+        .get()
+        .then(function (doc) {
+            var courseNO = doc.data().학수번호;
             localStorage.setItem("courseNO", courseNO);
-            var semester = doc.data().학기; console.log(semester);
+            var semester = doc.data().학기;
             localStorage.setItem("semester", semester);
+            // alert(courseNO + " " + semester);
+        }).then(() => {
+            window.location.href = "timeline.html";
         });
-    });
-    window.location.href = "timeline.html";
 }
 
 // db에서 특정 학기의 수업을 가져와 원하는 형식으로 보여주기. -> 잘 됨
@@ -87,37 +83,48 @@ function loadPage() {
         .get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (subject) {
-
+                let content1 = '';
                 const section = `
                 <section onClick="move(this)" class="content">
                     <div class="title">
                         <h3 class="name"><span class="t">${subject.data().교과목명}(${subject.data().분반}) - ${subject.data().교수명} 교수님&nbsp&nbsp</span></h3>
-                        <button class="delete-button" onClick="del_lec(this.id)" id="${subject.data().교과목명}-${subject.data().교수명}">삭제</button>
-                    </div>
-                    <div class="text">
-                        <p>A poet is a person who creates poetry. Poets may describe themselves as such or be described as such by others. A poet may simply be a writer of poetry, or may perform their art to an audience.</p>
-                        <div class="line"></div>
-                        <p>A poet is a person who creates poetry. Poets may describe themselves as such or be described as such by others. A poet may simply be a writer of poetry, or may perform their art to an audience.</p>
-                        <div class="line"></div>
-                        <p>A poet is a person who creates poetry. Poets may describe themselves as such or be described as such by others. A poet may simply be a writer of poetry, or may perform their art to an audience.</p>
-                    </div>
-                </section>
-                
-                `;
-                html += section;
+                        <button class="delete-button" onClick="del_lec(event, this.id)" id="${subject.data().교과목명}-${subject.data().교수명}">삭제</button>
+                    </div>`;
+                db.collection(localStorage.getItem("semester"))
+                    .doc(subject.data().교과목명+"-"+subject.data().교수명)
+                    .collection("board")
+                    .where("학기", "==", localStorage.getItem("semester"))
+                    .orderBy("time", "desc")
+                    .limit(3)
+                    .get()
+                    .then(function (querySnapshot) {
+                        querySnapshot.forEach(function (t) {
+                            content1 = `<div class="text">
+                                <p>${t.data().content}</p>
+                                <div class="line"></div>
+                                <p>${t.data().content}</p>
+                                <div class="line"></div>
+                                <p>${t.data().content}</p>
+                                </div>
+                                </section>
+                            `;
+                        });
+                    });
+                html += (section + content1);
             });
             container.innerHTML = html;
         });
 }
 
-
-function del_lec(doc_name){
+// 즐겨찾기 해둔 과목 게시판 하나를 삭제하는 함수
+function del_lec(event, doc_name) {
+    event.stopPropagation();
     console.log(doc_name);
     db.collection("Users").doc(auth.currentUser.uid).collection("즐겨찾기").doc(doc_name).delete().then(
-            function(){
-                alert("삭제되었습니다.");
-                loadPage();
-            });
+        function () {
+            alert("삭제되었습니다.");
+            loadPage();
+        });
 }
 
 // 로그인이나 회원가입 후 User의 정보가 있을 때 모든 기능이 동작함.
