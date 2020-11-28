@@ -61,7 +61,8 @@
     padding: 0px 5px 0px 5px;
     text-decoration: none;
     background:none;
-    /*outline:0;*/
+    cursor: pointer;
+    outline:0;
 }
 
 .button:focus{
@@ -82,6 +83,7 @@
     padding-top: 10px;
     padding-bottom: 5px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .postings li {
@@ -110,8 +112,9 @@
     box-sizing: border-box;
 }
 
-#logout-menu{
-    float:right;
-    margin-top: 10px;
-    background-color: #cccccc;
+#logout-button{
+    border: 1px #eeeeee solid;
+    border-radius: 3px;
+    padding: 5px;
+    vertical-align: middle;
 }

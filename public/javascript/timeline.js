@@ -35,6 +35,13 @@ var semester=localStorage.getItem("semester");
 // 렉처 이름 띄우기
 document.getElementById("subject").innerHTML=courseName+"-"+prof;
 
+// 학기 select box의 디폴트 값을 현재 학기로 설정
+var semester_value = semester.substring(0, 6);
+var select_tag = document.getElementById(semester_value);
+console.log(select_tag);
+console.log(semester_value);
+select_tag.setAttribute("selected", "selected");
+
 // 초기 태그는 최근 태그로 설정, 최근 포스팅 가져오기
 var docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board");
 var tagName = "최근";
@@ -52,6 +59,11 @@ function readPost(evt){
 function getTagPostings(evt){
     tagName = evt.currentTarget.innerText;
     tagName = tagName.substring(1, tagName.length);
+    var everyTag = document.querySelectorAll(".tag");
+    for(var i=0; i<everyTag.length; i++){
+        everyTag[i].style.fontWeight="normal";
+    }
+    evt.currentTarget.style.fontWeight = "bold";
     docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board");
     loadPostings(docRef);
 }
@@ -193,9 +205,10 @@ function change_tag(){
     loadTimelineTags();
 }
 
-// 키워드로 포스팅 검색하는 함수
-function find_keyword(evt) {
-    evt.preventDefault();
+// 검색 기능
+document.getElementById("search_box")
+.addEventListener("submit", (e)=>{
+    e.preventDefault();
     var search_key = document.getElementById("search").value;
     document.getElementById("search").value = "";
 
@@ -209,13 +222,4 @@ function find_keyword(evt) {
 
         });
     });
-
-    return false;
-}
-
-//semester값으로 tag보이는거 설정해야함
-var semester_value = semester.substring(0, 6);
-var select_tag = document.getElementById(semester_value);
-select_tag.setAttribute(selected, selected);
-
-//검색할때 리로드안되게 해야함
+});
