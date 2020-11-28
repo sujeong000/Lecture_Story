@@ -195,7 +195,7 @@ function change_tag(){
     // 바뀐 학기의 타임라인과 포스팅 기본값(최근) 로드
     docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board");
     timelineRef = db.collection(semester).doc(courseNO+"-"+prof).collection("tags");
-    tagName="최근";
+    tagName="전체";
     loadPostings(docRef);
     loadTimelineTags();
 }
