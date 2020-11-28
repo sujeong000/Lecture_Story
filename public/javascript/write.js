@@ -12,6 +12,19 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 var ui = firebase.auth();
 
+// 렉처 이름 띄우기
+//document.getElementById("subject").innerHTML=courseName+"-"+prof;
+
+// 로그아웃 함수
+function logOut(){
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        window.location.href="login.html";
+    }).catch(function(error) {
+        // An error happened.
+    });
+}
+
 //tag 불러오기
 window.onload = function() {
     var ref = db.collection("2020_1학기").doc("20479-이숙영").collection("tags");
