@@ -94,3 +94,10 @@ html, body, .wrap {
     box-sizing: border-box;
     padding-bottom: 30px;
 }
+
+#logout-button{
+    border: 1px #eeeeee solid;
+    border-radius: 3px;
+    padding: 5px;
+    vertical-align: middle;
+}

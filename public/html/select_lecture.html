@@ -18,7 +18,7 @@
 <body>
     <div class="wrap">
         <div class="header">
-            <img id="logo" src="../imgs/logo-white.png">
+            <a href="board.html"><img id="logo" src="../imgs/logo-white.png"></a>
             <!--학기 드롭다운-->
             <select class="semester" onchange="change_tag()">
                 <option>2020-2학기</option>
@@ -35,8 +35,9 @@
             </div>
             <!--아이콘 바-->
             <div class="icons">
-                <button type="button" id="noti"><i class="fa fa-bell fa-2x"></i></button>
-                <button type="button" id="setting"><i class="fa fa-cog fa-2x"></i></button>
+                <button id="logout-button" onclick="logOut()">로그아웃</button>
+            <!-- <button type="button" id="noti"><i class="fa fa-bell fa-2x"></i></button>
+            <button type="button" id="setting"><i class="fa fa-cog fa-2x"></i></button> -->
                 <button type="button" id="user"><i class="fa fa-user-circle fa-2x"></i></button>
             </div>
         </div>
