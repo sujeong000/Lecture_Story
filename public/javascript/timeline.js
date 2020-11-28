@@ -113,16 +113,10 @@ function addPostHTML(doc){
     var like_com = document.createElement("span");
     like_com.setAttribute("class","like-comment");
 
-    var like = document.createElement("img");
-    like.setAttribute("src", "../imgs/like.png");
-    var likeNode = document.createTextNode(doc.data().like+" ");
-
     var comment = document.createElement("img");
     comment.setAttribute("src", "../imgs/comment.png");
     var commentNode = document.createTextNode(doc.data().commentNum+" ");
     
-    like_com.append(like);
-    like_com.append(likeNode);
     like_com.append(comment);
     like_com.append(commentNode);
     date.append(like_com);

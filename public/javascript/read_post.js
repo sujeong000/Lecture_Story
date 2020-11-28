@@ -76,6 +76,7 @@ var firebaseConfig = {
 
     var edit = document.createElement("button");
     edit.setAttribute("type","button");
+    edit.setAttribute("onclick", "edit_post()");
     edit.innerText = "수정";
 
     var del = document.createElement("button");
@@ -92,13 +93,6 @@ var firebaseConfig = {
     var like_com = document.createElement("span");
     like_com.setAttribute("class","like-comment");
 
-    var like = document.createElement("img");
-    like.setAttribute("src", "../imgs/like.png");
-
-    var like_num = document.createElement("span");
-    var like_num_node = document.createTextNode(doc.data().like);
-    like_num.append(like_num_node);
-
     var comment = document.createElement("img");
     comment.setAttribute("src", "../imgs/comment.png");
 
@@ -106,8 +100,6 @@ var firebaseConfig = {
     var comment_num_node = document.createTextNode(doc.data().commentNum);
     comment_num.append(comment_num_node);
     
-    like_com.append(like);
-    like_com.append(like_num);
     like_com.append(comment);
     like_com.append(comment_num);
     date.append(like_com);
@@ -138,11 +130,6 @@ function addCommentHTML(doc){
     var edit_button = document.createElement("span");
     edit_button.setAttribute("class","edit_button");
 
-    var edit = document.createElement("button");
-    edit.setAttribute("type","button");
-    edit.innerText = "수정";
-    edit.setAttribute("onclick", "edit_comment(this.dataset.docid)");
-
     var del = document.createElement("button");
     del.setAttribute("type","button");
     del.setAttribute("data-docid", doc.id);
@@ -156,7 +143,6 @@ function addCommentHTML(doc){
     date.innerText= doc.data().time.toDate().toDateString();
     
     date_div.append(date);
-    edit_button.append(edit);
     edit_button.append(del);
     comment.append(contents);
     if(firebase.auth().currentUser.uid == doc.data().userId){
@@ -178,6 +164,7 @@ function addWriteSecHTML(){
 
     var textarea = document.createElement("textarea");
     textarea.setAttribute("id", "txt");
+    textarea.setAttribute("placeholder", "댓글을 입력하세요");
     var input = document.createElement("input");
     input.setAttribute("class", "button");
     input.setAttribute("type", "submit");
@@ -200,21 +187,13 @@ function del_post(){
         });
 }
 
-// 댓글 지우는 함수
-function del_comment(doc_name){
-    docRef.update({
-        commentNum: firebase.firestore.FieldValue.increment(-1)
-    })
-    docRef.collection("comment").doc(doc_name).delete().then(
-            function(){
-                alert("삭제되었습니다.");
-                window.location.reload();
-            });
+// 게시글 수정하는 함수
+function edit_post(){
+    window.location.href="edit.html";
 }
 
-// 댓글 수정하는 함수
-function edit_comment(doc_name){
-    var commit_block = document.querySelector("data-")
+// 댓글 지우는 함수
+function del_comment(doc_name){
     docRef.update({
         commentNum: firebase.firestore.FieldValue.increment(-1)
     })
