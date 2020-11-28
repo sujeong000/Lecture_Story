@@ -1,7 +1,14 @@
 #chart_div{
-    top: 20px;
+    display: inline-block;
+    text-align: center;
+    border: 2px solid #AAAAAA;
+    border-radius: 5px;
 }
-.grade{
-    font-size: 25px;
+.rank_div{
+    text-align: right;
+    padding-bottom: 30px;
+
+    font-size: 20px;
     font-weight: bold;
+    
 }
