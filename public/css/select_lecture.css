@@ -36,4 +36,6 @@
     font-size: 1.1em;
     border-radius: 5px;
     float: right;
+    /* 커서 손모양으로 바꿈 */
+    cursor:pointer; 
 }

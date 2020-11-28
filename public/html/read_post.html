@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="../css/read_post.css">
     <link rel="stylesheet" href="../css/tob_bar_sub_bar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 </head>
 <body>
     <div class="wrap">
@@ -36,9 +40,9 @@
             <span class="subject" id="subject"></span>
             <nav>
                 <ul class="navi">
-                    <li><a class="active" id="timeline" href="#"><span>타 임 라 인</span></a></li>
-                    <li><a id="grade" href="#"><span>성 적 통 계</span></a></li>
-                    <li><a id="eval" href="#"><span>강 의 평 가</span></a></li>
+                    <li><a class="active" id="timeline" href="timeline.html"><span>타 임 라 인</span></a></li>
+                    <li><a id="grade" href="statistics.html"><span>성 적 통 계</span></a></li>
+                    <li><a id="eval" href="evaluation.html"><span>강 의 평 가</span></a></li>
                 </ul>
             </nav>
             <a class="write" href="#">
@@ -96,5 +100,6 @@
             </div>
         </div>
     </div>
+    <script src="../javascript/read_post.js"></script>
 </body>
 </html>
