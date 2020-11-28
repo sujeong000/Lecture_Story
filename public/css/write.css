@@ -11,12 +11,12 @@ html, body, .wrap {
     margin: 0 auto;
 }
 .content{
+    margin: 0 auto;
     width: 900px;
 }
 .content form{
     display:block;
-    margin: 0px auto;
-    padding-top: 10px;
+    padding-top: 30px;
 }
 .content .top::after{
     display: block;
