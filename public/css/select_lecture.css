@@ -24,11 +24,6 @@
     line-height: 1.3em;
 } */
 
-.semester{
-    /* 커서 손모양으로 바꿈 */
-    cursor:pointer;
-}
-
 .lecture_submit{
     margin: 30px 0;
     background-color: #00462A;
