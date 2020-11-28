@@ -25,7 +25,8 @@ const container = document.querySelector(".container");
 function register() {
     var search_key = document.getElementById("search").value;
     localStorage.setItem("storageName", search_key);
-    localStorage.setItem("Semester", semester);
+    localStorage.setItem("semester", semester);
+    
 }
 
 
