@@ -111,10 +111,3 @@
     margin-right: 5px;
     box-sizing: border-box;
 }
-
-#logout-button{
-    border: 1px #eeeeee solid;
-    border-radius: 3px;
-    padding: 5px;
-    vertical-align: middle;
-}

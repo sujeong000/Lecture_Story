@@ -136,3 +136,10 @@ html, body, .wrap {
     bottom: 10px;
     float: right;
 }
+
+#logout-button{
+    border: 1px #eeeeee solid;
+    border-radius: 3px;
+    padding: 5px;
+    vertical-align: middle;
+}
