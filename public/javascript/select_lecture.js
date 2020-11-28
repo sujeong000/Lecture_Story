@@ -89,7 +89,8 @@ function show_lec() {
  
 }
 
-//radio 파트 만들기
+//radio에서 checkbox로 변경
+//checkbox 파트 만들기
 function createLine(doc){
   var num=doc.data().학수번호;
   var name=doc.data().교과목명;
@@ -98,7 +99,7 @@ function createLine(doc){
   
   //읽어온 검색어를 사용자에게 보여줘야 함. 어떤 과목을 추가할 건지
   var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님<br>";
-  line="<input type='radio'/> "+
+  line="<input type='checkbox'/> "+
   "<span style='padding:15px; font-size:20px; line-height:1.5em;'>"+str+"</span>";
   $("ul").append(line); //jquery문법, html에 링크 추가함
 
@@ -109,36 +110,43 @@ function createLine(doc){
 function sendInfo(){
   var rei=document.getElementsByTagName("input");
   var s=document.getElementsByTagName("span");
+  var check_decision=false;
   //s -> span 태그 list => 0번은 검색어 나타내는 부분
   //그 뒤로 radio 옆의 과목명,학수번호,분반,교수님 나오는 문자열
   for(i=0;i<rei.length;i++){
     if(rei[i].checked===true){
-      //rei -> 0번에는 검색창, 그뒤로는 radio버튼
+      //rei -> 0번에는 검색창, 그뒤로는 체크박스버튼
+      check_decision=true;
       splitStr(s[i].innerHTML); //쪼개기
     }
   }
-
-  function splitStr(str) {
-    //radio 옆의 span 문자열을 쪼개기
-    //사용자가 선택한 과목의 정보를 넘겨주기 위함
-    var strArr = str.split(' ');
-    var lec_name = strArr[0]; //강의명
-    var lec_num = strArr[1].split("(")[1];//학수번호
-    var lec_class = strArr[3].split(")")[0];//분반
-    var lec_pf = strArr[5];//교수님
-
-    //즐겨찾기 추가
-    var docdoc = db.collection("Users").doc(firebase.auth().currentUser.uid).collection("즐겨찾기");
-    docdoc.doc(lec_name + "-" + lec_pf).set({
-      교과목명: lec_name,
-      교수명: lec_pf,
-      분반: lec_class,
-      학수번호: lec_num,
-      학기: semester
-    }).then(function () {
-      //즐겨찾기에 문서가 저장이 되면
-      //board.html로 화면 전환
-      window.location.href = "board.html";
-    });
+  //아무 선택도 하지 않으면 팝업창 보내기
+  if(check_decision===false){
+    alert("과목을 선택하세요.");
   }
+}
+
+//radio 옆의 span 문자열을 쪼개기 + 정보 넘겨주기
+function splitStr(str) {
+
+  //사용자가 선택한 과목의 정보를 넘겨주기 위함
+  var strArr = str.split(' ');
+  var lec_name = strArr[0]; //강의명
+  var lec_num = strArr[1].split("(")[1];//학수번호
+  var lec_class = strArr[3].split(")")[0];//분반
+  var lec_pf = strArr[5];//교수님
+
+  //즐겨찾기 추가
+  var docdoc = db.collection("Users").doc(firebase.auth().currentUser.uid).collection("즐겨찾기");
+  docdoc.doc(lec_name + "-" + lec_pf).set({
+    교과목명: lec_name,
+    교수명: lec_pf,
+    분반: lec_class,
+    학수번호: lec_num,
+    학기: semester
+  }).then(function () {
+    //즐겨찾기에 문서가 저장이 되면
+    //board.html로 화면 전환
+    window.location.href = "board.html";
+  });
 }
