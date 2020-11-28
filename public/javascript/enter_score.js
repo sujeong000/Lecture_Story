@@ -75,7 +75,7 @@ function submit_grade() {
         if(selected_tag === "태그 추가") { //태그 추가 선택 + 태그 입력 받아 성적 입력
             var add_tag = document.getElementById("add_tag").value;
             ref.collection("grades").add({
-                grade: score,
+                grade: parseInt(score),
                 tag: add_tag,
                 userId: ui.currentUser.uid
             });
@@ -89,7 +89,7 @@ function submit_grade() {
         }
         else { //태그를 선택해서 성적 입력
             ref.collection("grades").add({
-                grade: score,
+                grade: parseInt(score),
                 tag: selected_tag,
                 userId: ui.currentUser.uid
             }).then(function(){
