@@ -9,14 +9,28 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 var db = firebase.firestore();
 var ui = firebase.auth();
 var ref = db.collection("2020_1학기").doc("20479-이숙영");
 
+// 렉처 이름 띄우기
+//document.getElementById("subject").innerHTML=courseName+"-"+prof;
+
+// 로그아웃 함수
+function logOut(){
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        window.location.href="login.html";
+    }).catch(function(error) {
+        // An error happened.
+    });
+}
+
 //tag 불러오기
 window.onload = function() {
     var arr = [];
-    ref.collection("tags").get().then((querySnapshot) => {
+    ref.collection("gradeTags").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
         arr.push(doc.data().tag);
         });
@@ -42,23 +56,20 @@ function check_user(){
     var selected_tag = document.getElementById("select_tag").value;
 
     //현재 userId와 tag가 일치하는 문서가 있으면 접근x
-    let flag = 0;
     ref.collection("grades").where('tag', '==', selected_tag).get().then((querySnapshot) => {
+        var flag = false;
         querySnapshot.forEach((doc) => {
             if(doc.data().userId === ui.currentUser.uid) {
-                flag = 1;
-                console.log(doc.data());
-                console.log(flag);
+                flag = true;
             }
         });
+        if(flag === true) {
+            alert("이미 성적을 입력하였습니다.");
+        }
+        else {
+            submit_grade();
+        }
     });
-    console.log(flag); 
-    if(flag === 1) {
-        alert("이미 성적을 입력하였습니다.");
-    }
-    else {
-        submit_grade();
-    }
 }
 
 function submit_grade() {
