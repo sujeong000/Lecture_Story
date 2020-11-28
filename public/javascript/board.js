@@ -16,9 +16,10 @@ var ui = firebaseui.auth.AuthUI(firebase.auth());
 const container = document.querySelector(".container");
 const tag = document.querySelector(".semester");
 
-if (localStorage.getItem("semester") === ""){
-    var semester = localStorage.setItem("semester", "2020_2학기");
-}
+// // semester 초기값 주기. 
+// if (localStorage.getItem("semester") === "") {
+//     var semester = localStorage.setItem("semester", "2020_2학기"); // (검색 후가 아닌 로그인 후가 이에 해당)
+// }
 //과목명 검색
 function register() {
     var search_key = document.getElementById("search").value;
@@ -26,25 +27,25 @@ function register() {
     localStorage.setItem("semester", semester);
 }
 
-// 학기 select 박스에서 학기를 변경할 경우 작동하는 함수
-function change_tag(select_obj){
+// 학기 select 박스에서 학기를 변경할 경우 작동하는 함수 -> 잘 됨
+function change_tag() {
 
     // 선택된 학기 정보를 받아 html에서 학기 이름 따오기
     var tag_choice = document.querySelector(".semester");
     var tag_selected = tag_choice.options[tag_choice.selectedIndex].innerHTML.replace("-", "_");
-    
+
     // 학기 이름 저장하고 학기 이름 변경
     localStorage.setItem("semester", tag_selected);
     semester = localStorage.getItem("semester");
     loadPage();
-  }
+}
 
 // 특정 과목의 게시판을 선택했을 때 선택한 과목의 정보를 localStorage에 저장 후 페이지 이동
 function move(evt) {
 
     var text = evt.getElementsByTagName("span")[0].innerHTML;
     var textlist = text.split(' ');
-   
+
     var courseName = textlist[0].split("(")[0]; console.log(courseName);
     localStorage.setItem("courseName", courseName);
     var prof = textlist[2]; console.log(prof);
@@ -66,7 +67,7 @@ function move(evt) {
     window.location.href = "timeline.html";
 }
 
-// db에서 특정 학기의 수업을 가져와 원하는 형식으로 보여주기.
+// db에서 특정 학기의 수업을 가져와 원하는 형식으로 보여주기. -> 잘 됨
 function loadPage() {
     let html = '';
     db.collection("Users")
@@ -98,8 +99,9 @@ function loadPage() {
 }
 
 // 로그인이나 회원가입 후 User의 정보가 있을 때 모든 기능이 동작함.
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user){
-        loadPage();
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        change_tag();
+        // loadPage();
     }
 });
