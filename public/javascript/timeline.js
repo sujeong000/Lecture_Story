@@ -45,6 +45,7 @@ select_tag.setAttribute("selected", "selected");
 // 초기 태그는 최근 태그로 설정, 최근 포스팅 가져오기
 var docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board");
 var tagName = "최근";
+document.querySelector(".tag").style.fontWeight = "bold";
 loadPostings(docRef);
 
 // 게시글 클릭하면 해당 게시글과 댓글 확인하는 페이지로 이동하는 함수
@@ -223,3 +224,8 @@ document.getElementById("search_box")
         });
     });
 });
+
+// 새로고침 할때마다 양식 다시 제출 확인 뜨는 오류 해결
+if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+}
