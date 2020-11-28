@@ -42,35 +42,38 @@ function change_tag(){
   // html에서 학기 이름 따오기
   var tag_choice = document.querySelector(".semester");
   var tag_selected = tag_choice.options[tag_choice.selectedIndex].value
-  
   tag_selected = tag_selected.replace("-", "_");
-  console.log(tag_selected);
-  
+   
   // 학기 이름 저장하고 학기 이름 변경
   localStorage.setItem("semester", tag_selected);
   semester = localStorage.getItem("semester");
-
+  window.onload=show_lec();
 }
 
 
 //데이터베이스
 var db = firebase.firestore();
-var ref = db.collection(semester);
 var auth=firebase.auth();
 
-//통계만 검색해서 통계학이 나오도록 하는 방법은 없나...ㅠ
-//검색어 읽어오기
-ref.where("교과목명","==",storageKey).get().then(
-  function(querySnapshot){
-    var arr = new Array;
-    querySnapshot.forEach((doc) => {
-      arr.push(doc.id);
-      createLine(doc);
-      dc=doc;
-  });
-}).catch(function(error){
-  console.log(error);
-});
+window.onload=show_lec();
+
+function show_lec() {
+  $('ul').empty();
+  //통계만 검색해서 통계학이 나오도록 하는 방법은 없나...ㅠ
+  //검색어 읽어오기
+  var ref = db.collection(semester);
+  ref.where("교과목명", "==", storageKey).get().then(
+    function (querySnapshot) {
+      //let html = '';
+      var arr = new Array;
+      querySnapshot.forEach((doc) => {
+        arr.push(doc.id);
+        createLine(doc);
+      });
+    }).catch(function (error) {
+      console.log(error);
+    });
+}
 
 
 //radio 파트 만들기
@@ -82,8 +85,10 @@ function createLine(doc){
   
   //읽어온 검색어를 사용자에게 보여줘야 함. 어떤 과목을 추가할 건지
   var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님<br>";
-  line="<input type='radio'/> "+ "<span>"+str+"</span>";
+  line="<input type='radio'/> "+
+  "<span style='padding:15px; font-size:20px; line-height:1.5em;'>"+str+"</span>";
   $("ul").append(line); //jquery문법, html에 링크 추가함
+
 };
 
 
