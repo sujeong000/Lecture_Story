@@ -13,6 +13,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
@@ -60,8 +62,11 @@
                 <ul class="tags">
                     <section id="timelineSec"></section>
                 </ul>
-                <section class="postings">
-                    <div class="grade">지금 나의 등수는? 3등 / 31명</div>
+                <section class="postings" id="chart-container">
+                    <div class="rank_div">
+                        지금 나의 등수는? &nbsp&nbsp
+                        <span id="rank">&nbsp</span>등 / <span id="total">&nbsp</span>명
+                    </div>
                     <div id="chart_div"></div>
                 </section>
             </div>
