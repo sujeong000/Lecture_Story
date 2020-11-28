@@ -25,7 +25,8 @@ var semester = "2020_1학기";
 function register() {
     var search_key = document.getElementById("search").value;
     localStorage.setItem("storageName", search_key);
-    localStorage.setItem("Semester", semester);
+    localStorage.setItem("semester", semester);
+    
 }
 
 var index;
@@ -59,8 +60,8 @@ function move(evt) {
 }
 
 
-window.onload = function () {
-    console.log(auth.currentUser.uid);
+//window.onload = function () {
+    //console.log(auth.currentUser.uid);
     // var ref = db.collection(UserrInfo).doc(auth.currentUser.uid).collection("tags");
     // var arr = [];
     // ref.get().then((querySnapshot) => {
@@ -76,4 +77,4 @@ window.onload = function () {
     //         $('#select_tag').append(option);
     //     }
     // });
-}
+//}
