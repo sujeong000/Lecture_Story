@@ -110,12 +110,12 @@ function addPostHTML(doc){
     var date = document.createElement("p");
     date.innerText= doc.data().time.toDate().toDateString();
 
-    var like_com = document.createElement("span");
+    var like_com = document.createElement("div");
     like_com.setAttribute("class","like-comment");
 
     var comment = document.createElement("img");
     comment.setAttribute("src", "../imgs/comment.png");
-    var commentNode = document.createTextNode(doc.data().commentNum+" ");
+    var commentNode = document.createTextNode(doc.data().commentNum);
     
     like_com.append(comment);
     like_com.append(commentNode);
@@ -131,7 +131,7 @@ function addPostHTML(doc){
 /* 타임 라인 변경 및 실시간 업데이트*/
 
 // 타임라인 띄울 html 공간
-var timelineZone = document.getElementById("timelineSec");
+const timelineZone = document.getElementById("timelineSec");
 
 // 변화 감지해서 계속 타임라인 로드하는 함수
 function loadTimelineTags(){
