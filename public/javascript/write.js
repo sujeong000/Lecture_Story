@@ -37,7 +37,7 @@ var select_tag = document.getElementById(semester_value);
 select_tag.setAttribute("selected", "selected");
 
 // firestore 경로
-var ref = db.collection(semester).doc(courseNO+"-"+prof);
+var ref = db.collection("2020_2학기").doc(courseNO+"-"+prof);
 
 // tag 불러오기
 window.onload = function() {
