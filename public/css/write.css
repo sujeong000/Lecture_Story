@@ -65,7 +65,6 @@ html, body, .wrap {
     border: 0px;
     box-sizing: border-box;
     font-size: 14px;
-    line-height: 1.4em;
 }
 .content .text textarea:focus{
     outline: none;
