@@ -69,12 +69,12 @@ function loadTimelineTags(){
     var entry = document.createElement("li");
 
     var timelineRef = db.collection(semester).doc(courseNO+"-"+prof).collection("gradeTags");
-    //리스너 생성
+    // 리스너 생성
     timelineRef
     .orderBy("time", "desc") //시간 내림차순
     .onSnapshot((docSnapshot) => {  //스냅샷
       timelineZone.innerHTML = ""; //타임라인 뜨는 세션에 HTML 부분 적기
-      //db에서 읽으면서 html 코드 추가
+      // db에서 읽으면서 html 코드 추가
       docSnapshot.forEach((doc) => {
           var entry = document.createElement("li");
       
@@ -114,27 +114,33 @@ function check_user(evt) {
     }
     evt.currentTarget.style.fontWeight = "bold";
 
-  //선택한 tag와 useId 일치하는 성적이 있는지 확인
+  // 선택한 tag와 useId 일치하는 성적이 있는지 확인
   ref.where('tag', '==', tagName).get().then((querySnapshot) => {
       var flag = false;
+      var number = 0;
       var userScore;
       querySnapshot.forEach((doc) => {
+        number+=1;
         if(doc.data().userId === ui.currentUser.uid) {
           flag = true;
           userScore = doc.data().grade;
         }
       });
-      if(flag === false) { //성적을 입력하지 않았다면 알림
+      console.log(number);
+      if(flag === false) { // 성적을 입력하지 않았다면 알림
         alert("성적을 입력해야 볼 수 있습니다.");
       }
-      else { //tag 성적 정보 가져오기
+      else if(number <= 1) { // 그래프는 두 명 이상 부터 그리기 가능
+        alert("두 명 이상 성적을 입력해야 그래프를 확인할 수 있습니다.")
+      }
+      else { // tag 성적 정보 가져오기
         ref.where('tag', '==', tagName).get().then((querySnapshot) => {
           var arr = new Array;
           var userRank;
           querySnapshot.forEach((doc) => {
             arr.push(doc.data().grade);
           });
-          arr.sort(function (a,b){ return b-a; }); //내림차순 정렬
+          arr.sort(function (a,b){ return b-a; }); // 내림차순 정렬해서 등수 구하기
           for(var i=0; i<arr.length; i++) {
             if(userScore === arr[i]) {
               userRank = i+1;
@@ -146,7 +152,7 @@ function check_user(evt) {
           google.charts.setOnLoadCallback(function() {drawChart(arr)});
           document.getElementById("rank").innerHTML=userRank;
           document.getElementById("total").innerHTML=arr.length;
-          chartContainer.style.display = "block"; //차트 section을 보이게
+          chartContainer.style.display = "block"; // 차트 section을 보이게
         });
       }
   });
