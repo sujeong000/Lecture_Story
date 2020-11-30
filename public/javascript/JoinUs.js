@@ -24,11 +24,13 @@ form.addEventListener('submit', (e) => {
     var password = document.getElementById("password").value;
     var password_check = document.getElementById("password_check");
 
-    var email_ch = email.split("@")[1];
-    if (email_ch !== "ewhain.net") {
-        document.test.Email.focus();
-        alert("이화인 계정이어야 합니다.");
-    } else if (password === "") {
+    /* 아래 부분만 풀면 다시 ewhain으로만 회원가입 가능 */
+    // var email_ch = email.split("@")[1];
+    // if (email_ch !== "ewhain.net") {
+    //     document.test.Email.focus();
+    //     alert("이화인 계정이어야 합니다.");
+    // } else
+     if (password === "") {
         alert("비밀번호를 입력하세요");
     } else if (password.length < 6) {
         alert("비밀번호는 6자 이상이어야 합니다");
@@ -45,8 +47,12 @@ form.addEventListener('submit', (e) => {
                 day: form.p_day.value
             });
         }).then(() => {
-            // 데이터 쓰기가 성공할 시 페이지 이동함.
-            window.location.href = "board.html";
+            // 데이터 쓰기가 성공할 시 인증을 위한 이메일받음.
+            let user = auth.currentUser;
+            user.sendEmailVerification()
+                .then(function () {
+                    window.location.href = "intermission.html";
+                });
         });
     }
 });

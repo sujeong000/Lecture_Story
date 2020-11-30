@@ -111,7 +111,13 @@ function del_lec(event, doc_name) {
 // 로그인이나 회원가입 후 User의 정보가 있을 때 모든 기능이 동작함.
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        change_tag();
-        // loadPage();
+        var emailVerified = user.emailVerified;
+        if (emailVerified === false) {
+            alert("Email이 아직 인증되지 않았습니다.");
+        } else {
+            change_tag();
+            // loadPage();
+    
+        }
     }
 });
