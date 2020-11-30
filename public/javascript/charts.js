@@ -13,10 +13,12 @@ var db = firebase.firestore();
 var ui = firebase.auth();
 
 // 렉쳐정보 전달 받기
-var courseNO=localStorage.getItem("courseNO");
-var courseName=localStorage.getItem("courseName");
-var prof=localStorage.getItem("prof");
+const courseNO=localStorage.getItem("courseNO");
+const courseName=localStorage.getItem("courseName");
+const prof=localStorage.getItem("prof");
 var semester=localStorage.getItem("semester");
+
+var ref = db.collection(semester).doc(courseNO+"-"+prof).collection("grades");
 
 // 렉처 이름 띄우기
 document.getElementById("subject").innerHTML=courseName+"-"+prof;
@@ -45,6 +47,7 @@ function logOut() {
 // 학기 select 박스에서 학기를 변경할 경우 작동하는 함수
 function change_tag(){
 
+  location.reload();
   // html에서 학기 이름 따오기
   var tag_choice = document.querySelector(".semester");
   var tag_selected = tag_choice.options[tag_choice.selectedIndex].value
@@ -102,12 +105,6 @@ function loadTimelineTags(){
 loadTimelineTags();
 
 function check_user(evt) {
-  // 렉쳐정보 전달 받기
-  var courseNO=localStorage.getItem("courseNO");
-  var prof=localStorage.getItem("prof");
-  var semester=localStorage.getItem("semester");
-  var ref = db.collection(semester).doc(courseNO+"-"+prof).collection("grades");
-
   var tagName = evt.currentTarget.innerText;
   tagName = tagName.substring(1, tagName.length);
   // 선택한 태그 글씨 진하게 만들기
