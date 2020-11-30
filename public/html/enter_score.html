@@ -21,11 +21,11 @@
         <div class="header">
             <a href="board.html"><img id="logo" src="../imgs/logo-white.png"></a>
             <!--학기 드롭다운-->
-            <select>
-                <option selected>2020-2학기</option>
-                <option>2020-1학기</option>
-                <option>2019-2학기</option>
-                <option>2019-1학기</option>
+            <select class="semester" onchange="change_tag()">
+                <option id="2020_2">2020-2학기</option>
+                <option id="2020_1">2020-1학기</option>
+                <option id="2019_2">2019-2학기</option>
+                <option id="2019_1">2019-1학기</option>
             </select>
             <!--검색 바-->
             <div class="search_bar">

@@ -1,20 +1,20 @@
-#chart_div{
-    display: inline-block;
-    text-align: center;
-    border: 2px solid #AAAAAA;
-    border-radius: 5px;
+#chart_div {
+  display: inline-block;
+  text-align: center;
+  border: 2px solid #aaaaaa;
+  border-radius: 5px;
 }
-.rank_div{
-    text-align: right;
-    padding-bottom: 30px;
+.rank_div {
+  text-align: right;
+  padding-bottom: 30px;
 
-    font-size: 20px;
-    font-weight: bold;
-    
+  font-size: 20px;
+  font-weight: bold;
 }
-#info{
-    left:0;
-    right: 0;
-    float: left;
-    color: #00462A;
+#info {
+  left: 0;
+  right: 0;
+  float: left;
+  text-align: left;
+  line-height: 150%;
 }
