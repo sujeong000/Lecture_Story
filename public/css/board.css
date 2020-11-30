@@ -6,13 +6,13 @@ a {
 /* 각각의 게시판 */
 .content {
     width: 80%;
-    margin: 10px auto;
-    padding-bottom: 15px;
-    /* 커서 손모양으로 바꿈 */
-    cursor:pointer;
+    margin: 15px auto;
+    cursor: pointer;
+    background: #eee;
+    border-radius: 10px;
+    height: 65px;
 }
 .delete-button{
-    /* 커서 손모양으로 바꿈 */
     cursor:pointer;
 }
 
@@ -21,16 +21,14 @@ a {
 }
 .content .title{
     text-align: left;
-    padding: 15px 0;
+    padding: 24px 20px;
 }
 .content .title .name{
     position: relative;
     text-align: left;
-    z-index: 2;
     display: inline-block;
 }
 .content .title .name span{
-    background: white;
     font-weight: bold;
 }
 .content .title .line{
@@ -41,31 +39,7 @@ a {
 }
 .content .title .delete-button{
     float: right;
-    background: white;
-    border: none;
     position: relative;
     outline: none;
-}
-
-.content .text{
-    background-color: #f1f1f1;
-    height: 120px;
-    border-radius: 15px;
-}
-.content .text p{
-    margin: 0 auto;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    word-wrap:normal;
-    text-align: left;
-    width:97%;
-    overflow:hidden;
-    line-height: 39px;
-}
-.content .text .line{
-    margin: 0 auto;
-    width: 98%;
-    position: relative;
-    background: #dcdcdc;
-    border: 0.1px solid #dcdcdc;
+    top: -4px;
 }
