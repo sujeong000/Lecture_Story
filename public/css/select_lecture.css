@@ -1,0 +1,52 @@
+.container{
+    width: 80%;
+    margin: 30px auto;
+}
+.contents-area{
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left;
+}
+.contents-area h2 {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+.lecture_list{
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    padding: 10px 0;
+}
+
+
+.lecture_list li{
+    padding: 10px 20px;
+}
+
+.lecture_list li label{
+    padding-left: 5px;
+}
+
+.lecture_submit{
+    margin-top: 15px;
+    background-color: #00462A;
+    color: #ffffff;
+    text-align: center;
+    border-style: none;
+    font-weight: bold;    
+    width: 90px;
+    height: 30px;
+    font-size: 1em;
+    border-radius: 4px;
+    float: right;
+    /* 커서 손모양으로 바꿈 */
+    cursor:pointer; 
+}
+/* float 해제 */
+.contents-area::after{
+        display: block;
+        content:'';
+        clear: both;
+}

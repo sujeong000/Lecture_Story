@@ -1,0 +1,21 @@
+#chart_div {
+  display: inline-block;
+  text-align: center;
+  border: 2px solid #aaaaaa;
+  border-radius: 5px;
+}
+.rank_div {
+  text-align: right;
+  padding-bottom: 30px;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+#info {
+  left: 0;
+  right: 0;
+  float: left;
+  margin-left: 10%;
+  text-align: left;
+  line-height: 150%;
+}
