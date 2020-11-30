@@ -36,17 +36,18 @@ var semester_value = semester.substring(0, 6);
 var select_tag = document.getElementById(semester_value);
 select_tag.setAttribute("selected", "selected");
 
-//tag 불러오기
+// firestore 경로
+var ref = db.collection(semester).doc(courseNO+"-"+prof);
+
+// tag 불러오기
 window.onload = function() {
-    var ref = db.collection(semester).doc(courseNO+"-"+prof).collection("tags");
     var arr = [];
-    ref.get().then((querySnapshot) => {
+    ref.collection("tags").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
         arr.push(doc.data().tag);
         });
-        //console.log(arr);
 
-        //tag 옵션에 추가
+        // tag 옵션에 추가
         for(var i = 0; i<arr.length; i++) {
             var option = $("<option>"+arr[i]+"</option>");
             $('#select_tag').append(option);
@@ -55,7 +56,6 @@ window.onload = function() {
 }
 
 function sub(){ 
-    var ref = db.collection(semester).doc(courseNO+"-"+prof);
     var selected_tag = document.getElementById("select_tag").value;
     var content = document.getElementById("content").value;
 
@@ -102,7 +102,6 @@ function sub(){
                 window.location.href="timeline.html";
             });
         }
-       
     }
 }
 

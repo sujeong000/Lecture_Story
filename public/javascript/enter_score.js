@@ -7,12 +7,19 @@ const firebaseConfig = {
     messagingSenderId: "109177070261",
     appId: "1:109177070261:web:8b6aa71008757f550254fc"
 };
-
 firebase.initializeApp(firebaseConfig);
-
 var db = firebase.firestore();
 var ui = firebase.auth();
-var ref = db.collection("2020_1학기").doc("20479-이숙영");
+
+// 로그아웃 함수
+function logOut(){
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        window.location.href="login.html";
+    }).catch(function(error) {
+        // An error happened.
+    });
+}
 
 // 렉쳐정보 전달 받기
 const courseNO=localStorage.getItem("courseNO");
@@ -28,26 +35,18 @@ var semester_value = semester.substring(0, 6);
 var select_tag = document.getElementById(semester_value);
 select_tag.setAttribute("selected", "selected");
 
-// 로그아웃 함수
-function logOut(){
-    firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-        window.location.href="login.html";
-    }).catch(function(error) {
-        // An error happened.
-    });
-}
+// firestore 경로
+var ref = db.collection(semester).doc(courseNO+"-"+prof);
 
-//tag 불러오기
+// tag 불러오기
 window.onload = function() {
     var arr = [];
     ref.collection("gradeTags").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
         arr.push(doc.data().tag);
         });
-        //console.log(arr);
 
-        //tag 옵션에 추가
+        // tag 옵션에 추가
         for(var i = 0; i<arr.length; i++) {
             var option = $("<option>"+arr[i]+"</option>");
             $('#select_tag').append(option);
