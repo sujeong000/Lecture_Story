@@ -87,7 +87,7 @@ function loadPage() {
                 <section onClick="move(this)" class="content">
                     <div class="title">
                         <h3 class="name"><span class="t">${subject.data().교과목명}(${subject.data().분반}) - ${subject.data().교수명} 교수님&nbsp&nbsp</span></h3>
-                        <button class="delete-button" onClick="del_lec(event, this.id)" id="${subject.data().교과목명}-${subject.data().교수명}">삭제</button>
+                        <button class="delete-button" onClick="del_lec(event, this.id)" id="${subject.data().교과목명}-${subject.data().교수명}"></button>
                     </div>
                 </section>`;
                 html += section;
