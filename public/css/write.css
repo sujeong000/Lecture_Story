@@ -36,6 +36,8 @@ html, body, .wrap {
     border: 2px solid #AAAAAA;
     border-radius: 5px;
     float: left;
+    /* 커서 손모양으로 바꿈 */
+    cursor:pointer;
 }
 .content .top .submit{
     float: right;
