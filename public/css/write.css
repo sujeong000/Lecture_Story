@@ -62,7 +62,7 @@ html, body, .wrap {
     border-radius: 15px;
     border: 0px;
     box-sizing: border-box;
-    font-size: 1.3em;
+    font-size: 14px;
     line-height: 1.4em;
 }
 .content .text textarea:focus{
