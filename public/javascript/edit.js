@@ -36,11 +36,10 @@ select_tag.setAttribute("selected", "selected");
   const content_box = document.getElementById("content");
   //content_box.focus();
   var doc_Ref = db.collection(semester).doc(courseNO+"-"+prof).collection("board").doc(doc_id);
-  console.log(doc_Ref);
+  //console.log(doc_Ref);
 
   doc_Ref.get().then((doc)=>{
     var origin_text=doc.data().content;
-    console.log(origin_text);
     content_box.innerHTML = origin_text;
     });
 
