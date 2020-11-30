@@ -106,6 +106,12 @@ loadTimelineTags();
 function check_user(evt) {
   var tagName = evt.currentTarget.innerText;
   tagName = tagName.substring(1, tagName.length);
+  // 선택한 태그 글씨 진하게 만들기
+  var everyTag = document.querySelectorAll(".tag");
+    for(var i=0; i<everyTag.length; i++){
+        everyTag[i].style.fontWeight="normal";
+    }
+    evt.currentTarget.style.fontWeight = "bold";
 
   //선택한 tag와 useId 일치하는 성적이 있는지 확인
   ref.where('tag', '==', tagName).get().then((querySnapshot) => {
