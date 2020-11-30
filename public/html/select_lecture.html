@@ -26,12 +26,12 @@
                 <option>2020-1학기</option>
                 <option>2019-2학기</option>
                 <option>2019-1학기</option>
-            </select>            
+            </select>
             <!--검색 바-->
             <div class="search_bar">
-                <form action="./select_lecture.html" method="post" onSubmit = "register()">
+                <form action="./select_lecture.html" method="post" onSubmit="register()">
                     <input type="text" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
-                    <button type="submit"  id="btn_search"><i class="fa fa-search"></i></button>
+                    <button type="submit" id="btn_search"><i class="fa fa-search"></i></button>
                 </form>
             </div>
             <!--아이콘 바-->
@@ -41,15 +41,17 @@
         </div>
         <!-- 여기까지 툴바 -->
         <div class="container">
-            <div class="content">
-                <p>검색어: <span id="search_key">여기에 검색어</span></p>
+            <div class="contents-area">
+                <h2>검색어: <span id="search_key">여기에 검색어</span></h2>
 
                 <form method="post"></form>
-                    <ul class="lecture_list">
-                     <!-- 여기에 검색한 결과가 나타난다 -->
-                    </ul>
-                    <input type="submit" onClick="sendInfo()" class="lecture_submit" value="등록">
+                <ul class="lecture_list">
+                    <!-- 여기에 검색한 결과가 나타난다 -->
+
+                </ul>
+                <input type="submit" onClick="sendInfo()" class="lecture_submit" value="등록">
                 </form>
+
             </div>
         </div>
 
