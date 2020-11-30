@@ -8,9 +8,7 @@
     font-size: 100%;
     background-color: #dddddd;
     border-radius: 3px;
-    padding: 15px;
-    padding-top: 13px;
-    padding-bottom: 10px;
+    padding: 13px 15px 10px 15px;
     box-sizing: border-box;
     margin-bottom: 30px;
 }
@@ -39,7 +37,7 @@
     box-sizing: border-box;
     border-radius: 3px;
     margin-bottom: 5px;
-    font-size: 90%;
+    font-size: 100%;
 }
 
 .comments li {
@@ -50,7 +48,7 @@
 }
 
 .date {
-    font-size: 8px;
+    font-size: 12px;
     margin-top: 20px;
     font-weight: normal;
     line-height: 18px;
@@ -82,27 +80,25 @@
     width:100%;
     resize: none;
     height:70px;
-    padding: 10px;
+    padding: 13px 15px 10px 15px;
     border-radius: 3px;
     border: 0px;
     box-sizing: border-box;
-    font-size: 13px;
-    line-height: 1.4em;
     margin-bottom: 5px;
 }
 .write_comment textarea:focus{
     outline: none;
 }
 .write_comment .button{
-    width: 80px;
-    height: 30px;
+    width: 100px;
+    height: 35px;
     background-color: #00462A;
     border-radius: 3px;
     color: white;
     font-weight: bold;
     box-sizing: border-box;
     float: right;
-    font-size: 11px;
+    font-size: 100%;
     /* 커서 손모양으로 바꿈 */
     cursor:pointer;
 }
