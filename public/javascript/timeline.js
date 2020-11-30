@@ -42,6 +42,20 @@ var tagName = "전체";
 document.querySelector(".tag").style.fontWeight = "bold";   //"전체" 태그를 굵게
 loadPostings(docRef);
 
+// 2020_2학기가 아니면 연필 안보이게 하는 함수
+function hidePencil(){
+    var pencil = document.querySelector(".write");
+    if(semester != "2020_2학기"){
+        pencil.setAttribute("style", "visibility: hidden");
+    }
+    else{
+        pencil.setAttribute("style", "visibility: visible")
+    }
+}
+
+hidePencil();
+
+
 // 게시글 클릭하면 해당 게시글과 댓글 확인하는 페이지로 이동하는 함수
 function readPost(evt){
     // 해당 문서로 이동하기 위해 문서 id 저장
@@ -207,6 +221,7 @@ function change_tag(){
     // 학기 이름 저장하고 학기 이름 변경
     localStorage.setItem("semester", tag_selected);
     semester = localStorage.getItem("semester");
+    hidePencil();
 
     // 바뀐 학기의 타임라인과 포스팅 기본값(최근) 로드
     docRef = db.collection(semester).doc(courseNO+"-"+prof).collection("board");
