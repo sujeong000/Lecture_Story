@@ -10,7 +10,6 @@
 .timeline {
     width: auto;
     margin-top: 30px;
-    margin-left: 10px;
     position: relative;
     height: auto;
     overflow: hidden;
@@ -21,7 +20,7 @@
     height: 100%;
     overflow: hidden;
     float: left;
-    margin-left: 2%;
+    margin-left: 36px;
     padding-left: 0px;
 }
 
@@ -44,7 +43,7 @@
     border: 3px #ffffff solid;
     position: relative;
     /* 전체화면으로 보면 -5보다 -4가 좀더 나은듯....? */
-    left: -4%;
+    left: -4.5px;
     float: left;
 }
 
@@ -54,7 +53,7 @@
     position: absolute;
     height: 100%;
     width: 3px;
-    left: 2.5%;
+    left: 45.4px;
     background-color: #cccccc;
 }
 
