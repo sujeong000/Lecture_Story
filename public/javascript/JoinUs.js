@@ -23,23 +23,29 @@ form.addEventListener('submit', (e) => {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var password_check = document.getElementById("password_check");
+    var p_name=document.getElementById("p_name").value;
+    var p_year=document.getElementById("p_year").value;
+    var p_month=document.getElementById("p_month").value;
+    var p_day=document.getElementById("p_day").value;
 
     /* 아래 부분만 풀면 다시 ewhain으로만 회원가입 가능 */
-    // var email_ch = email.split("@")[1];
-    // if (email_ch !== "ewhain.net") {
-    //     document.test.Email.focus();
-    //     alert("이화인 계정이어야 합니다.");
-    // } else
-     if (password === "") {
+    var email_ch = email.split("@")[1];
+    if (email_ch !== "ewhain.net") {
+        document.test.Email.focus();
+        alert("이화인 계정이어야 합니다.");
+    } else if (password === "") {
         alert("비밀번호를 입력하세요");
     } else if (password.length < 6) {
         alert("비밀번호는 6자 이상이어야 합니다");
     } else if (password !== password_check.value) {
         document.test.p_check.focus();
         alert("비밀번호를 다시 확인해 주세요.");
-    } else {
+    } else if(p_name=="" || p_year=="" || p_month=="" || p_day==""){
+        alert("빈칸을 모두 입력해 주세요.");
+    }else {
         // 회원가입 성공 시 데이터 쓰기를 함.
-        auth.createUserWithEmailAndPassword(email, password).then(cred => {
+        auth.createUserWithEmailAndPassword(email, password)
+        .then(cred => {
             return db.collection('Users').doc(cred.user.uid).set({
                 name: form.p_name.value,
                 year: form.p_year.value,
@@ -53,6 +59,8 @@ form.addEventListener('submit', (e) => {
                 .then(function () {
                     window.location.href = "intermission.html";
                 });
+        }).catch(function(error){
+            alert(error.message);
         });
     }
 });
