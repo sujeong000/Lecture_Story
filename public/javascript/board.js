@@ -23,7 +23,7 @@ function logOut() {
 const auth = firebase.auth();
 const db = firebase.firestore();
 var ui = firebaseui.auth.AuthUI(firebase.auth());
-const container = document.querySelector(".container");
+const container = document.querySelector(".sections");
 const tag = document.querySelector(".semester");
 
 //과목명 검색
@@ -75,7 +75,7 @@ function move(evt) {
 
 // db에서 특정 학기의 수업을 가져와 원하는 형식으로 보여주기. -> 잘 됨
 function loadPage() {
-    let html = '';
+    let html = '<div class="contents-area"><h2>즐겨찾기한 목록</h2>';
     db.collection("Users")
         .doc(auth.currentUser.uid)
         .collection("즐겨찾기")
@@ -92,6 +92,7 @@ function loadPage() {
                 </section>`;
                 html += section;
             });
+            html += `</div>`;
             container.innerHTML = html;
         });
 }
