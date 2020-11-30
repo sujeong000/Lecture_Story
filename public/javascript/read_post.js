@@ -103,8 +103,9 @@ var firebaseConfig = {
     like_com.append(comment);
     like_com.append(comment_num);
     date.append(like_com);
-    edit_button.append(edit);
     edit_button.append(del);
+    edit_button.append(edit);
+    
     date_div.append(date);
     
     if(firebase.auth().currentUser.uid == doc.data().userId){
