@@ -34,6 +34,15 @@ var semester_value = semester.substring(0, 6);
 var select_tag = document.getElementById(semester_value);
 select_tag.setAttribute("selected", "selected");
 
+// 로그아웃 함수
+function logOut() {
+  firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+      window.location.href = "login.html";
+  }).catch(function (error) {
+      // An error happened.
+  });
+}
 
 // 학기 select 박스에서 학기를 변경할 경우 작동하는 함수
 function change_tag(){
