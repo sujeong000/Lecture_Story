@@ -18,8 +18,6 @@ var courseName=localStorage.getItem("courseName");
 var prof=localStorage.getItem("prof");
 var semester=localStorage.getItem("semester");
 
-var ref = db.collection(semester).doc(courseNO+"-"+prof).collection("grades");
-
 // 렉처 이름 띄우기
 document.getElementById("subject").innerHTML=courseName+"-"+prof;
 
@@ -106,7 +104,6 @@ loadTimelineTags();
 function check_user(evt) {
   // 렉쳐정보 전달 받기
   var courseNO=localStorage.getItem("courseNO");
-  var courseName=localStorage.getItem("courseName");
   var prof=localStorage.getItem("prof");
   var semester=localStorage.getItem("semester");
   var ref = db.collection(semester).doc(courseNO+"-"+prof).collection("grades");
