@@ -162,9 +162,11 @@ function loadTimelineTags(){
         
     });
         var entry = document.createElement("li");
+        entry.setAttribute("style", "padding-bottom:0; margin-bottom:0; vertical-align: bottom;");
     
         var point = document.createElement("div");
         point.setAttribute("class", "point");
+        point.setAttribute("style", "width: 20px; height: 20px; left:-6%; background-color: #aaaaaa;");
     
         var button = document.createElement("button");
         button.setAttribute("class", "tag");

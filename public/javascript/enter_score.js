@@ -7,12 +7,19 @@ const firebaseConfig = {
     messagingSenderId: "109177070261",
     appId: "1:109177070261:web:8b6aa71008757f550254fc"
 };
-
 firebase.initializeApp(firebaseConfig);
-
 var db = firebase.firestore();
 var ui = firebase.auth();
-var ref = db.collection("2020_1학기").doc("20479-이숙영");
+
+// 로그아웃 함수
+function logOut(){
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        window.location.href="login.html";
+    }).catch(function(error) {
+        // An error happened.
+    });
+}
 
 // 렉쳐정보 전달 받기
 const courseNO=localStorage.getItem("courseNO");
@@ -28,26 +35,18 @@ var semester_value = semester.substring(0, 6);
 var select_tag = document.getElementById(semester_value);
 select_tag.setAttribute("selected", "selected");
 
-// 로그아웃 함수
-function logOut(){
-    firebase.auth().signOut().then(function() {
-        // Sign-out successful.
-        window.location.href="login.html";
-    }).catch(function(error) {
-        // An error happened.
-    });
-}
+// firestore 경로
+var ref = db.collection(semester).doc(courseNO+"-"+prof);
 
-//tag 불러오기
+// tag 불러오기
 window.onload = function() {
     var arr = [];
     ref.collection("gradeTags").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
         arr.push(doc.data().tag);
         });
-        //console.log(arr);
 
-        //tag 옵션에 추가
+        // tag 옵션에 추가
         for(var i = 0; i<arr.length; i++) {
             var option = $("<option>"+arr[i]+"</option>");
             $('#select_tag').append(option);
@@ -58,7 +57,7 @@ window.onload = function() {
 function check_user(){ 
     var selected_tag = document.getElementById("select_tag").value;
 
-    //현재 userId와 tag가 일치하는 문서가 있으면 접근x
+    // 이미 유저가 해당 태그의 성적을 입력하였다면 성적을 입력하지 못함
     ref.collection("grades").where('tag', '==', selected_tag).get().then((querySnapshot) => {
         var flag = false;
         querySnapshot.forEach((doc) => {
@@ -78,25 +77,45 @@ function check_user(){
 function submit_grade() {
     var selected_tag = document.getElementById("select_tag").value;
     var score = document.getElementById("score").value;
+    var add_tag = document.getElementById("add_tag").value;
 
-    if(score === null) {
+    if(score === "") {
         alert("성적을 입력해주세요.");
     }
     else{
         if(selected_tag === "태그 추가") { //태그 추가 선택 + 태그 입력 받아 성적 입력
-            var add_tag = document.getElementById("add_tag").value;
-            ref.collection("grades").add({
-                grade: parseInt(score),
-                tag: add_tag,
-                userId: ui.currentUser.uid
-            });
-            //태그 추가
-            ref.collection("gradeTags").add({
-                tag: add_tag,
-                time: firebase.firestore.Timestamp.fromDate(new Date())
-            }).then(function(){
-                window.location.href="statistics.html";
-            });
+            if (add_tag === "") {
+                alert("태그를 등록하거나 선택해주세요.");
+            }
+            else {
+                // 태그 존재 여부 확인
+                ref.collection("gradeTags").get().then((querySnapshot) => {
+                    var flag = false;
+                    querySnapshot.forEach((doc) => {
+                        if(doc.data().tag === add_tag) {
+                            flag = true;
+                        }
+                    });
+                    if(flag === true) {
+                        alert("이미 존재하는 태그입니다.");
+                    }
+                    else {
+                        // 성적 추가
+                        ref.collection("grades").add({
+                            grade: parseInt(score),
+                            tag: add_tag,
+                            userId: ui.currentUser.uid
+                        });
+                        // 새로운 태그 추가
+                        ref.collection("gradeTags").add({
+                            tag: add_tag,
+                            time: firebase.firestore.Timestamp.fromDate(new Date())
+                        }).then(function(){
+                            window.location.href="statistics.html";
+                        });
+                    }
+                });
+            }
         }
         else { //태그를 선택해서 성적 입력
             ref.collection("grades").add({

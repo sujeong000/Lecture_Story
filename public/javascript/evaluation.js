@@ -90,7 +90,7 @@ var firebaseConfig = {
       var entry = document.createElement("li");
   
       var post = document.createElement("div");
-      post.setAttribute("class","post");
+      post.setAttribute("class","eval");
       post.setAttribute("value", doc.id);
   
       var content = document.createElement("span");
