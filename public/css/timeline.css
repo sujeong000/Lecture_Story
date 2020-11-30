@@ -82,6 +82,7 @@
     padding: 13px 15px 10px 15px;
     box-sizing: border-box;
     cursor: pointer;
+    line-height: 150%;
 }
 
 .postings li {
