@@ -3,14 +3,30 @@ a {
     color: black;
     text-decoration: none;
 }
+.container{
+    width: 80%;
+    margin: 20px auto;
+}
+.contents-area{
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    padding: 20px;
+}
+.contents-area h2{
+    font-weight: bold;
+    font-size: 1.2em;
+    padding-bottom: 10px;
+}
 /* 각각의 게시판 */
 .content {
-    width: 80%;
     margin: 15px auto;
     cursor: pointer;
     background: #eee;
     border-radius: 10px;
     height: 65px;
+}
+.content:last-child{
+    margin-bottom: 0;
 }
 .delete-button{
     cursor:pointer;
