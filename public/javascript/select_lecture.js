@@ -97,11 +97,18 @@ function createLine(doc){
   var pf=doc.data().교수명;
   var cl=doc.data().분반;
   
+  // //읽어온 검색어를 사용자에게 보여줘야 함. 어떤 과목을 추가할 건지
+  // var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님";
+  // line="<input type='checkbox' id='"+str+"'>"+
+  // "<label for='"+str+"'><span style='padding:15px; font-weight:bold; font-size:20px; line-height:2.5em;'>"+str+"<br></span></label>";
+  // $("ul").append(line); //jquery문법, html에 링크 추가함
+
   //읽어온 검색어를 사용자에게 보여줘야 함. 어떤 과목을 추가할 건지
-  var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님";
-  line="<input type='checkbox' id='"+str+"'>"+
-  "<label for='"+str+"'><span style='padding:15px; font-weight:bold; font-size:20px; line-height:2.5em;'>"+str+"<br></span></label>";
-  $("ul").append(line); //jquery문법, html에 링크 추가함
+  //라벨을 사용해서 체크박스 옆의 텍스트만 선택해도 과목 선택이 되도록 함
+  var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님<br>";
+  line="<li><input type='checkbox' id='"+str+"'>"+
+  "<label for='"+str+"'><span '>"+str+"</span></label></li>";
+  $("ul").append(line); //jquery문법, html에 링크에 위의 요소 추가함 추가함
 
 };
 
