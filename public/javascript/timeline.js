@@ -161,6 +161,20 @@ function loadTimelineTags(){
         timelineZone.appendChild(entry);
         
     });
+        var entry = document.createElement("li");
+    
+        var point = document.createElement("div");
+        point.setAttribute("class", "point");
+    
+        var button = document.createElement("button");
+        button.setAttribute("class", "tag");
+        var tagNode = document.createTextNode("#개강");
+        button.append(tagNode);
+    
+        entry.append(point);
+        entry.append(button);
+    
+        timelineZone.appendChild(entry);
         // 각 태그 누르면 해당 태그 포스팅 뜨는 이벤트 리스너 등록
         var tags = document.querySelectorAll(".tag");
         var tagsNum = tags.length;
