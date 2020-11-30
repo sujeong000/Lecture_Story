@@ -27,6 +27,16 @@ var semester_value = semester.substring(0, 6);
 var select_tag = document.getElementById(semester_value);
 select_tag.setAttribute("selected", "selected");
 
+// 로그아웃 함수
+function logOut() {
+  firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+      window.location.href = "login.html";
+  }).catch(function (error) {
+      // An error happened.
+  });
+}
+
 // var postingZone = document.querySelector(".content");
 // postingZone.innerHTML="";
 // var commentZone;
