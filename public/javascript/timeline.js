@@ -166,7 +166,7 @@ function loadTimelineTags(){
     
         var point = document.createElement("div");
         point.setAttribute("class", "point");
-        point.setAttribute("style", "width: 20px; height: 20px; left:-6%; background-color: #aaaaaa;");
+        point.setAttribute("style", "width: 20px; height: 20px; left:-7px; background-color: #aaaaaa;");
     
         var button = document.createElement("button");
         button.setAttribute("class", "tag");
