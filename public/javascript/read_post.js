@@ -106,10 +106,11 @@ var firebaseConfig = {
     edit_button.append(edit);
     edit_button.append(del);
     date_div.append(date);
-    entry.append(content);
+    
     if(firebase.auth().currentUser.uid == doc.data().userId){
         entry.append(edit_button);
     }
+    entry.append(content);
     entry.append(date_div);
 
     postingZone.appendChild(entry);
