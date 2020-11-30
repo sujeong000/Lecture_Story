@@ -78,8 +78,8 @@
 
 .post{
     background-color: #eeeeee;
-    border-radius: 5px;
-    padding: 10px 15px 5px 15px;
+    border-radius: 3px;
+    padding: 13px 15px 10px 15px;
     box-sizing: border-box;
     cursor: pointer;
 }
