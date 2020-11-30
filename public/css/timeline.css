@@ -79,7 +79,7 @@
 .post{
     background-color: #eeeeee;
     border-radius: 5px;
-    padding: 13px 15px 10px 15px;
+    padding: 8px 15px 10px 20px;
     box-sizing: border-box;
     cursor: pointer;
     line-height: 150%;
@@ -93,7 +93,7 @@
     text-align: left;
 }
 
-.postings li p {
+.postings li .date {
     font-size: 12px;
     margin-top: 20px;
     font-weight: normal;
@@ -118,4 +118,11 @@
     border-radius: 5px;
     padding: 10px 15px 5px 15px;
     box-sizing: border-box;
+}
+
+.hashtag{
+    margin-bottom: 2px;
+    font-size:11px;
+    font-weight: bold;
+    color: #0b7915;
 }

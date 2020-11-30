@@ -101,6 +101,10 @@ function addPostHTML(doc){
     post.setAttribute("class","post");
     post.setAttribute("data-docid", doc.id);
 
+    var hashtag = document.createElement("p");
+    hashtag.innerText= "# "+doc.data().tag;
+    hashtag.setAttribute("class", "hashtag");
+
     var content = document.createElement("span");
     content.setAttribute("class","contents");
     content.innerText = doc.data().content;
@@ -108,6 +112,7 @@ function addPostHTML(doc){
     var date_com_like = document.createElement("div");
 
     var date = document.createElement("p");
+    date.setAttribute("class", "date");
     date.innerText= doc.data().time.toDate().toDateString();
 
     var like_com = document.createElement("div");
@@ -121,6 +126,7 @@ function addPostHTML(doc){
     like_com.append(commentNode);
     date.append(like_com);
     date_com_like.append(date);
+    post.append(hashtag);
     post.append(content);
     post.append(date_com_like);
     entry.append(post);
