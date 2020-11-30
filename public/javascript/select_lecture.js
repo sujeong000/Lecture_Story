@@ -98,9 +98,9 @@ function createLine(doc){
   var cl=doc.data().분반;
   
   //읽어온 검색어를 사용자에게 보여줘야 함. 어떤 과목을 추가할 건지
-  var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님<br>";
-  line="<input type='checkbox'/> "+
-  "<span style='padding:15px; font-size:20px; line-height:1.5em;'>"+str+"</span>";
+  var str=name+" ("+num+" - "+cl+") - "+pf+" 교수님";
+  line="<input type='checkbox' id='"+str+"'>"+
+  "<label for='"+str+"'><span style='padding:15px; font-weight:bold; font-size:20px; line-height:2.5em;'>"+str+"<br></span></label>";
   $("ul").append(line); //jquery문법, html에 링크 추가함
 
 };
