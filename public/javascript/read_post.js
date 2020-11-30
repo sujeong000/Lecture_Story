@@ -132,6 +132,7 @@ function addCommentHTML(doc){
 
     var del = document.createElement("button");
     del.setAttribute("type","button");
+    del.setAttribute("class","comment_del");
     del.setAttribute("data-docid", doc.id);
     del.setAttribute("onclick", "del_comment(this.dataset.docid)");
     del.innerText = "삭제";

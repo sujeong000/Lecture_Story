@@ -79,11 +79,8 @@
 
 .post{
     background-color: #eeeeee;
-    border-radius: 3px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 10px;
-    padding-bottom: 5px;
+    border-radius: 5px;
+    padding: 10px 15px 5px 15px;
     box-sizing: border-box;
     cursor: pointer;
 }
@@ -105,6 +102,8 @@
 
 .like-comment{
     float: right;
+    vertical-align: middle;
+    display: flex;
 }
 
 .like-comment img{
