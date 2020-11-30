@@ -58,39 +58,51 @@ window.onload = function() {
 function sub(){ 
     var selected_tag = document.getElementById("select_tag").value;
     var content = document.getElementById("content").value;
+    var add_tag = document.getElementById("add_tag").value;
 
     if(content === "") {
         alert("내용을 입력해주세요.");
     }
     else{
-        //console.log(`${selected_tag}`);
-        if(selected_tag === "태그 추가") { //태그 추가 선택 + 태그 입력 받아 글을 쓸 때
-            var add_tag = document.getElementById("add_tag").value;
-            if(add_tag === ""){
+        if(selected_tag === "태그 추가") { // 태그 입력을 받아 글 작성
+            if(add_tag === "") {
                 alert("태그를 등록하거나 선택해주세요.");
             }
-            else{
-                //글 추가
-                ref.collection("board").add({
-                    commentNum: 0,
-                    content: content,
-                    like: 0,
-                    tag: add_tag,
-                    time: firebase.firestore.Timestamp.fromDate(new Date()),
-                    userId: ui.currentUser.uid 
-                });
-                //태그 추가
-                ref.collection("tags").add({
-                    tag: add_tag,
-                    time: firebase.firestore.Timestamp.fromDate(new Date())
-                }).then(function(){
-                    window.location.href="timeline.html";
+            else {
+                // 태그 존재 여부 확인
+                ref.collection("tags").get().then((querySnapshot) => {
+                    var flag = false;
+                    querySnapshot.forEach((doc) => {
+                        if(doc.data().tag === add_tag) {
+                            flag = true;
+                        }
+                    });
+                    if(flag === true) {
+                        alert("이미 존재하는 태그입니다.");
+                    }
+                    else{
+                    // 글 추가
+                        ref.collection("board").add({
+                            commentNum: 0,
+                            content: content,
+                            like: 0,
+                            tag: add_tag,
+                            time: firebase.firestore.Timestamp.fromDate(new Date()),
+                            userId: ui.currentUser.uid 
+                        });
+                        // 새로운 태그 추가
+                        ref.collection("tags").add({
+                            tag: add_tag,
+                            time: firebase.firestore.Timestamp.fromDate(new Date())
+                        }).then(function(){
+                            window.location.href="timeline.html";
+                        }); 
+                    }
                 });
             }
         }
-        else { //태그를 선택해서 글을 쓸 때
-            //글 추가
-            var doc =
+        else { // 태그를 선택하여 글 작성
+            // 글 추가
             ref.collection("board").add({
                 commentNum: 0,
                 content: content,
