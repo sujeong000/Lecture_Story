@@ -85,6 +85,7 @@
     border: 0px;
     box-sizing: border-box;
     margin-bottom: 5px;
+    line-height: 150%;
 }
 .write_comment textarea:focus{
     outline: none;
