@@ -67,18 +67,27 @@ var firebaseConfig = {
     var entry = document.createElement("div");
     entry.setAttribute("class","origin_post");
 
+    //태그 생성
+    var content_tag=document.createElement("p");
+    content_tag.setAttribute("class","content_tag");
+    content_tag.innerText="# "+doc.data().tag;
+
+    //내용
     var content = document.createElement("span");
     content.setAttribute("class","contents");
     content.innerText = doc.data().content;
 
+    //게시글 수정,삭제 버튼 패널
     var edit_button = document.createElement("span");
     edit_button.setAttribute("class","edit_button");
 
+    //게시글 수정 버튼
     var edit = document.createElement("button");
     edit.setAttribute("type","button");
     edit.setAttribute("onclick", "edit_post()");
     edit.innerText = "수정";
 
+    //게시글 삭제버튼
     var del = document.createElement("button");
     del.setAttribute("type","button");
     del.setAttribute("onclick", "del_post()");
@@ -86,31 +95,40 @@ var firebaseConfig = {
     
     var date_div = document.createElement("div");
 
+    //날짜
     var date = document.createElement("p");
     date.setAttribute("class", "date");
     date.innerText= doc.data().time.toDate().toDateString();
 
+    //코멘트, 코멘트 숫자 패널
     var like_com = document.createElement("span");
     like_com.setAttribute("class","like-comment");
 
+    //코멘트 이미지
     var comment = document.createElement("img");
     comment.setAttribute("src", "../imgs/comment.png");
 
+    //코멘트 숫자
     var comment_num = document.createElement("span");
     var comment_num_node = document.createTextNode(doc.data().commentNum);
     comment_num.append(comment_num_node);
     
+    //날짜에 댓글 부착
     like_com.append(comment);
     like_com.append(comment_num);
     date.append(like_com);
+
+    //패널에 부착-삭제, 수정버튼
     edit_button.append(del);
     edit_button.append(edit);
-    
+    //패널에 날짜 부착
     date_div.append(date);
-    
+    //태그 패널에 삭제,수정 버튼 부착
     if(firebase.auth().currentUser.uid == doc.data().userId){
-        entry.append(edit_button);
+        content_tag.append(edit_button);
     }
+    //전체 패널에 태그,내용,날짜 부착
+    entry.append(content_tag);
     entry.append(content);
     entry.append(date_div);
 
