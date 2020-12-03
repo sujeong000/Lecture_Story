@@ -18,18 +18,16 @@ const courseName = localStorage.getItem("courseName");
 const prof = localStorage.getItem("prof");
 var semester = localStorage.getItem("semester");
 
-var ref = db
-  .collection(semester)
-  .doc(courseNO + "-" + prof)
-  .collection("grades");
+var ref = db.collection(semester).doc(courseNO + "-" + prof).collection("grades");
 
 // 렉처 이름 띄우기
 document.getElementById("subject").innerHTML = courseName + "-" + prof;
 
 //차트 section 가리기, 안내 문구 보이기
 const chartContainer = document.getElementById("chart-container");
-chartContainer.style.display = "none";
+const rankDiv = document.getElementById("rank-div");
 const info = document.getElementById("info");
+chartContainer.style.display = "none";
 info.style.display = "block";
 
 // 학기 select box의 디폴트 값을 현재 학기로 설정
@@ -122,12 +120,10 @@ function check_user(evt) {
     everyTag[i].style.fontWeight = "normal";
   }
   evt.currentTarget.style.fontWeight = "bold";
-
-  // 선택한 tag와 useId 일치하는 성적이 있는지 확인
-  ref
-    .where("tag", "==", tagName)
-    .get()
-    .then((querySnapshot) => {
+  // 현재 진행 중인 학기라면 조건에 따라 성적 그래프를 공개함
+  if(semester === "2020_2학기") {
+    // 선택한 tag와 useId 일치하는 성적이 있는지 확인
+    ref.where("tag", "==", tagName).get().then((querySnapshot) => {
       var flag = false;
       var number = 0;
       var userScore;
@@ -138,7 +134,6 @@ function check_user(evt) {
           userScore = doc.data().grade;
         }
       });
-      console.log(number);
       if (flag === false) {
         // 성적을 입력하지 않았다면 알림
         alert("성적을 입력해야 볼 수 있습니다.");
@@ -147,35 +142,49 @@ function check_user(evt) {
         alert("두 명 이상 성적을 입력해야 그래프를 확인할 수 있습니다.");
       } else {
         // tag 성적 정보 가져오기
-        ref
-          .where("tag", "==", tagName)
-          .get()
-          .then((querySnapshot) => {
-            var arr = new Array();
-            var userRank;
-            querySnapshot.forEach((doc) => {
-              arr.push(doc.data().grade);
-            });
-            arr.sort(function (a, b) {
-              return b - a;
-            }); // 내림차순 정렬해서 등수 구하기
-            for (var i = 0; i < arr.length; i++) {
-              if (userScore === arr[i]) {
-                userRank = i + 1;
-                break;
-              }
-            }
-            info.style.display = "none"; // info 보이지 않게
-            google.charts.load("current", { packages: ["corechart"] });
-            google.charts.setOnLoadCallback(function () {
-              drawChart(arr);
-            });
-            document.getElementById("rank").innerHTML = userRank;
-            document.getElementById("total").innerHTML = arr.length;
-            chartContainer.style.display = "block"; // 차트 section을 보이게
+        ref.where("tag", "==", tagName).get().then((querySnapshot) => {
+          var arr = new Array();
+          var userRank;
+          querySnapshot.forEach((doc) => {
+            arr.push(doc.data().grade);
           });
+          // 내림차순 정렬해서 등수 구하기
+          arr.sort(function (a, b) {
+            return b - a;
+          });
+          for (var i = 0; i < arr.length; i++) {
+            if (userScore === arr[i]) {
+              userRank = i + 1;
+              break;
+            }
+          }
+          info.style.display = "none"; // info 보이지 않게
+          google.charts.load("current", { packages: ["corechart"] });
+          google.charts.setOnLoadCallback(function () {
+            drawChart(arr);
+          });
+          document.getElementById("rank").innerHTML = userRank;
+          document.getElementById("total").innerHTML = arr.length;
+          chartContainer.style.display = "block"; // 차트 section을 보이게
+        });
       }
     });
+  } else{ // 지난학기라면 성적 그래프를 공개함
+    // tag 성적 정보 가져오기
+    ref.where("tag", "==", tagName).get().then((querySnapshot) => {
+      var arr = new Array();
+      querySnapshot.forEach((doc) => {
+        arr.push(doc.data().grade);
+      });
+      info.style.display = "none"; // info 보이지 않게
+          google.charts.load("current", { packages: ["corechart"] });
+          google.charts.setOnLoadCallback(function () {
+            drawChart(arr);
+          });
+      chartContainer.style.display = "block"; // 차트 section을 보이게
+      rankDiv.style.display = "none";
+    });
+  }
 }
 
 // 배열을 받아 차트를 그리는 함수
