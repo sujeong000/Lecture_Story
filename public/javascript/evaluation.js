@@ -62,7 +62,7 @@ var firebaseConfig = {
       loadPostings(docRef);
   }
   
-  /* 타임 라인 변경 및 실시간 업데이트*/
+  /* 게시글 실시간 업데이트*/
   
   // 포스팅들 띄울 html 공간
   var postingZone = document.querySelector(".postings");
@@ -87,27 +87,40 @@ var firebaseConfig = {
   
   // db의 게시글 문서를 html로 띄워주는 함수
   function addPostHTML(doc){
-      var entry = document.createElement("li");
+    // 게시글 담을 리스트
+    var entry = document.createElement("li");
+
+    // 게시글 하나가 차지하는 div
+    var post = document.createElement("div");
+    post.setAttribute("class","post");
+    post.setAttribute("data-docid", doc.id);
+
+    // 해쉬 태그
+    var hashtag = document.createElement("p");
+    hashtag.innerText= "# "+doc.data().tag;
+    hashtag.setAttribute("class", "hashtag");
+
+    // 게시글 내용
+    var content = document.createElement("span");
+    content.setAttribute("class","contents");
+    content.innerText = doc.data().content;
+
+    // 날짜 보이는 부분
+    var date_com_like = document.createElement("div");
+
+    // 날짜
+    var date = document.createElement("p");
+    date.setAttribute("class", "date");
+    date.innerText= doc.data().time.toDate().toDateString();
+    
+    date_com_like.append(date);
+    post.append(hashtag);
+    post.append(content);
+    post.append(date_com_like);
+    entry.append(post);
+
+    postingZone.appendChild(entry);
   
-      var post = document.createElement("div");
-      post.setAttribute("class","eval");
-      post.setAttribute("value", doc.id);
-  
-      var content = document.createElement("span");
-      content.setAttribute("class","contents");
-      content.innerText = doc.data().content;
-  
-      var date_com_like = document.createElement("div");
-  
-      var date = document.createElement("p");
-      date.innerText= doc.data().time.toDate().toDateString();
-      
-      date_com_like.append(date);
-      post.append(content);
-      post.append(date_com_like);
-      entry.append(post);
-  
-      postingZone.appendChild(entry);
   }
   
   // 각 태그 누르면 해당 태그 포스팅 뜨는 이벤트 리스너 등록
@@ -140,14 +153,17 @@ var firebaseConfig = {
   document.getElementById("search_box")
   .addEventListener("submit", (e)=>{
       e.preventDefault();
+      // 검색어 가져오기
       var search_key = document.getElementById("search").value;
       document.getElementById("search").value = "";
+      // 결과 로딩 시 태그 선택은 전체로
       var everyTag = document.querySelectorAll(".tag");
       for(var i=0; i<everyTag.length; i++){
           everyTag[i].style.fontWeight="normal";
       }
       tagName="전체";
       document.querySelector(".tag").style.fontWeight = "bold";   //"전체" 태그를 굵게
+      // 검색어를 포함하는 게시글 로딩
       docRef
       .orderBy("time", "desc").get().then((querySnapshot) => {
           postingZone.innerHTML = ""; //포스팅 뜨는 세션에 HTML 부분 비우기
