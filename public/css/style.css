@@ -87,7 +87,6 @@ html, body, .wrap {
     background: transparent;
     color: #fff;
     outline: none;
-<<<<<<< HEAD:public/css/tob_bar.css
     padding: 0px 15px;
     border-radius: 3px;
     padding: 5px;
@@ -105,7 +104,4 @@ html, body, .wrap {
 .semester{
     /* 커서 손모양으로 바꿈 */
     cursor:pointer;
-=======
-    padding: 0px 10px 0px 10px;
->>>>>>> 5abdc75791412afa318bf454dc1017f39f38b100:public/css/style.css
 }
