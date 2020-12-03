@@ -37,35 +37,28 @@ function logOut() {
   });
 }
 
-// var postingZone = document.querySelector(".content");
-// postingZone.innerHTML="";
-// var commentZone;
+const content_box = document.getElementById("content");
+var doc_Ref = db.collection(semester).doc(courseNO + "-" + prof).collection("board").doc(doc_id);
 
-  //localStorage.setItem("cont", "sksksksk");
+//글 작성창에 이전에 쓴 내용 불러오기
+doc_Ref.get().then((doc) => {
+  var origin_text = doc.data().content;
+  content_box.innerHTML = origin_text;
+});
 
-  const content_box = document.getElementById("content");
-  //content_box.focus();
-  var doc_Ref = db.collection(semester).doc(courseNO+"-"+prof).collection("board").doc(doc_id);
-  //console.log(doc_Ref);
+//수정한 글 데이터베이스에 업데이트 후 read_post화면으로 전환
+function sub() {
+  var n_content = document.getElementById("content").value;
 
-  doc_Ref.get().then((doc)=>{
-    var origin_text=doc.data().content;
-    content_box.innerHTML = origin_text;
-    });
-
-
-    function sub(){ 
-      var n_content = document.getElementById("content").value;
-      
-      if(content === "") {
-          alert("내용을 입력해주세요.");
-      }
-      else{
-          doc_Ref.update({
-              time: firebase.firestore.Timestamp.fromDate(new Date()),
-              content: n_content
-          }).then(function(){
-            window.location.href = "read_post.html";
-          });
-      };
+  if (content === "") {
+    alert("내용을 입력해주세요.");
   }
+  else {
+    doc_Ref.update({
+      time: firebase.firestore.Timestamp.fromDate(new Date()),
+      content: n_content
+    }).then(function () {
+      window.location.href = "read_post.html";
+    });
+  };
+}
