@@ -3,10 +3,7 @@
 	padding: 0;
 }
 
-.tag{
-    border: none;
-}
-
+/* 메뉴바 이하 섹션 */
 .timeline {
     width: auto;
     margin-top: 30px;
@@ -15,6 +12,7 @@
     overflow: hidden;
 } 
 
+/* 타임라인 태그 리스트 */
 .tags {
     width: 130px;
     height: 100%;
@@ -24,6 +22,7 @@
     padding-left: 0px;
 }
 
+/* 타임라인 태그들(동그라미+태그버튼) */
 .tags li{
     list-style: none;
 	line-height: 1;
@@ -34,6 +33,12 @@
     text-align: left;
 }
 
+/* 태그 버튼 */
+.tag{
+    border: none;
+}
+
+/* 타임라인 동그라미 */
 .point {
     min-width: 15px;
     height: 15px;
@@ -42,12 +47,11 @@
     z-index: 0;
     border: 3px #ffffff solid;
     position: relative;
-    /* 전체화면으로 보면 -5보다 -4가 좀더 나은듯....? */
     left: -4.5px;
     float: left;
 }
 
-/* 타임라인 길이는 여기서 조절 */
+/* 타임라인 직선 */
 .timeline::before {
     content: "";
     position: absolute;
@@ -57,6 +61,7 @@
     background-color: #cccccc;
 }
 
+/* 타임라인 태그 버튼 */
 .tags button {
     line-height: 25px;
     padding: 0px 5px 0px 5px;
@@ -66,16 +71,19 @@
     outline:0;
 }
 
+/* 타임라인 태그 눌러도 테두리 안생기도록*/
 .button:focus{
     border:none;
 }
 
+/* 게시글 영역 */
 .postings{
     float:center;
     margin-left: 15%;
     margin-right: 5%;
 }
 
+/* 게시글 div */
 .post{
     background-color: #eeeeee;
     border-radius: 5px;
@@ -85,6 +93,7 @@
     line-height: 150%;
 }
 
+/* 게시글 */
 .postings li {
     width: 100%;
     height: 100%;
@@ -93,6 +102,7 @@
     text-align: left;
 }
 
+/* 날짜 */
 .postings li .date {
     font-size: 12px;
     margin-top: 20px;
@@ -100,12 +110,14 @@
     line-height: 22px;
 }
 
+/* 댓글 수 */
 .like-comment{
     float: right;
     vertical-align: middle;
     display: flex;
 }
 
+/* 댓글 아이콘 */
 .like-comment img{
     width:20px;
     height:20px;
@@ -113,6 +125,7 @@
     box-sizing: border-box;
 }
 
+/* 강의평가 */
 .eval{
     background-color: #eeeeee;
     border-radius: 5px;
@@ -120,9 +133,15 @@
     box-sizing: border-box;
 }
 
+/* 해쉬 태그 */
 .hashtag{
     margin-bottom: 2px;
     font-size:11px;
     font-weight: bold;
     color: #0b7915;
+}
+
+/* 스크롤바 모양만 없애기 */
+::-webkit-scrollbar {
+    display: none;
 }
