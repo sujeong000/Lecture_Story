@@ -11,6 +11,13 @@
   font-size: 20px;
   font-weight: bold;
 }
+.total_div {
+  text-align: right;
+  padding-bottom: 30px;
+
+  font-size: 20px;
+  font-weight: bold;
+}
 #info {
   left: 0;
   right: 0;
