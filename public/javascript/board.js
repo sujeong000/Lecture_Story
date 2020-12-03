@@ -67,15 +67,15 @@ function move(evt) {
             localStorage.setItem("courseNO", courseNO);
             var semester = doc.data().학기;
             localStorage.setItem("semester", semester);
-            // alert(courseNO + " " + semester);
         }).then(() => {
             window.location.href = "timeline.html";
         });
 }
 
-// db에서 특정 학기의 수업을 가져와 원하는 형식으로 보여주기. -> 잘 됨
+// db에서 특정 학기의 수업을 가져와 원하는 형식으로 보여주기. 
 function loadPage() {
     let html = '<div class="contents-area"><h2>즐겨찾기한 목록</h2>';
+    // db에서 원하는 정보를 얻어 문자열의 원하는 위치에 삽입하기
     db.collection("Users")
         .doc(auth.currentUser.uid)
         .collection("즐겨찾기")
@@ -93,7 +93,7 @@ function loadPage() {
                 html += section;
             });
             html += `</div>`;
-            container.innerHTML = html;
+            container.innerHTML = html; // html 문서로 쓰기
         });
 }
 
@@ -116,8 +116,6 @@ firebase.auth().onAuthStateChanged(function (user) {
             alert("Email이 아직 인증되지 않았습니다.");
         } else {
             change_tag();
-            // loadPage();
-    
         }
     }
 });
