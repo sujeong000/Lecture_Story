@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>lecture story</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../imgs/logo-title.png">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/write.css">
+    <link rel="stylesheet" href="../css/tob_bar_sub_bar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <a href="board.html"><img id="logo" src="../imgs/logo-white.png"></a>
+            <!--학기 드롭다운-->
+            <select class="semester" onchange="change_tag()">
+                <option id="2020_2">2020-2학기</option>
+                <option id="2020_1">2020-1학기</option>
+                <option id="2019_2">2019-2학기</option>
+                <option id="2019_1">2019-1학기</option>
+            </select>
+            <!--검색 바-->
+            <div class="search_bar">
+                <form action="./select_lecture.html" method="post">
+                    <input type="text" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
+                    <button type="submit" id="btn_search"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <!--아이콘 바-->
+            <div class="icons">
+                <div id="logout-button" onclick="logOut()">Log Out</div>
+            </div>
+        </div>
+        <!--메뉴 바-->
+        <div class="menu">
+            <span class="subject" id="subject"></span>
+            <nav>
+                <ul class="navi">
+                    <li><a id="timeline" href="timeline.html"><span>타 임 라 인</span></a></li>
+                    <li><a id="grade" href="statistics.html"><span>성 적 통 계</span></a></li>
+                    <li><a class="active" id="eval" href="evaluation.html"><span>강 의 평 가</span></a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container">
+            <section class="content">
+
+                <form>
+                    <div class="top">
+                        <select name="select_tag" id="select_tag">
+                            <option>중간고사 전</option>
+                            <option>기말고사 전</option>
+                            <option>종강 후</option>
+                        </select>
+                        <input class="submit" type="button" value="등록" onclick="sub()">
+                    </div>
+                    <div class="text">
+                        <textarea name="content" id="content" placeholder="내용을 입력해주세요."></textarea>
+                    </div>
+                </form>
+
+            </section>
+
+        </div>
+
+
+    </div>
+    <script src="../javascript/evalWrite.js"></script>
+</body>
+
+</html>

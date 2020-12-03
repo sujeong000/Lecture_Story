@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>lecture story</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../imgs/logo-title.png">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/tob_bar_sub_bar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="header">
+            <a href="board.html"><img id="logo" src="../imgs/logo-white.png"></a>
+            <!--학기 드롭다운-->
+            <select>
+                <option selected>2020-2학기</option>
+                <option>2020-1학기</option>
+                <option>2019-2학기</option>
+                <option>2019-1학기</option>
+            </select>
+            <!--검색 바-->
+            <div class="search_bar">
+                <form action="../html/select_lecture.html" method="post">
+                    <input type="text" id="search" placeholder="추가하고 싶은 과목명을 입력하세요." />
+                    <button type="submit" id="btn_search"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <!--아이콘 바-->
+            <div class="icons">
+                <div id="logout-button" onclick="logOut()">Log Out</div>
+            </div>
+        </div>
+        <!--메뉴 바-->
+        <div class="menu">
+            <span class="subject">통계학 (01) - 김이화 교수님</span>
+            <nav>
+                <ul class="navi">
+                    <li><a class="active" id="timeline" href="#"><span>타 임 라 인</span></a></li>
+                    <li><a id="grade" href="#"><span>성 적 통 계</span></a></li>
+                    <li><a id="eval" href="#"><span>강 의 평 가</span></a></li>
+                </ul>
+            </nav>
+            <a class="write" href="#">
+                <img src="../imgs/pencil.png" width=24px height=24px alt="글쓰기">
+            </a>
+
+        </div>
+        <div class="container">
+            <div class="content">content</div>
+        </div>
+    </div>
+</body>
+
+</html>

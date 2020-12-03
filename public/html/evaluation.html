@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>lecture story</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../imgs/logo-title.png">
+    <link href="../css/timeline.css" rel="stylesheet">
+    <link href="../css/reset.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tob_bar_sub_bar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <a href="board.html"><img id="logo" src="../imgs/logo-white.png"></a>
+        <!--학기 드롭다운-->
+        <select class="semester" onchange="change_tag()">
+            <option id="2020_2">2020-2학기</option>
+            <option id="2020_1">2020-1학기</option>
+            <option id="2019_2">2019-2학기</option>
+            <option id="2019_1">2019-1학기</option>
+        </select>
+        <!--검색 바-->
+        <div class="search_bar">
+            <form method="get" id="search_box">
+                <input type="text" id="search" placeholder="검색어를 입력하세요." />
+                <button type="submit" id="btn_search"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <!--아이콘 바-->
+        <div class="icons">
+            <div id="logout-button" onclick="logOut()">Log Out</div>
+        </div>
+    </div>
+    <!--메뉴 바-->
+    <div class="menu">
+        <span class="subject" id="subject"></span>
+        <nav>
+            <ul class="navi">
+                <li><a id="timeline" href="timeline.html"><span>타 임 라 인</span></a></li>
+                <li><a id="grade" href="statistics.html"><span>성 적 통 계</span></a></li>
+                <li><a class="active" id="eval" href="evaluation.html"><span>강 의 평 가</span></a></li>
+            </ul>
+        </nav>
+        <a class="write" href="evalWrite.html">
+            <img src="../imgs/pencil.png" width=24px height=24px alt="글쓰기">
+        </a>
+
+    </div>
+    <section>
+        <div class="container">
+            <div class="timeline">
+                    <ul class="tags">
+                        <li><div class="point"style="width: 20px; height: 20px; left:-7px; background-color: #aaaaaa;"></div><button class="tag">#전체</button></li>
+                        <li><div class="point"></div><button class="tag">#중간고사 전</button></li>
+                        <li><div class="point"></div><button class="tag">#기말고사 전</button></li>
+                        <li><div class="point"></div><button class="tag">#종강 후</button></li>
+                        <section id="timelineSec"></section>
+                    </ul>
+                
+                <section id="postSec">
+                    <ul class="postings">
+                        
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </section>
+    <script src="../javascript/evaluation.js"></script>
+</body>
+</html>
