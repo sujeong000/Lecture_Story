@@ -26,6 +26,7 @@ document.getElementById("subject").innerHTML = courseName + "-" + prof;
 //차트 section 가리기, 안내 문구 보이기
 const chartContainer = document.getElementById("chart-container");
 const rankDiv = document.getElementById("rank-div");
+const totalDiv = document.getElementById("total-div");
 const info = document.getElementById("info");
 chartContainer.style.display = "none";
 info.style.display = "block";
@@ -166,6 +167,7 @@ function check_user(evt) {
           document.getElementById("rank").innerHTML = userRank;
           document.getElementById("total").innerHTML = arr.length;
           chartContainer.style.display = "block"; // 차트 section을 보이게
+          totalDiv.style.display = "none";
         });
       }
     });
@@ -177,10 +179,11 @@ function check_user(evt) {
         arr.push(doc.data().grade);
       });
       info.style.display = "none"; // info 보이지 않게
-          google.charts.load("current", { packages: ["corechart"] });
-          google.charts.setOnLoadCallback(function () {
-            drawChart(arr);
-          });
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(function () {
+        drawChart(arr);
+      });
+      document.getElementById("total2").innerHTML = arr.length;
       chartContainer.style.display = "block"; // 차트 section을 보이게
       rankDiv.style.display = "none";
     });
