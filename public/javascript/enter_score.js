@@ -146,3 +146,16 @@ function submit_grade() {
     }
   }
 }
+
+/* 태그 추가를 선택했을 때만 태그 입력창 보이게 */
+function show_hide_input(){
+  var ttag = document.getElementById("select_tag").value;
+  var tag_input = document.getElementById("add_tag");
+  
+  if(ttag === "태그 추가"){
+    tag_input.style.display = "block";
+  }
+  else{
+    tag_input.style.display = "none";
+  }
+}
