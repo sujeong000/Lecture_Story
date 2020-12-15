@@ -27,7 +27,10 @@ form.addEventListener('submit', (e) => {
 
     //조건 확인하기
     var email_ch = email.split("@")[1];
-    if (email_ch !== "ewhain.net") {
+    if(email==""){
+        document.test.Email.focus();
+        alert("이메일을 입력해 주세요.");
+    } else if (email_ch !== "ewhain.net") {
         document.test.Email.focus();
         alert("이화인 계정이어야 합니다.");
     } else if (password === "") {
