@@ -32,11 +32,6 @@ var firebaseConfig = {
   // 렉처 이름 띄우기
   document.getElementById("subject").innerHTML=courseName+"-"+prof;
   
-  // 학기 select box의 디폴트 값을 현재 학기로 설정
-  var semester_value = semester.substring(0, 6);
-  var select_tag = document.getElementById(semester_value);
-  select_tag.setAttribute("selected", "selected");
-  
   var postingZone = document.querySelector(".content");
   postingZone.innerHTML="";
   var commentZone;
