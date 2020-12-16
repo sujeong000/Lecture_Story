@@ -119,3 +119,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         }
     }
 });
+
+// 안내 팝업창
+var modal = document.querySelector(".modal");
+var closeButton = document.querySelector(".close-button");
