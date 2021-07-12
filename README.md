@@ -87,7 +87,10 @@ Read postings and leave and delete **comments**
 ## Team Contribution
 
 [mminjg](http://github.com/mminjg) : Chart Visualization
+
 [dooli1971039](http://github.com/dooli1971039) : Keyword Search
+
 [hoit1302](http://github.com/hoit1302) : Board
+
 [sujeong000](http://github.com/sujeong000) : Timeline
 
